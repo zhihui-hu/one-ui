@@ -1,7 +1,7 @@
 import { SITE_URL } from "@/lib/site";
 
 export type TrafficConfig = {
-  cloudflare?: { token: string; zone: string };
+  cloudflare?: { token: string; zone: string; host: string };
   ga?: { property: string; credentials: string };
   gsc?: { site: string; credentials: string };
   bing?: { site: string; key: string };
@@ -18,7 +18,10 @@ export function trafficConfig(): TrafficConfig {
 
   const token = read("CLOUDFLARE_ANALYTICS_TOKEN");
   const zone = read("CLOUDFLARE_ZONE_ID");
-  if (token && zone) config.cloudflare = { token, zone };
+  if (token && zone) {
+    const host = read("CLOUDFLARE_HOST") ?? new URL(SITE_URL).host;
+    config.cloudflare = { token, zone, host };
+  }
 
   const googleKey = read("GOOGLE_SERVICE_ACCOUNT_JSON");
   const property = read("GA4_PROPERTY_ID");
@@ -37,4 +40,20 @@ export function trafficConfig(): TrafficConfig {
     };
   }
   return config;
+}
+
+const REQUIRED: Record<keyof TrafficConfig, string[]> = {
+  cloudflare: ["CLOUDFLARE_ANALYTICS_TOKEN", "CLOUDFLARE_ZONE_ID"],
+  ga: ["GOOGLE_SERVICE_ACCOUNT_JSON", "GA4_PROPERTY_ID"],
+  gsc: ["GOOGLE_SERVICE_ACCOUNT_JSON", "GSC_SITE_URL"],
+  bing: ["BING_WEBMASTER_API_KEY"],
+};
+
+// names only, never values, so the page can say which setting is missing
+export function missingSettings(source: keyof TrafficConfig): string[] {
+  return REQUIRED[source].filter((name) => {
+    const value = read(name);
+    if (name === "GA4_PROPERTY_ID") return !value || !/^\d+$/.test(value);
+    return !value;
+  });
 }

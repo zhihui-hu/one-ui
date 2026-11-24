@@ -11,7 +11,7 @@ export const notConfigured = (data: unknown) =>
 
 export type Load<T> =
   | { state: "loading" }
-  | { state: "error" }
+  | { state: "error"; reason?: string }
   | { state: "ready"; data: T | { configured: false } };
 
 export function Panel({
@@ -49,10 +49,23 @@ export function PanelState<T>({
 }) {
   const { m } = useI18n();
   if (load.state === "ready" && notConfigured(load.data)) {
-    return <Message>{m.stats.notConfigured}</Message>;
+    const missing = (load.data as { missing?: string[] }).missing ?? [];
+    return (
+      <Message
+        detail={
+          missing.length
+            ? `${m.stats.missing} ${missing.join(", ")}`
+            : undefined
+        }
+      >
+        {m.stats.notConfigured}
+      </Message>
+    );
   }
   if (load.state === "ready") return <>{children(load.data as T)}</>;
-  if (load.state === "error") return <Message>{m.stats.unavailable}</Message>;
+  if (load.state === "error") {
+    return <Message detail={load.reason}>{m.stats.unavailable}</Message>;
+  }
   return (
     <div className="flex flex-col gap-4" aria-busy="true">
       <span className="sr-only">{m.stats.loading}</span>
@@ -69,11 +82,22 @@ export function PanelState<T>({
   );
 }
 
-function Message({ children }: { children: ReactNode }) {
+function Message({
+  children,
+  detail,
+}: {
+  children: ReactNode;
+  detail?: string;
+}) {
   return (
-    <p className="flex min-h-40 items-center justify-center rounded-2xl bg-foreground/[0.03] px-4 text-center text-sm text-muted-foreground">
-      {children}
-    </p>
+    <div className="flex min-h-40 flex-col items-center justify-center gap-2 rounded-2xl bg-foreground/[0.03] px-4 py-6 text-center">
+      <p className="text-sm text-muted-foreground">{children}</p>
+      {detail ? (
+        <p className="max-w-md break-words font-mono text-xs text-muted-foreground/70">
+          {detail}
+        </p>
+      ) : null}
+    </div>
   );
 }
 
@@ -91,7 +115,7 @@ export function Tile({
   const body = (
     <>
       <span className="text-xs text-muted-foreground">{label}</span>
-      <span className="text-xl font-semibold tracking-tight tabular-nums">
+      <span className="truncate whitespace-nowrap text-lg font-semibold tracking-tight tabular-nums sm:text-xl">
         {value}
       </span>
     </>

@@ -32,6 +32,7 @@ const nextConfig: NextConfig = {
       // rename a video when replacing it, browsers will never refetch the same url
       { source: "/componentdemos/:path*", headers: IMMUTABLE_CACHE },
       { source: "/og/:path*", headers: PUBLIC_CACHE },
+      { source: "/flags/:path*", headers: PUBLIC_CACHE },
       { source: "/r/:path*", headers: REGISTRY_CACHE },
       // polled by the update checker, so a stale copy would hide new deploys
       {

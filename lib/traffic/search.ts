@@ -126,7 +126,9 @@ export async function gscStats(
     error?: { message?: string };
   };
   if (body.error?.message)
-    throw new Error(`search console: ${body.error.message}`);
+    throw new Error(
+      `search console: ${body.error.message} (site ${settings.site})`,
+    );
   const rows: Row[] = [];
   for (const row of body.rows ?? []) {
     const day = dayNumber(row.keys[0] ?? "");
@@ -152,15 +154,26 @@ export async function bingStats(
     Message?: string;
     ErrorCode?: number;
   };
+  let response: Response;
   try {
-    const response = await fetch(url, { signal: AbortSignal.timeout(20_000) });
-    body = await response.json();
+    response = await fetch(url, { signal: AbortSignal.timeout(20_000) });
   } catch {
     // the url carries the api key, so never surface the original error
-    throw new Error("bing webmaster request failed");
+    throw new Error("bing webmaster: network error or timeout");
   }
-  if (body.Message)
-    throw new Error(`bing webmaster ${body.ErrorCode}: ${body.Message}`);
+  const text = (await response.text()).replaceAll(settings.key, "***");
+  try {
+    body = JSON.parse(text);
+  } catch {
+    throw new Error(
+      `bing webmaster HTTP ${response.status}: ${text.slice(0, 120)}`,
+    );
+  }
+  if (body.Message) {
+    throw new Error(
+      `bing webmaster ${body.ErrorCode ?? response.status}: ${body.Message} (siteUrl ${settings.site})`,
+    );
+  }
   if (!body.d) throw new Error("bing webmaster returned no stats list");
   const rows: Row[] = [];
   for (const row of body.d) {

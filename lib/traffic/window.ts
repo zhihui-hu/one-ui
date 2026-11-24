@@ -10,12 +10,7 @@ export type Window =
   | { kind: "hour"; start: number; end: number }
   | { kind: "day"; first: number; last: number };
 
-// `utcDays` aligns 30d to utc dates, which is how cloudflare groups its daily data
-export function rangeWindow(
-  range: TrafficRange,
-  now: number,
-  utcDays = false,
-): Window {
+export function rangeWindow(range: TrafficRange, now: number): Window {
   const nextHour = now - mod(now, HOUR) + HOUR;
   const midnight = now + BEIJING - mod(now + BEIJING, DAY) - BEIJING;
   const hourly = (start: number, end: number): Window => ({
@@ -32,10 +27,8 @@ export function rangeWindow(
       return hourly(midnight - DAY, midnight);
     case "3d":
       return hourly(nextHour - 3 * DAY, nextHour);
-    case "30d": {
-      const last = utcDays ? now - mod(now, DAY) : midnight;
-      return { kind: "day", first: last - 29 * DAY, last };
-    }
+    case "30d":
+      return { kind: "day", first: midnight - 29 * DAY, last: midnight };
   }
 }
 

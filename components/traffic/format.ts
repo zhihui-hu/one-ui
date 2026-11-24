@@ -32,14 +32,6 @@ export function duration(seconds: number) {
   return m ? `${m}m ${s}s` : `${s}s`;
 }
 
-// regional indicator symbols turn a country code into its flag emoji
-export function flag(code: string) {
-  if (!/^[A-Z]{2}$/.test(code)) return "🌐";
-  return String.fromCodePoint(
-    ...[...code].map((c) => 0x1f1a5 + c.charCodeAt(0)),
-  );
-}
-
 export function regionName(code: string, lang: Locale, unknown: string) {
   if (code === "T1") return "Tor";
   if (code === "XX" || !/^[A-Z]{2}$/.test(code)) return unknown;

@@ -15,7 +15,6 @@
   "unavailable": "Temporarily unavailable. Try again in a few minutes.",
   "beijingTime": "Beijing time (UTC+8)",
   "cloudflare": {
-    "dailyNote": "UTC dates (Cloudflare limits hourly data to 3 days)",
     "pageViews": "Page views",
     "requests": "Requests",
     "cacheRate": "Cache rate",
@@ -44,5 +43,6 @@
     "dailyClicks": "Daily clicks, last 7 days",
     "chart": "Daily clicks · peak {value}",
     "lag": "Search data lags 2 to 3 days."
-  }
+  },
+  "missing": "Missing:"
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { BarChart3, Cloud, Search } from "lucide-react";
 import { useI18n } from "@/components/i18n/I18nProvider";
 import { format } from "@/lib/i18n/format";
 import {
@@ -17,11 +16,11 @@ import {
 import { cn } from "@/lib/utils";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
+import { BrandIcon, Flag } from "./icons";
 import {
   bytes,
   compact,
   duration,
-  flag,
   percent,
   regionName,
   share,
@@ -46,11 +45,17 @@ function useSource<T>(path: string): Load<T> {
     const controller = new AbortController();
     const run = () =>
       fetch(path, { signal: controller.signal })
-        .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-        .then((data) => setResult({ path, load: { state: "ready", data } }))
-        .catch(() => {
+        .then(async (res) => {
+          const body = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(body?.reason ?? `HTTP ${res.status}`);
+          setResult({ path, load: { state: "ready", data: body } });
+        })
+        .catch((error: Error) => {
           if (!controller.signal.aborted) {
-            setResult({ path, load: { state: "error" } });
+            setResult({
+              path,
+              load: { state: "error", reason: error.message },
+            });
           }
         });
     run();
@@ -61,26 +66,6 @@ function useSource<T>(path: string): Load<T> {
     };
   }, [path]);
   return result?.path === path ? result.load : { state: "loading" };
-}
-
-function Badge({
-  className,
-  children,
-}: {
-  className: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <span
-      aria-hidden="true"
-      className={cn(
-        "flex size-7 items-center justify-center rounded-lg text-white",
-        className,
-      )}
-    >
-      {children}
-    </span>
-  );
 }
 
 export default function TrafficDashboard() {
@@ -138,21 +123,13 @@ export default function TrafficDashboard() {
         <SearchPanel
           load={gsc}
           title="Google Search Console"
-          logo={
-            <Badge className="bg-[#4285F4]">
-              <Search className="size-4" strokeWidth={2.5} />
-            </Badge>
-          }
+          logo={<BrandIcon name="gsc" />}
           withPosition
         />
         <SearchPanel
           load={bing}
           title="Bing Webmaster Tools"
-          logo={
-            <Badge className="bg-[#008373] font-runde text-base font-bold">
-              b
-            </Badge>
-          }
+          logo={<BrandIcon name="bing" />}
         />
       </div>
     </div>
@@ -175,17 +152,12 @@ function CloudflarePanel({ load }: { load: Load<CloudflareStats> }) {
   const t = m.stats.cloudflare;
   const [metric, setMetric] = useState<CfMetric>("pageViews");
   const data = readyData(load);
-  const prefix =
-    data?.granularity === "day" ? t.dailyNote : m.stats.beijingTime;
+  const prefix = data ? `${data.host} · ${m.stats.beijingTime}` : "";
 
   return (
     <Panel
       title="Cloudflare"
-      logo={
-        <Badge className="bg-[#F38020]">
-          <Cloud className="size-4" strokeWidth={2.5} />
-        </Badge>
-      }
+      logo={<BrandIcon name="cloudflare" />}
       note={data ? note(data.updatedAt, prefix) : undefined}
     >
       <PanelState load={load}>
@@ -256,7 +228,7 @@ function CloudflarePanel({ load }: { load: Load<CloudflareStats> }) {
                   key: c.code,
                   label: (
                     <>
-                      <span className="mr-2">{flag(c.code)}</span>
+                      <Flag code={c.code} />
                       {regionName(c.code, lang, t.unknownRegion)}
                     </>
                   ),
@@ -283,11 +255,7 @@ function GaPanel({ load }: { load: Load<GaStats> }) {
   return (
     <Panel
       title="Google Analytics"
-      logo={
-        <Badge className="bg-[#F9AB00]">
-          <BarChart3 className="size-4" strokeWidth={2.5} />
-        </Badge>
-      }
+      logo={<BrandIcon name="ga" />}
       note={data ? note(data.updatedAt, m.stats.beijingTime) : undefined}
     >
       <PanelState load={load}>
@@ -345,7 +313,7 @@ function GaPanel({ load }: { load: Load<GaStats> }) {
                 <div className="grid gap-6 sm:grid-cols-2">
                   <RankList
                     title={t.sources}
-                    barClass="bg-[#F9AB00]"
+                    barClass="bg-[#E37400]"
                     rows={d.sources.slice(0, 6).map((s) => ({
                       key: `${s.source}/${s.medium}`,
                       label:
@@ -358,7 +326,7 @@ function GaPanel({ load }: { load: Load<GaStats> }) {
                   />
                   <RankList
                     title={t.pages}
-                    barClass="bg-[#F9AB00]"
+                    barClass="bg-[#E37400]"
                     rows={d.pages.slice(0, 6).map((p) => ({
                       key: p.path,
                       label: p.path,

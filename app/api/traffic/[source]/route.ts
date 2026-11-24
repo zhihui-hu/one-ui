@@ -1,12 +1,13 @@
 import { cached } from "@/lib/traffic/cache";
 import { cloudflareStats } from "@/lib/traffic/cloudflare";
-import { trafficConfig } from "@/lib/traffic/config";
+import { missingSettings, trafficConfig } from "@/lib/traffic/config";
 import { gaStats } from "@/lib/traffic/ga";
 import { bingStats, gscStats } from "@/lib/traffic/search";
 import {
   DEFAULT_RANGE,
   isTrafficRange,
   isTrafficSource,
+  type TrafficSource,
 } from "@/lib/traffic/types";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +25,15 @@ const json = (body: unknown, status = 200, maxAge = 0) =>
     },
   });
 
+const notConfigured = (source: TrafficSource) =>
+  json({ configured: false, missing: missingSettings(source) });
+
+// upstream messages explain a misconfiguration (wrong site, missing permission); secrets never reach them
+function reason(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  return message.replace(/\s+/g, " ").slice(0, 300);
+}
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ source: string }> },
@@ -38,7 +48,7 @@ export async function GET(
     switch (source) {
       case "cloudflare": {
         const settings = config.cloudflare;
-        if (!settings) return json({ configured: false });
+        if (!settings) return notConfigured(source);
         const body = await cached(`cloudflare:${range}`, FIVE_MINUTES, () =>
           cloudflareStats(settings, range),
         );
@@ -46,7 +56,7 @@ export async function GET(
       }
       case "ga": {
         const settings = config.ga;
-        if (!settings) return json({ configured: false });
+        if (!settings) return notConfigured(source);
         const body = await cached(`ga:${range}`, FIVE_MINUTES, () =>
           gaStats(settings, range),
         );
@@ -54,19 +64,19 @@ export async function GET(
       }
       case "gsc": {
         const settings = config.gsc;
-        if (!settings) return json({ configured: false });
+        if (!settings) return notConfigured(source);
         const body = await cached("gsc", ONE_HOUR, () => gscStats(settings));
         return json(body, 200, 300);
       }
       case "bing": {
         const settings = config.bing;
-        if (!settings) return json({ configured: false });
+        if (!settings) return notConfigured(source);
         const body = await cached("bing", ONE_HOUR, () => bingStats(settings));
         return json(body, 200, 300);
       }
     }
   } catch (error) {
-    console.warn(`traffic ${source} failed:`, (error as Error).message);
-    return json({ error: "unavailable" }, 502);
+    console.warn(`traffic ${source} failed:`, reason(error));
+    return json({ error: "unavailable", reason: reason(error) }, 502);
   }
 }

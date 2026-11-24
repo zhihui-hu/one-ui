@@ -22,7 +22,7 @@ export function isTrafficSource(value: unknown): value is TrafficSource {
   return TRAFFIC_SOURCES.includes(value as TrafficSource);
 }
 
-export type NotConfigured = { configured: false };
+export type NotConfigured = { configured: false; missing?: string[] };
 
 type Window = {
   configured: true;
@@ -42,6 +42,7 @@ export type CloudflarePoint = {
 };
 
 export type CloudflareStats = Window & {
+  host: string;
   totals: Omit<CloudflarePoint, "time">;
   series: CloudflarePoint[];
   countries: { code: string; requests: number }[];
