@@ -1,0 +1,3 @@
+{
+  "states": { "idle": "Idle", "listening": "Listening", "thinking": "Thinking" }
+}

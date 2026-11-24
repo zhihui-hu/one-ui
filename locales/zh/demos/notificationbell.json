@@ -1,0 +1,5 @@
+{
+  "remove": "移除一条通知",
+  "add": "添加一条通知",
+  "labels": { "empty": "通知", "unread": "通知，{count} 条未读" }
+}

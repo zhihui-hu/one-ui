@@ -1,0 +1,45 @@
+{
+  "query": "React 弹簧动画",
+  "replay": "重播",
+  "sources": {
+    "motion": {
+      "title": "弹簧动画：基于物理的 React 动效",
+      "snippet": "弹簧模拟真实物理，动画被打断时会保留速度，并自然地停下来。"
+    },
+    "mdn": {
+      "title": "prefers-reduced-motion：CSS 媒体特性",
+      "snippet": "检测用户是否在设备上开启了减少非必要动效的设置。"
+    },
+    "react": {
+      "title": "useEffect：与外部系统同步",
+      "snippet": "useEffect 是一个 React Hook，用于让组件与外部系统保持同步。"
+    },
+    "webdev": {
+      "title": "Web 上的动画与性能",
+      "snippet": "只对 transform 和 opacity 做动画，工作会留在合成线程，帧率更平稳。"
+    },
+    "github": {
+      "title": "one-ui：带动画的 React 组件"
+    },
+    "vercel": {
+      "title": "打造让人觉得快的界面"
+    }
+  },
+  "answer": [
+    "用户可能打断的动画都用弹簧，因为它会保留速度，而不是从头开始",
+    "。只对 transform 和 opacity 做动画，让工作留在合成线程",
+    "，并在用户希望减少动效时关闭动画",
+    "。从 effect 中启动动画，不要在渲染期间启动",
+    "。"
+  ],
+  "labels": {
+    "searching": "正在联网搜索",
+    "searchingQuery": "正在搜索“{query}”",
+    "searchedOne": "已搜索 {count} 个网站",
+    "searchedOther": "已搜索 {count} 个网站",
+    "showLess": "收起",
+    "showMore": "再显示 {count} 个来源",
+    "moreSourcesOne": "个更多来源",
+    "moreSourcesOther": "个更多来源"
+  }
+}

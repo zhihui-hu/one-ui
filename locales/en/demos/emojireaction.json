@@ -1,0 +1,16 @@
+{
+  "hint": "Click the button, then pick an emoji to throw it up the screen.",
+  "labels": {
+    "menu": "Pick a reaction",
+    "add": "Add a reaction",
+    "close": "Close reactions",
+    "reacted": "Reacted {emoji}"
+  },
+  "emojis": {
+    "smiling-face-with-hearts": "smiling face with hearts",
+    "star-struck": "star struck",
+    "confused-face": "confused face",
+    "pleading-face": "pleading face",
+    "grinning-face-with-smiling-eyes": "grinning face with smiling eyes"
+  }
+}

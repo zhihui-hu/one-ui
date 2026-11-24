@@ -1,0 +1,7 @@
+{
+  "hint": "输入 {code} 即可通过，其他验证码都会失败。",
+  "labels": {
+    "digit": "第 {position} 位数字，共 {length} 位",
+    "character": "第 {position} 位字符，共 {length} 位"
+  }
+}

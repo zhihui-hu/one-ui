@@ -1,0 +1,8 @@
+{
+  "remove": "Remove a notification",
+  "add": "Add a notification",
+  "labels": {
+    "empty": "Notifications",
+    "unread": "Notifications, {count} unread"
+  }
+}

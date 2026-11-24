@@ -1,0 +1,27 @@
+{
+  "tagline": "One UI：稀有动画 React 组件",
+  "description": "One UI（oneui）是一个免费开源的稀有动画 React 组件注册表。基于 Tailwind CSS、Motion 和 shadcn CLI 构建，复制粘贴即可拥有代码。",
+  "ogAlt": "One UI：稀有动画 React 组件",
+  "componentTitle": "{name}：动画 React 组件",
+  "componentsTitle": "组件",
+  "componentsDescription": "浏览 One UI（oneui）全部组件的实际效果。这些稀有动画 React 组件基于 Tailwind CSS 和 Motion 构建，均可通过 shadcn CLI 安装。",
+  "collectionName": "{site} 组件",
+  "breadcrumbHome": "首页",
+  "breadcrumbComponents": "组件",
+  "keywords": [
+    "oneui",
+    "One UI",
+    "One UI 组件",
+    "React 组件",
+    "Next.js 组件",
+    "shadcn 注册表",
+    "shadcn 组件",
+    "动画 UI 组件",
+    "Motion 动画组件",
+    "Tailwind CSS 组件",
+    "免费 UI 组件",
+    "复制粘贴组件",
+    "UI 组件库",
+    "微交互"
+  ]
+}

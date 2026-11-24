@@ -1,0 +1,21 @@
+{
+  "question": "Why do springs feel better than easing curves?",
+  "answer": "Springs feel natural because they **carry velocity**. Interrupt one mid-flight and it picks up right where it was.\n\n1. Use `bounce: 0` for precise UI, like menus.\n2. Add a little bounce for *playful* moments.\n\nThe [AI Prompt Box]({href}) uses this for its send button.",
+  "stop": "Stop",
+  "replay": "Replay",
+  "status": {
+    "thinking": "Thinking",
+    "writing": "Writing",
+    "done": "Done",
+    "workedFor": "Worked for {elapsed}",
+    "stopped": "Stopped"
+  },
+  "labels": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyCode": "Copy code",
+    "retry": "Retry",
+    "goodResponse": "Good response",
+    "badResponse": "Bad response"
+  }
+}

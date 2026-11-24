@@ -1,0 +1,24 @@
+{
+  "items": {
+    "what-is-one-ui": {
+      "question": "One UI 是什么？",
+      "answer": "一套用 Tailwind CSS 和 Motion 构建的 React 动画组件。把源码复制进你的项目，之后就归你所有。"
+    },
+    "is-it-free": {
+      "question": "免费吗？",
+      "answer": "免费。所有组件都可以在个人和商业项目中免费使用。"
+    },
+    "install": {
+      "question": "如何安装组件？",
+      "answer": "用 shadcn CLI 添加。源码会放进你的 components/ui 目录，可以直接修改。"
+    },
+    "commercial-use": {
+      "question": "可以用在商业项目里吗？",
+      "answer": "可以，闭源项目也行，只要用一个可见的 ui.huzhihui.com 链接注明 One UI。"
+    },
+    "resell": {
+      "question": "可以转售这些组件吗？",
+      "answer": "不可以。不能单独出售、再授权或分发，也不能打包进模板、套件、主题或课程中。"
+    }
+  }
+}

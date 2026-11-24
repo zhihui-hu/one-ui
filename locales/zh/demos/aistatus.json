@@ -1,0 +1,16 @@
+{
+  "question": "怎么把 One UI 组件加到我的项目里？",
+  "detail": "正在读取 registry",
+  "answerBefore": "用 shadcn CLI 加上组件名运行即可，例如",
+  "period": "。",
+  "answerAfter": "源码会放进你的 components 目录，随你修改。",
+  "replay": "重播",
+  "states": {
+    "thinking": "思考中",
+    "researching": "检索中",
+    "analyzing": "分析中",
+    "writing": "撰写中",
+    "done": "完成",
+    "workedFor": "用时 {time}"
+  }
+}

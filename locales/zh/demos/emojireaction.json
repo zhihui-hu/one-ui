@@ -1,0 +1,16 @@
+{
+  "hint": "点击按钮，再选一个表情，把它抛向屏幕上方。",
+  "labels": {
+    "menu": "选择回应",
+    "add": "添加回应",
+    "close": "关闭回应",
+    "reacted": "已回应：{emoji}"
+  },
+  "emojis": {
+    "smiling-face-with-hearts": "爱心笑脸",
+    "star-struck": "星星眼",
+    "confused-face": "困惑",
+    "pleading-face": "恳求",
+    "grinning-face-with-smiling-eyes": "眯眼笑"
+  }
+}

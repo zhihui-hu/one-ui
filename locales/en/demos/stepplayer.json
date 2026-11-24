@@ -1,0 +1,10 @@
+{
+  "status": "Step {step} of {count}",
+  "labels": {
+    "play": "Play",
+    "pause": "Pause",
+    "replay": "Replay",
+    "progress": "Step {step} of {count}",
+    "step": "Step {step}"
+  }
+}

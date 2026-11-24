@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "ship": "Ship a new component to the registry",
+    "preview": "Record a preview for the gallery",
+    "star": "Star One UI"
+  },
+  "completed": "{label} completed",
+  "reopened": "{label} reopened"
+}

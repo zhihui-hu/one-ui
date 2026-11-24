@@ -1,0 +1,52 @@
+{
+  "component": "组件",
+  "unavailable": "该组件暂未上线。",
+  "code": "代码",
+  "openDescription": "打开说明",
+  "closeDescription": "关闭说明",
+  "getCode": "获取代码",
+  "hideCode": "隐藏代码",
+  "viewSource": "查看源码",
+  "hideSource": "隐藏源码",
+  "install": {
+    "label": "安装",
+    "show": "显示安装命令",
+    "close": "关闭安装命令",
+    "changePm": "切换包管理器"
+  },
+  "props": {
+    "prop": "属性",
+    "type": "类型",
+    "description": "说明"
+  },
+  "propsHint": "可传入以下选项来定制这个组件。",
+  "copyEmail": "复制邮箱（{email}）",
+  "sections": {
+    "dependencies": "依赖",
+    "interaction": "交互方式",
+    "props": "属性",
+    "installation": "安装",
+    "usage": "使用方法",
+    "source": "源代码",
+    "keepInMind": "请注意",
+    "credits": "致谢",
+    "contact": "联系",
+    "license": "许可与使用"
+  },
+  "panel": {
+    "sourceHint": "点击右上角的代码图标查看源代码。",
+    "keepInMind": "这里的大多数组件是对网络上优秀作品的复刻。我并不自称原创，这是我尝试逆向、复现，并常常额外加上一些功能的成果。我已尽量注明每一位作者；如有遗漏，请告诉我。",
+    "contactNote": "发现 bug 或问题？欢迎私信。",
+    "license": [
+      "采用附带 Commons Clause 和署名要求的 MIT 许可。可在个人和商业项目中免费使用、修改和发布，包括闭源项目。组件放进你的项目后，代码就归你所有。",
+      "必须署名。任何发布 One UI 组件的项目，都必须在页脚、关于页、致谢页或 README 中注明 One UI，并附上指向 ui.huzhihui.com 的可见链接。",
+      "不得删除所复制源码中的署名或版权声明。",
+      "不得出售、再许可或再分发组件本身，无论是单独分发、打包进模板、套件、主题或付费课程，还是移植到其他框架。",
+      "不得重新发布。不得建立镜像、重新上传，或将其列为你自己的作品。",
+      "不得将本注册表重新包装为竞争性的组件库。",
+      "不得声称对任何组件或 One UI 本身拥有作者身份。",
+      "仓库中的 LICENSE 文件为完整条款并具有最终效力。如果你的用途不符合这些规则，请先询问。"
+    ]
+  },
+  "setOption": "将 {name} 设为 {value}"
+}

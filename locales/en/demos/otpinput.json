@@ -1,0 +1,7 @@
+{
+  "hint": "Enter {code} to pass. Any other code fails.",
+  "labels": {
+    "digit": "Digit {position} of {length}",
+    "character": "Character {position} of {length}"
+  }
+}

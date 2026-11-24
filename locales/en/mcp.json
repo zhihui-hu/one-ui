@@ -1,0 +1,28 @@
+{
+  "description": "Add One UI from Claude Code, Cursor, Codex, or VS Code. One registry in components.json, then ask for any component.",
+  "steps": {
+    "registry": {
+      "heading": "Add the registry",
+      "body": "Your project needs shadcn set up first: `components.json`, Tailwind, and the `cn` helper. Add this to `components.json` and keep `{name}` as written."
+    },
+    "connect": {
+      "heading": "Connect your editor"
+    },
+    "ask": {
+      "heading": "Ask for a component",
+      "body": "Prefix the name with `@one-ui`, or ask in plain words. The file lands in `components/ui`, and it's yours from there."
+    }
+  },
+  "clients": {
+    "claude": "Run this in your project, then restart Claude Code. `/mcp` should list shadcn as connected.",
+    "cursor": "Run this in your project, then enable shadcn in Cursor's MCP settings.",
+    "vscode": "Run this in your project, then open `.vscode/mcp.json` and click Start next to shadcn.",
+    "codex": "Codex can't write its own config. Add this to `~/.codex/config.toml`, then restart Codex."
+  },
+  "works": "Works",
+  "wontFind": "Won't find it",
+  "wontFindHint": "searches the default shadcn registry",
+  "askPrompt": "Add the fluid orb from One UI",
+  "withoutHeading": "Without MCP",
+  "withoutBody": "The shadcn CLI installs the same files. Browse everything on the <link>components</link> page."
+}

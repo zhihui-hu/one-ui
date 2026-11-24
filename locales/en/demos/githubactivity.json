@@ -1,0 +1,23 @@
+{
+  "label": "Top contributions in:",
+  "heading": "{total} contributions",
+  "headingYear": "{total} contributions in {year}",
+  "dayOne": "{count} contribution on {date}",
+  "dayOther": "{count} contributions on {date}",
+  "months": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ],
+  "showRepos": "Show top repositories",
+  "hideRepos": "Hide top repositories"
+}

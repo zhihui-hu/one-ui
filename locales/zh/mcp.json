@@ -1,0 +1,28 @@
+{
+  "description": "在 Claude Code、Cursor、Codex 或 VS Code 中添加 One UI。在 components.json 中加入一个注册表，然后就能请求任意组件。",
+  "steps": {
+    "registry": {
+      "heading": "添加注册表",
+      "body": "你的项目需要先配置好 shadcn：`components.json`、Tailwind 和 `cn` 工具函数。把下面的内容加入 `components.json`，`{name}` 保持原样。"
+    },
+    "connect": {
+      "heading": "连接你的编辑器"
+    },
+    "ask": {
+      "heading": "请求组件",
+      "body": "在名称前加上 `@one-ui`，或直接用自然语言描述。文件会放进 `components/ui`，之后就完全归你所有。"
+    }
+  },
+  "clients": {
+    "claude": "在项目中运行这条命令，然后重启 Claude Code。`/mcp` 应显示 shadcn 已连接。",
+    "cursor": "在项目中运行这条命令，然后在 Cursor 的 MCP 设置中启用 shadcn。",
+    "vscode": "在项目中运行这条命令，然后打开 `.vscode/mcp.json`，点击 shadcn 旁边的 Start。",
+    "codex": "Codex 无法自行写入配置。把下面的内容加入 `~/.codex/config.toml`，然后重启 Codex。"
+  },
+  "works": "可以找到",
+  "wontFind": "找不到",
+  "wontFindHint": "会在默认的 shadcn 注册表中搜索",
+  "askPrompt": "从 One UI 添加 fluid orb",
+  "withoutHeading": "不使用 MCP",
+  "withoutBody": "shadcn CLI 会安装相同的文件。可在<link>组件</link>页面浏览全部内容。"
+}

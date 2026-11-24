@@ -1,0 +1,171 @@
+{
+  "groups": {
+    "overview": {
+      "label": "概览",
+      "eyebrow": "简介",
+      "title": "Proximity Sidebar",
+      "description": "一个紧凑的文档缩略导航，把标题和正文节奏变成可交互的短线。默认保持安静，指针靠近时展开，读者滚动时让对应短线短暂跳动一下。",
+      "items": {
+        "overview-purpose": {
+          "label": "用途",
+          "description": "侧边栏让读者感知文档长度，又不用在布局里再塞一个目录。每条短线都对应真实内容，所以缩略导航和页面紧密相关，而不只是装饰。"
+        },
+        "overview-pattern": {
+          "label": "模式",
+          "description": "指针靠近时，附近的短线会连续展开。滚动激活只会短暂跳动，随后回到默认状态，导航不会一直抢眼。"
+        },
+        "overview-density": {
+          "label": "密度",
+          "description": "组件最适合映射阅读结构：主标题、次级标题和较小的描述段落，都成为同一个安静栈的一部分。"
+        },
+        "overview-clicks": {
+          "label": "点击",
+          "description": "点击任意短线都会滚动到对应的内容块。缩略导航因此保持实用，同时保留原本纯短线设计的极简视觉语言。"
+        },
+        "overview-sizing": {
+          "label": "尺寸",
+          "description": "标题使用最长的基础长度，副标题略短，正文分区保持短而淡。悬停展开也沿用同样的比例。"
+        },
+        "overview-motion": {
+          "label": "动效",
+          "description": "短线动画由 transform 缩放驱动，而不是布局宽度。即使滚动容器正在移动，交互也能保持流畅。"
+        }
+      }
+    },
+    "content-model": {
+      "label": "内容模型",
+      "eyebrow": "结构",
+      "title": "内容模型",
+      "description": "侧边栏不会自己生成标记。它只反映你提供的分区，所以视觉层级可预测，也容易调整。",
+      "items": {
+        "content-title": {
+          "label": "标题",
+          "description": "标题短线应代表文档中的一个主要区域。它们是最醒目的标记，只应出现在读者预期新章节或重要概念的地方。"
+        },
+        "content-subtitle": {
+          "label": "副标题",
+          "description": "副标题短线比标题短线稍弱一些。适合用于功能分组、安装步骤、API 分类或文档中的重要转折。"
+        },
+        "content-section": {
+          "label": "分区",
+          "description": "分区短线介于标记和正文之间。它们增加节奏感，又不会让整个缩略导航看起来每项都一样重要。"
+        },
+        "content-body": {
+          "label": "正文",
+          "description": "正文短线是最小的标记。它们让侧边栏达到原实现的密度，同时仍与真实内容相关联。"
+        },
+        "content-auto": {
+          "label": "自动识别",
+          "description": "如果分区没有提供 kind 或 level，组件会查找目标元素中的第一个标题，并把 h1、h2、h3 映射为视觉权重。"
+        }
+      }
+    },
+    "behavior": {
+      "label": "行为",
+      "eyebrow": "交互",
+      "title": "行为",
+      "description": "侧边栏在直接交互和被动阅读之间取得平衡。它响应指针，短暂跟随滚动位置，空闲时不打扰阅读。",
+      "items": {
+        "behavior-hover": {
+          "label": "悬停",
+          "description": "在栈上悬停会设置一个共享的指针值。每条短线测量自己与指针的距离，并按远近缩放。"
+        },
+        "behavior-scroll": {
+          "label": "滚动",
+          "description": "读者滚动时，最近的内容分区会展开半秒，然后恢复正常。激活提示有用，但不会一直停留。"
+        },
+        "behavior-click": {
+          "label": "点击",
+          "description": "每条短线都渲染为带无障碍标签的按钮。视觉保持极简，控件仍像真正的导航一样工作。"
+        },
+        "behavior-scroll-parent": {
+          "label": "滚动容器",
+          "description": "演示使用内部滚动区域。组件会检测目标分区的可滚动父元素，所以在应用布局中也能触发跳动。"
+        },
+        "behavior-reduced-motion": {
+          "label": "减少动态效果",
+          "description": "当用户要求减少动态效果时，点击短线会直接跳转，不做平滑滚动。组件让对动效敏感的用户也能获得可预期的导航。"
+        },
+        "behavior-history": {
+          "label": "历史",
+          "description": "选中短线会把 URL hash 更新为目标 id。读者复制链接或刷新页面后，仍能保持在同一位置。"
+        }
+      }
+    },
+    "styling": {
+      "label": "样式",
+      "eyebrow": "视觉系统",
+      "title": "样式",
+      "description": "短线栈保留原有的视觉基调：1 像素细线、8 像素间距、弱化的小条目，以及醒目的前景色标记。",
+      "items": {
+        "styling-gap": {
+          "label": "间距",
+          "description": "原组件显得精准，是因为间距紧凑且一致。这个版本在所有短线类型间保持相同的垂直间距。"
+        },
+        "styling-thickness": {
+          "label": "粗细",
+          "description": "层级来自长度和颜色，而不是加粗描边。即使页面有很多锚点，缩略导航依然精致。"
+        },
+        "styling-color": {
+          "label": "颜色",
+          "description": "主要分区使用前景色。较小的条目使用降低不透明度的前景色，营造密度又不喧宾夺主。"
+        },
+        "styling-width": {
+          "label": "宽度",
+          "description": "最醒目的标记会展开到与初始原型相同的完整长度。较小的条目保持同样的比例语言。"
+        },
+        "styling-side": {
+          "label": "方向",
+          "description": "侧边栏放到右侧时，短线从右边缘展开，让动效始终锚定在外侧轨道上。"
+        }
+      }
+    },
+    "usage": {
+      "label": "用法",
+      "eyebrow": "实现",
+      "title": "用法",
+      "description": "API 很小。传入一组带 id 和 label 的内容分区，再在要跳转到的内容块上设置相同的 id。",
+      "items": {
+        "usage-sections": {
+          "label": "分区",
+          "description": "对于内容密集的文档页，不要只放顶级标题。加入副标题和有意义的描述块，才能形成缩略导航的纹理。"
+        },
+        "usage-kind": {
+          "label": "类型",
+          "description": "当视觉权重不应依赖 DOM 标题层级时，使用 kind。这对演示、MDX 内容和自动生成的文档很有用。"
+        },
+        "usage-level": {
+          "label": "层级",
+          "description": "如果你的内容管线已经知道标题层级，传入 1 到 6 的 level 值，让组件映射为短线权重。"
+        },
+        "usage-classname": {
+          "label": "类名",
+          "description": "组件负责栈和动效。外层页面可以控制吸顶定位、侧边栏宽度和响应式显隐。"
+        },
+        "usage-content": {
+          "label": "内容",
+          "description": "避免只用于装饰的短线。当每一条线都代表读者可以跳转并理解的内容时，缩略导航最有价值。"
+        },
+        "usage-mobile": {
+          "label": "移动端",
+          "description": "密集的缩略导航更适合较大的阅读区域。在小屏上可以隐藏，或收进一个紧凑的导航入口。"
+        }
+      }
+    },
+    "reference": {
+      "label": "参考",
+      "eyebrow": "API",
+      "title": "参考",
+      "description": "组件接受 side、可选的 className、可选的激活偏移，以及一组有序的分区。这个顺序就是短线栈的渲染顺序。",
+      "items": {}
+    }
+  },
+  "reference": {
+    "props": "传入 {sections}、{side}、{className} 和 {activeOffset}。分区 id 应与文档中的元素一一对应。",
+    "output": "组件渲染一条无障碍导航轨道，每条短线都是一个按钮，关联到对应的内容块。"
+  },
+  "labels": {
+    "nav": "页面分区",
+    "goTo": "跳转到 {label}"
+  }
+}

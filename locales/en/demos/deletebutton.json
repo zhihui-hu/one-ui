@@ -1,0 +1,9 @@
+{
+  "labels": {
+    "trigger": "Delete",
+    "confirm": "Confirm delete",
+    "cancel": "Cancel",
+    "deleted": "Deleted",
+    "kept": "Kept"
+  }
+}

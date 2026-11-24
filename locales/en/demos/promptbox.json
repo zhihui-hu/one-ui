@@ -1,0 +1,43 @@
+{
+  "heading": "What should we think about?",
+  "placeholders": [
+    "Ask anything",
+    "Plan a weekend in Kyoto",
+    "Explain springs like I'm five",
+    "Draft a launch tweet"
+  ],
+  "hint": "Hold to think harder",
+  "efforts": {
+    "quick": "Quick",
+    "think": "Think",
+    "deep": "Think deeply"
+  },
+  "labels": {
+    "send": "Send, hold to think harder",
+    "stop": "Stop"
+  },
+  "attach": "Attach a file",
+  "search": "Search the web",
+  "status": {
+    "thinking": "Thinking",
+    "thinkingDeeply": "Thinking deeply",
+    "writing": "Writing",
+    "done": "Done",
+    "workedFor": "Worked for {elapsed}",
+    "stopped": "Stopped"
+  },
+  "answers": {
+    "quick": [
+      "Quick answer, straight off the top. Hold send a little longer next time and I'll think it through first.",
+      "Here's the short version. For anything tricky, hold the button until it turns amber."
+    ],
+    "think": [
+      "I gave this a moment of thought before answering. Holding send told me it was worth more than a quick reply, so I weighed a couple of options first.",
+      "Thought about it for a bit. Keep holding past amber to orange and I'll go even deeper next time."
+    ],
+    "deep": [
+      "You held all the way to orange, so I took my time. I broke the question into parts, checked each one, and only then wrote this. Long holds are for the questions that deserve them.",
+      "Deep mode. I worked through this step by step before replying, which is slower but more careful. Tap for speed, hold for depth."
+    ]
+  }
+}

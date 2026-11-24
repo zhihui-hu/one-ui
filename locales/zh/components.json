@@ -1,0 +1,513 @@
+{
+  "foldercomponent": {
+    "name": "文件夹",
+    "description": "一个带动画的文件夹，悬停时卡片呈扇形展开，点击时向上掀开，翻盖带有 3D 倾斜效果。支持 color 和 size（sm/md/lg）属性。",
+    "interaction": "悬停让卡片呈扇形展开，再点击掀开文件夹。",
+    "props": {
+      "color": "文件夹、翻盖和卡片的配色主题。每个主题都设置了相互匹配的填充、描边和内阴影。",
+      "size": "文件夹的整体缩放比例。分别对应 0.65×（sm）、1×（md）和 1.35×（lg）。"
+    }
+  },
+  "bouncesidebar": {
+    "name": "弹性侧边栏",
+    "description": "一个垂直导航列表，激活指示器带有弹性的弹簧动画。",
+    "interaction": "点击任意项，弹跳标记会以弹簧动画移动过去。",
+    "props": {
+      "items": "作为垂直列表渲染的行。纯字符串或带 label 的对象即为导航项，加上 href 则变为链接。添加 heading: true 可渲染一个不可选中的分组标签，标记会跳过它。",
+      "value": "受控用法下的激活项索引。设置后，组件不再自行管理状态。",
+      "defaultValue": "非受控用法下的初始激活索引。提供 value 时忽略。",
+      "onChange": "每当选中某一项时调用，参数为新的索引。",
+      "dotColor": "弹跳激活标记的颜色，可用任意 CSS 颜色（hex、rgb、hsl、var）。",
+      "className": "合并到根 <ul> 元素上的额外 class。"
+    }
+  },
+  "hooksidebar": {
+    "name": "钩形侧边栏",
+    "description": "一个垂直导航列表，用虚线导轨标记当前激活项。",
+    "interaction": "点击某一项，强调色导轨会以弹簧动画移动到该项。悬停或用 Tab 切换到其他行时，会绘制第二条较暗的导轨，止于强调色导轨的末端。",
+    "props": {
+      "items": "作为垂直列表渲染的行。纯字符串或带 label 的对象即为导航项，加上 href 则变为链接。",
+      "label": "显示在列表上方、导轨之外的分组标题。省略则为纯列表。同时也作为导航在屏幕阅读器中的名称。",
+      "value": "受控用法下的激活项索引。设置后，其优先级高于 URL 和内部状态。",
+      "defaultValue": "初始激活索引。仅在没有任何项带 href 且未提供 value 时使用。",
+      "onChange": "每当选中某一项时调用，参数为新的索引。",
+      "color": "激活导轨的颜色，可用任意 CSS 颜色（hex、rgb、hsl、var）。悬停导轨保持中性色。",
+      "dashed": "以虚线绘制导轨及其拐角。设为 false 则为实线。",
+      "className": "合并到根 <nav> 元素上的额外 class。"
+    }
+  },
+  "proximitysidebar": {
+    "name": "临近感应侧边栏",
+    "description": "一个交互式侧边栏，带有临近悬停效果，滚动时出现，并随滚动强度做出响应。",
+    "interaction": "滚动内容时会追踪当前章节；将指针移近短横线可使其展开，点击即可平滑滚动到对应章节。",
+    "props": {
+      "sections": "有序的章节映射，用于渲染短横线和确定滚动目标。每个 id 必须与页面中存在的元素 id 一致。",
+      "side": "将小地图固定在所选一侧，并相应翻转短横线的变换原点。",
+      "activeOffset": "滚动时用于检测激活章节的视口锚点比例（0 = 顶部，1 = 底部）。",
+      "className": "外层 nav 容器的额外 class。",
+      "labels": "覆盖导航区域和每条短线按钮的无障碍文本。"
+    },
+    "credits": ["灵感来自 devouringdetails.com"]
+  },
+  "durationpicker": {
+    "name": "时长选择器",
+    "description": "一个带粘滞融合效果和弹簧动画的选择器，用于输入以小时和分钟计的时长。",
+    "interaction": "点击笔形按钮，各分段会弹开并进入编辑，小时字段会自动获得焦点。输入数值；超出上限（默认 24 hr / 60 min）的值会被限制为最大值，并抖动提示已被修正。点击对勾确认，胶囊会重新合为一体。",
+    "props": {
+      "value": "受控值。配合 onChange 使用，选择器会如实反映你传入的值。省略则由组件自行管理状态。",
+      "defaultValue": "非受控用法下的初始值。提供 value 时忽略。",
+      "onChange": "每次按键时触发，参数为当前已限制后的值。如需在用户输入过程中做出响应，请监听此回调。",
+      "onConfirm": "点击对勾时以最终值触发一次。保存数据时通常用这个。",
+      "onEditingChange": "在选择器进入或退出编辑模式时通知你，适合在打开期间阻止导航或调暗周围的 UI。",
+      "defaultEditing": "渲染时直接处于编辑模式。",
+      "maxHours": "小时字段的上限。输入超过该值会被限制为此值，并使输入框抖动。",
+      "maxMinutes": "分钟字段的上限。限制与抖动行为与 maxHours 相同。",
+      "hoursLabel": "渲染在小时字段后的文字，可替换为译文或更简短的 'h'。",
+      "minutesLabel": "渲染在分钟字段后的文字。",
+      "disabled": "调暗控件并禁止进入编辑模式。与标准表单字段行为一致。",
+      "className": "合并到根元素上的额外 class。每个内部部件也带有 data-slot 属性（duration-picker、-segment、-input、-toggle）以及 data-editing / data-disabled 状态，因此仅用 CSS 即可重新设置样式。",
+      "labels": "覆盖编辑和保存按钮的无障碍标签。"
+    }
+  },
+  "fluidorb": {
+    "name": "流体光球",
+    "description": "一个带有流动流体着色的 WebGL 动画光球，灵感来自 ChatGPT 的语音模式。",
+    "interaction": "环境动画：色块会自行向左、右、上、下及斜向漂移，不断交融又重新成形，无需任何交互。遵循 prefers-reduced-motion，此时保持静止画面。",
+    "props": {
+      "color": "流体的颜色，可用任意 hex 颜色。中间和底部色带由它派生（一个浅色调和完整颜色），顶部保持白色。默认为原始的蓝色。",
+      "size": "光球的直径，单位为像素。",
+      "className": "合并到根元素（data-slot=\"fluid-orb\"）上的额外 class。"
+    },
+    "credits": ["灵感来自 chatgpt.com"]
+  },
+  "scrollprogressindicator": {
+    "name": "滚动进度",
+    "description": "一个滚动进度胶囊，跟踪阅读位置，并可展开为 squircle 菜单，列出可跳转的章节。",
+    "interaction": "滚动时圆环逐渐填满，当前章节标签以交叉淡入的方式出现。点击胶囊可将其变形为 squircle 菜单，再点按任意章节即可平滑滚动过去。点击外部或按 Escape 关闭。",
+    "props": {
+      "sections": "有序的章节列表，随阅读进度显示并列在菜单中。每个 id 必须与滚动内容中存在的元素 id 一致。",
+      "containerRef": "要跟踪并在其中滚动的滚动容器。省略时默认为 window。",
+      "offset": "章节需越过的、距滚动容器顶边的距离（像素），越过后即标记为激活。",
+      "className": "合并到固定定位根容器上的额外 class，可用来调整胶囊的位置。",
+      "labels": "覆盖无障碍文本，即折叠状态下用于展开章节列表的按钮标签。"
+    }
+  },
+  "railtoc": {
+    "name": "导轨目录",
+    "description": "一个目录组件，纸飞机会飞向你正在阅读的章节。",
+    "interaction": "滚动内容时，纸飞机沿导轨在标题之间飞行，并在导轨弯折处转向。向上滚动时它会掉头。它身后的导轨为实线，经过的每个标题都会被填充；其余部分保持虚线。点击任意标题即可滚动到该处。",
+    "props": {
+      "items": "按文档顺序排列的标题。每个 id 必须与内容中的元素 id 一致。depth 设置缩进层级，默认为 0。",
+      "containerRef": "要跟踪并在其中滚动的滚动容器。省略时默认为 window。",
+      "offset": "距滚动容器顶边的距离（像素），标题越过此线即视为已到达。点击某项会将其标题滚动到这条线。",
+      "indent": "每个层级的水平缩进步长，单位为像素。",
+      "title": "列表上方的文字，同时也作为导航在屏幕阅读器中的名称。",
+      "className": "合并到根 nav 上的额外 class。内部部件带有 data-slot 属性（rail-toc-title、-list、-plane），可通过 CSS 设置样式。"
+    },
+    "credits": ["灵感来自 pinterest.com/pin/1118863101209303811"]
+  },
+  "codeblock": {
+    "name": "代码块",
+    "description": "一个简洁的代码块，整套主题都由单一强调色生成。传入代码和一个 hex 色值，其余交给它。",
+    "interaction": "选择一个强调色色块，整个代码块会按该颜色重新着色。点击复制按钮，它会以弹簧动画变为对勾。",
+    "props": {
+      "code": "要渲染的源代码。",
+      "language": "Prism 语言 id，例如 \"tsx\"、\"css\"、\"json\"、\"bash\"。同时作为标签显示在头部。",
+      "accent": "任意 hex 颜色。整个主题都是它的不同深浅：最深的作为背景，代码 token 是强调色的浅色调，最亮的文字始终为白色。",
+      "mode": "配色方案。auto 跟随页面主题（html 的 dark/light class、data-theme 或系统偏好）。传入 dark 或 light 可固定调色板：dark 在深色背景上使用强调色的浅色调，light 则反转色阶。",
+      "filename": "显示在头部左侧的文件名或路径。省略时回退为语言 id。",
+      "showFrame": "切换外层布局：背景、边框、圆角和头部。关闭后只渲染高亮后的代码。",
+      "showHeader": "切换头部栏。隐藏时，复制按钮改为悬浮在右上角。showFrame 关闭时忽略。",
+      "showLineNumbers": "切换行号栏。",
+      "showCopyButton": "切换复制到剪贴板按钮。",
+      "highlightLines": "可选，要以柔和强调色背景高亮的行号（从 1 开始）。省略时不高亮。",
+      "className": "合并到根元素（data-slot=\"code-block\"）上的额外 class，可用于设置宽度和 max-height。",
+      "labels": "覆盖复制按钮的标签，以及没有文件名时代码区域的标签。"
+    }
+  },
+  "gravityletters": {
+    "name": "重力字母",
+    "description": "一个趣味重力场，字母、数字、emoji 或你传入的任意组件会像真实物体一样落下并堆积。",
+    "interaction": "点击或轻触任意位置投下一个字符，按住不放则持续倾泻。字符下落时会翻滚，落地时轻轻弹起，并堆成圆润的小丘。在手机上，倾斜设备可让堆积物向较低一侧倾泻。遵循 prefers-reduced-motion。",
+    "props": {
+      "type": "从哪个字符池中抽取：letters、digits 或 both。设置 items 时忽略。",
+      "items": "你自己的掉落池：emoji、图标或任意组件。每次掉落随机选取一项。会覆盖 type。",
+      "gravity": "向下的加速度，单位为 px/s²。越小越轻飘，越大越沉重。",
+      "size": "字符的基础尺寸，单位为像素。每次掉落会在此基础上略有变化。",
+      "color": "字符颜色。默认为 currentColor，因此会跟随你的主题。",
+      "maxGlyphs": "场中保留的最大字符数；超出上限后最早的会淡出。默认不限。",
+      "deviceTilt": "倾斜手机会让堆积物向较低一侧倾泻。iOS 会在首次点按时请求运动权限。",
+      "className": "根元素的额外 class，可用来设置场地尺寸。"
+    }
+  },
+  "otpinput": {
+    "name": "验证码输入框",
+    "description": "一个一次性验证码输入框，字符滚动到位，光标在各格之间滑动。",
+    "interaction": "输入即填充当前格并跳到下一格。Backspace 先就地清空当前格，再按一次则退回上一格。方向键可在各格之间移动，光标会随之滑动。粘贴验证码，或让手机从短信中自动填充，都会直接填入。设置 status 可让各格变绿，验证码错误时则抖动并变红。",
+    "props": {
+      "length": "渲染的格子数量，4 位验证码即 length={4}。任意数量均可。",
+      "size": "格子的整体尺寸。分别对应 40px（sm）、48px（md）和 56px（lg），文字、光标和间距随之缩放。",
+      "value": "当前验证码。传入即可自行控制输入；省略则由组件自行跟踪状态。",
+      "defaultValue": "非受控时的初始验证码。",
+      "onChange": "每次编辑时触发，参数为目前完整的验证码。",
+      "onComplete": "最后一格填满时触发。",
+      "type": "格子接受哪些字符。其他字符会被忽略，粘贴时也一样。",
+      "status": "控制反馈状态。success 会依次为每个格子描出绿色圆环，error 会将它们描为红色并让整行抖动一次。",
+      "mask": "隐藏字符，类似密码框。",
+      "disabled": "禁止输入并调暗所有格子。",
+      "autoFocus": "挂载时聚焦第一格。",
+      "className": "包裹各格的行容器的额外 class。",
+      "slotClassName": "每个格子的额外 class，用于设置尺寸和颜色。",
+      "labels": "覆盖每个输入格的无障碍标签。数字类型用 digit，其他类型用 character。"
+    }
+  },
+  "passwordinput": {
+    "name": "密码输入框",
+    "description": "一个密码输入框，带有切换显示或隐藏输入内容的眼睛按钮，以及在输入时显示密码强度的强度条。",
+    "interaction": "点击眼睛显示密码，再次点击隐藏。开始输入后，下方会滑出强度条，并随密码变强而逐渐填满。",
+    "props": {
+      "value": "当前密码。传入即可自行控制输入；省略则由组件自行跟踪状态。",
+      "defaultValue": "非受控时的初始密码。",
+      "onChange": "每次编辑时触发，参数为完整的密码。",
+      "defaultVisible": "初始时显示密码。",
+      "onVisibleChange": "通过眼睛按钮显示或隐藏密码时触发。",
+      "strength": "输入内容后，在输入框下方显示四级强度条，标签为 Weak、Fair、Good 或 Strong。",
+      "placeholder": "输入框为空时显示的文字。",
+      "disabled": "禁止输入并调暗整个输入框。",
+      "className": "包裹输入框和强度条的容器的额外 class。",
+      "inputClassName": "原生 input 的额外 class。其他任何 input 属性（如 name 或 autoComplete）也会传给它。",
+      "labels": "覆盖显示密码按钮的标签和强度提示文本。"
+    }
+  },
+  "themeselector": {
+    "name": "主题选择器",
+    "description": "一排迷你应用预览，每个主题一个，用圆环标记你选中的那个。",
+    "interaction": "悬停预览时会显示淡淡的圆环；点击后实线圆环将其标记为已选中。方向键可在主题之间移动并随之选中；Home 和 End 跳到第一个和最后一个。",
+    "props": {
+      "themes": "要显示的主题，每个包含 value、label 以及用于预览的六色调色板。默认为 dark 和 light。",
+      "value": "选中的主题。传入即可自行控制选择器；省略则由组件自行跟踪状态。在主题尚未确定时（例如服务端渲染期间）传入 null，此时不选中任何项。",
+      "defaultValue": "非受控时的初始主题。回退为第一个主题。",
+      "onChange": "选中不同主题时触发，参数为新的 value。",
+      "labels": "在每个预览下方显示主题标签，选中项的标签会更亮。",
+      "disabled": "禁止选择并调暗所有预览。",
+      "className": "包裹各预览的行容器的额外 class。",
+      "itemClassName": "每个预览的额外 class，用于设置尺寸。默认每个为 w-40、4:3 比例，内部所有内容随之缩放。"
+    }
+  },
+  "toast": {
+    "name": "消息提示",
+    "description": "一个带有动画状态图标的 toast 通知，基于 Sonner 构建。",
+    "interaction": "Toast 堆叠在角落，悬停时展开。每种状态都会弹出各自的图标，promise toast 会在原位从加载圈变为对勾或叉号。可以滑动关闭、点击其操作按钮，或悬停以显示关闭按钮。遵循 prefers-reduced-motion。",
+    "props": {
+      "toast(title, options)": "显示一条普通 toast 并返回其 id。toast.success、toast.error、toast.warning、toast.info 和 toast.loading 接受相同参数，并附加状态图标。",
+      "toast.promise": "在任务完成前显示 messages.loading，之后在同一条 toast 中切换为 messages.success 或 messages.error。二者都可以是接收结果的函数。",
+      "description": "标题下方弱化显示的第二行文字。",
+      "action": "右侧的胶囊按钮。点击会执行 onClick 并关闭 toast。",
+      "duration": "toast 关闭前的毫秒数。加载中的 toast 会一直保留，直到被更新或关闭。",
+      "id": "复用 id 可更新已显示的 toast，而不是新增一条。",
+      "dismissible": "显示关闭按钮并允许滑动关闭。",
+      "position": "用于 Toaster，设置堆叠的位置。Toaster 也接受 Sonner Toaster 的其余属性，如 expand、visibleToasts、offset、duration 和 hotkey。深色模式跟随你的 .dark class。",
+      "gap": "用于 Toaster，展开后各 toast 之间的间距（像素）。",
+      "labels": "在 Toaster 上设置，覆盖所有 toast 关闭按钮的无障碍标签。"
+    },
+    "credits": ["基于 Emil Kowalski 的 Sonner 构建"]
+  },
+  "githubactivity": {
+    "name": "GitHub 活动",
+    "description": "一个贡献热力图，底部面板可展开覆盖在网格上，展示你的热门仓库排名。",
+    "interaction": "点击 V 形箭头在网格上方展开热门仓库，再次点击则收回堆叠。悬停任意格子可查看其数量和日期。",
+    "props": {
+      "username": "要获取数据的 GitHub 用户名。",
+      "contributions": "你自己的贡献数据，用于代替用户名。",
+      "repos": "底部列出的仓库，按从高到低排列。",
+      "year": "标题中显示的年份。默认为最后一次贡献所在的年份。",
+      "accent": "贡献方格的颜色。",
+      "cellSize": "每个日期方格的尺寸，单位为像素。",
+      "months": "显示多少个月的历史。",
+      "showMonths": "在网格上方添加一行月份名称。",
+      "label": "底部头像旁显示的文字。",
+      "defaultOpen": "初始时仓库面板为展开状态。设置 open 时忽略。",
+      "open": "受控用法下的面板状态。设置后，组件不再自行管理状态。",
+      "onOpenChange": "点击 V 形箭头时调用，参数为下一个状态。",
+      "className": "包裹网格的卡片的额外 class。",
+      "labels": "覆盖标题 heading(total, year)、日期提示 day(count, date)、12 个月份名称，以及 showRepos 和 hideRepos 按钮文案。"
+    }
+  },
+  "emojireaction": {
+    "name": "表情回应",
+    "description": "一个类似 tapback 的回应按钮，会打开一排 Apple emoji，并让你选中的 emoji 复制出多个向上飘出。",
+    "interaction": "点击按钮弹出 emoji 栏，或按住并直接拖到某个 emoji 上，一个手势完成选择。悬停 emoji 会使其上浮。选中后会有 5 个副本从它上方飘起，在上升过程中逐渐散开、缩小并模糊淡出。按住 emoji 不放可持续飘出。上方空间不足时，emoji 栏会翻转到按钮下方，方向键可在其中移动。打开时按钮会变成叉号；点击叉号、点击外部或按 Escape 即可关闭。之后按钮会显示你上一次的选择。",
+    "props": {
+      "emojis": "emoji 栏中显示的 Apple emoji 名称，使用 Emojipedia 上的连字符写法。五个默认项之外的 emoji 还需提供 emojiData。",
+      "emojiData": "传给 EmojiProvider 的 emoji 名称到图片的映射。默认为内置的五个表情；传入 react-apple-emojis/src/data.json 可获得完整集合。",
+      "onReact": "每次选中 emoji 时调用，参数为 emoji 名称，按住期间的每次重复也会调用。",
+      "size": "按钮、emoji 栏以及飞起的 emoji 的缩放比例。",
+      "align": "emoji 栏的哪一侧边缘与触发器对齐。超出屏幕时仍会向内偏移。",
+      "asChild": "使用你自己的子元素作为触发器，代替内置按钮，这样 emoji 栏可以挂在消息、卡片或图片上。",
+      "className": "合并到根元素上的额外 class。",
+      "labels": "覆盖触发按钮、选择面板和每个表情的无障碍文本。"
+    }
+  },
+  "notificationbell": {
+    "name": "通知铃铛",
+    "description": "一个 iOS 风格的通知铃铛，带未读数徽标。",
+    "interaction": "按加号添加一条通知，按减号清除一条。新通知到达时铃铛会摆动，数字滚动到新值。快速连续添加几条，摆动会更剧烈。数量为零时徽标会缩小消失。",
+    "props": {
+      "count": "徽标上的未读总数。为 0 时隐藏徽标，小数会向下取整，负数按 0 处理。",
+      "max": "显示的最大数字。超过时显示为该最大值加一个加号。",
+      "variant": "徽标显示数字还是一个纯圆点。圆点出现和消失的时机与数字相同。",
+      "size": "按钮的直径，单位为像素。铃铛、徽标和数字的尺寸都按它的比例计算。",
+      "color": "徽标颜色，取自 Apple 系统调色板。每种颜色都会随主题切换为对应的深色模式变体。",
+      "asChild": "使用你自己的子元素作为触发器，代替内置按钮，这样徽标可以放在头像或导航项上。你的元素需为圆形，徽标才能对齐；铃铛摆动只在内置按钮上生效。",
+      "className": "合并到根元素上的额外 class。尺寸由 size 属性以内联样式设置，因此在这里设置宽度或高度 class 不会生效。",
+      "labels": "覆盖朗读的标签，分为有未读数和无未读两种情况。"
+    }
+  },
+  "stepplayer": {
+    "name": "步骤播放器",
+    "description": "一个 iOS 风格的分步进度轨道，带有播放、暂停和重播控件。当前步骤会拉伸成一个随播放逐渐填满的进度条。",
+    "interaction": "按播放开始序列。当前步骤拉伸成进度条并在运行中填满，交接给下一步时收缩为实心圆点。再按一次可在填充中途暂停；播放图标会在过渡中拆分为暂停竖条。播放结束时淡变为重播箭头。可点击步骤进行跳转。",
+    "props": {
+      "steps": "显示多少个步骤。传入数组可为每一步单独设置时长或标签。",
+      "value": "受控用法下的当前步骤索引。省略时组件自行跟踪索引。",
+      "defaultValue": "非受控时的起始步骤。会被限制在最后一步以内。",
+      "onValueChange": "步骤前进、循环回绕或被点击时触发。重播时也会触发。",
+      "playing": "受控用法下的播放状态。省略则由按钮控制。",
+      "defaultPlaying": "非受控时，序列是否在挂载后立即开始运行。",
+      "onPlayingChange": "按下按钮时触发；未开启 loop 而最后一步结束时也会触发。",
+      "duration": "每一步运行的毫秒数。单步时长会覆盖它；设为 0 会停止计时器，以便你自行控制索引。",
+      "loop": "回到第一步继续，而不是停止。开启后不会出现重播按钮。",
+      "onComplete": "最后一步结束时触发；循环时每一轮都会触发。",
+      "size": "轨道和按钮的高度，单位为像素。其余尺寸都按固定比例由它计算，因此圆点、进度条、间距、内边距、图标和点击区域都随这一个数字缩放。",
+      "showControl": "显示圆形播放按钮。关闭后只显示轨道，通过 playing 属性来控制。",
+      "controlPosition": "按钮位于轨道的哪一侧。",
+      "speeds": "点击时间标签时依次切换的播放速度。只传一个速度可将其固定，标签也会变回纯文本。",
+      "onSpeedChange": "每次点击标签时调用，参数为新的速度。",
+      "seekable": "允许点击某一步跳转过去。在任何尺寸下，圆点都保留适合手指点击的区域。",
+      "className": "合并到根元素上的额外 class。它会根据 size 属性自行确定尺寸，只有在希望轨道比内容更宽时才需设置宽度。",
+      "labels": "覆盖控制按钮、进度轨道和步骤按钮的标签。步骤自带的 label 优先。"
+    }
+  },
+  "gridreveal": {
+    "name": "网格揭示",
+    "description": "一个用于 AI 图片的加载状态，图片到达后会转变为真实画面。",
+    "interaction": "按下 Generate，画框会先分成四格，然后不断将最大的一格一分为二，直到变成图片。图像中细节丰富的部分会先变清晰，左下角会显示一个状态胶囊，直到图片加载完成。遵循 prefers-reduced-motion，此时保持静止画面。",
+    "props": {
+      "src": "要揭示的图片。生成期间保持为 null，因为网格只在它为空时运行；如果 src 已加载完成，整个过程会一闪而过。",
+      "alt": "为屏幕阅读器描述最终图片。省略时，画框对辅助技术隐藏。",
+      "progress": "等待进度，从 0 到 1，决定网格分割到什么程度。在图片解码完成前停在 0.72，图片落定后才完成揭示。",
+      "aspect": "画框的宽高比（宽除以高）。画框会填满父元素的宽度，因此请通过约束父元素来设置尺寸。",
+      "caption": "可选的状态文字，以磨砂胶囊形式显示在画框左下角，并带有缓慢的微光效果。运行中修改它，文字行会交叉淡入淡出，胶囊也会随之调整大小。",
+      "estimatedDuration": "任务大约需要的时长，在未传入 progress 时用于控制网格节奏。超时也没关系，网格会继续缓慢推进而不是停下。",
+      "onRevealComplete": "图片完全显现后触发。",
+      "onError": "图片加载失败时触发。如果不提供，损坏的 src 会让网格一直等待，因此可以用它显示你自己的回退内容。",
+      "className": "合并到根元素（data-slot=\"grid-reveal\"）上的额外 class。"
+    }
+  },
+  "gooeynav": {
+    "name": "粘滞导航",
+    "description": "一个粘滞效果的导航栏，选中项会从整组中分离出来。",
+    "interaction": "点击某一项，它会从栏中脱离出来；其余项在它身后重新合为一体。",
+    "props": {
+      "items": "导航项。字符串为按钮，带 href 的对象为链接，icon 渲染在标签前。",
+      "value": "选中项的索引。传入即可自行控制导航；省略时，若各项带有 href 则跟随 url，否则使用自身状态。",
+      "defaultValue": "非受控时导航的初始索引。传入 value 后忽略；某项 href 与当前 url 匹配时也会忽略。",
+      "onChange": "触发时参数为被点击项的索引。",
+      "size": "导航栏的尺寸。设置标签内边距、文字大小和图标大小，并选用匹配的 separation 和 radius，使形状保持比例。在手机上使用 xs，可适配 360px 宽的屏幕。",
+      "activeColor": "选中项色块的填充色。未选中的栏则跟随主题：浅色模式下为浅灰，深色模式下接近黑色。",
+      "activeLabelColor": "选中项的标签颜色。当较浅的 activeColor 导致白色文字难以辨认时设置。",
+      "separation": "在选中项两侧打开的间隙（像素），正是它把栏的其余部分推开。默认值取决于 size：14（xs）、16（sm）、20（md）、24（lg）。",
+      "radius": "色块的圆角半径（像素）。只有栏的外侧圆角和打开间隙两侧的圆角会使用它；闭合的接缝处为 0，使各色块看起来是一个整体。默认值取决于 size：8（xs）、10（sm）、12（md）、14（lg）。",
+      "className": "合并到根元素（data-slot=\"gooey-nav\"）上的额外 class。导航栏按内容确定尺寸且从不换行，如果可能超出父元素，请在这里添加溢出容器。"
+    }
+  },
+  "deletebutton": {
+    "name": "删除按钮",
+    "description": "一个就地确认的删除按钮，无需弹出对话框。",
+    "interaction": "点击垃圾桶，桶盖会掀开。随后滑出一个面板，带有用于确认的对勾和用于取消的叉号。按 Escape 也会取消。确认后，垃圾桶的位置会绘制出一个对勾；取消则垃圾桶回到原位。",
+    "props": {
+      "onConfirm": "按下对勾时调用。",
+      "onCancel": "面板未执行删除就关闭时调用，无论是通过叉号、垃圾桶还是 Escape。",
+      "className": "合并到根元素上的额外 class。",
+      "labels": "覆盖按钮标签，以及做出选择后播报的状态文本。"
+    }
+  },
+  "animatedcounter": {
+    "name": "动画计数器",
+    "description": "一个像里程表一样、在数字滚轮上滚动到新值的数字。",
+    "interaction": "数字增大时各位向上滚动，减小时向下滚动，在每个窗口的顶部和底部淡入淡出，而不是被生硬截断。持续变化的数字会平滑旋转而不是卡顿。宽度始终与数字匹配：新增的位会滑入，减少的位会淡出，其余位随之靠拢，分隔符也会一起滑动。",
+    "props": {
+      "value": "要显示的数字。每次变化都会从当前屏幕上的值开始动画，因此可以随时频繁更新。",
+      "decimals": "保留几位小数，最多 15 位。数值会按该精度四舍五入，因此滚轮总是停在完整的数字上。",
+      "duration": "每一位数字稳定到新值大约需要的秒数。数值持续更新时可调低它，让滚轮紧跟数字。",
+      "padStart": "最少显示的整数位数，最多 24 位，不足时用前导零补齐。可用来在数字跨越十的幂时保持宽度稳定。",
+      "separator": "每三位整数插入的字符。传入空字符串则不分组。",
+      "decimalSeparator": "整数位与小数位之间的字符。",
+      "grouping": "分隔符的位置。western 每三位一组，如 1,234,567。indian 先分出最后三位，之后每两位一组，如 12,34,567。",
+      "prefix": "渲染在数字前面，用于货币符号或图标。它位于滚轮之外，从不参与动画。",
+      "suffix": "渲染在数字后面，用于单位或百分号。",
+      "className": "合并到根元素（data-slot=\"animated-counter\"）上的额外 class。尺寸、颜色、字体和字重都继承自父元素，因此可以像文字一样设置样式。数字列带有 data-slot=\"animated-counter-digit\"，分隔符带有 data-slot=\"animated-counter-mark\"，便于从根元素选中它们。"
+    }
+  },
+  "matrixorb": {
+    "name": "点阵光球",
+    "description": "一个点阵光球，可在空闲、聆听和思考状态之间动画切换。",
+    "interaction": "使用控件在空闲、聆听和思考状态之间切换光球。",
+    "props": {
+      "state": "光球播放哪种动画。",
+      "level": "光球绽放的程度，0 到 1。未提供时回退为内置的包络曲线。",
+      "size": "光球的直径，单位为像素。",
+      "color": "圆点的颜色，可用任意 CSS 颜色。",
+      "dots": "网格横向的圆点数量。",
+      "labels": "光球下方的说明文字，按状态分别设置。",
+      "className": "合并到根元素（data-slot=\"matrix-orb\"）上的额外 class。"
+    }
+  },
+  "tasklist": {
+    "name": "任务列表",
+    "description": "一个清单，会为已完成的任务加上删除线，并将其移到列表底部。",
+    "interaction": "点击某一行即可切换其状态。",
+    "props": {
+      "tasks": "要显示的行，每行包含 id、label 和可选的 done 标记。传入它即可自行控制列表。",
+      "defaultTasks": "不自行控制列表时的初始行。列表会自行跟踪哪些已完成。",
+      "onTasksChange": "每次勾选或取消勾选某行时调用，参数为完整列表。",
+      "size": "行的尺寸。文字、圆圈、内边距和圆角一起缩放，圆圈始终与标签的单行高度一致。",
+      "accent": "实心圆圈和焦点环的颜色，可用任意 CSS 颜色。删除线和淡化的文字保持灰色。",
+      "onSettled": "仅用于 TaskItem。某行完成勾选动画后触发，TaskList 借此得知何时将其下移。",
+      "className": "合并到根元素（data-slot=\"task-list\"）上的额外 class。",
+      "labels": "覆盖任务完成或重新打开时读屏器播报的文案。"
+    }
+  },
+  "voicenote": {
+    "name": "语音消息",
+    "description": "一个语音消息条，带有可拖动定位的波形和播放控件。",
+    "interaction": "按播放开始。播放三角形会拆分为暂停竖条，波形从左侧开始填充，柔和的光沿消息条内侧边缘环绕。暂停后，光会逐渐减速停下。在波形上拖动可调整进度，或聚焦后使用方向键。点击时间可更改播放速度。",
+    "props": {
+      "src": "要播放的音频文件 URL。不提供时，消息条按计时器运行，上方的演示就是如此。",
+      "duration": "音频时长，单位为秒。真实文件报告自身时长后忽略。",
+      "waveform": "取值 0 到 1 的竖条高度。省略时根据 seed 生成竖条。",
+      "bars": "要生成多少根竖条。它们平分宽度，因此竖条越多越细。",
+      "seed": "决定生成哪一种波形。相同的 seed 总是绘制出相同的竖条。",
+      "playing": "由你自行控制播放。省略则由消息条自行跟踪状态。",
+      "defaultPlaying": "不由你控制时，消息条是否一开始就播放。",
+      "onPlayingChange": "每次开始或停止播放时调用。",
+      "onEnded": "音频播放到结尾时调用，时机在消息条倒回开头之后。",
+      "accent": "消息条背后光效的颜色，可用任意 hex 颜色。波形本身保持中性色。",
+      "size": "消息条尺寸。高度、控件、竖条宽度和文字一起缩放。",
+      "speeds": "点击时间标签时依次切换的播放速度。只传一个速度可将其固定，标签也会变回纯文本。",
+      "onSpeedChange": "每次点击标签时调用，参数为新的速度。",
+      "seekable": "波形是否可拖动调整进度。方向键每次移动 5 秒，Home 和 End 跳到两端。关闭后同时移除指针和键盘调整进度。",
+      "className": "合并到根元素（data-slot=\"voice-note\"）上的额外 class。在这里设置宽度。",
+      "children": "仅用于 VoiceNoteGroup。将多个消息条包在其中，开始播放其中一个会停止其余的，就像聊天会话中那样。",
+      "labels": "覆盖播放按钮、进度滑块、位置读数和倍速按钮的无障碍文本。"
+    }
+  },
+  "faq": {
+    "name": "常见问题",
+    "description": "一个以消息会话形式呈现的常见问题组件，每个答案都以回复气泡的形式发出。",
+    "interaction": "点击问题展开答案，再次点击则收起。方向键可在问题之间移动。",
+    "props": {
+      "items": "问题列表，每项包含一个 id、问题和答案。",
+      "value": "当前展开问题的 id。传入它可控制展开哪一个。",
+      "defaultValue": "首次渲染时展开问题的 id。",
+      "onValueChange": "每次问题展开或收起时调用，参数为展开项的 id 或 null。",
+      "accent": "答案气泡的颜色，可用任意 CSS 颜色。",
+      "avatar": "你的 logo 或图片，显示在每个答案旁的圆形中。传入 null 可隐藏。",
+      "className": "合并到根元素（data-slot=\"faq\"）上的额外 class。"
+    }
+  },
+  "websearch": {
+    "name": "网页搜索",
+    "description": "AI 回答背后的信息来源，以搜索胶囊、来源卡片、流式回答和行内引用的形式呈现。",
+    "interaction": "按 Replay 观看一次搜索运行，以及回答逐字打出的过程。悬停网站图标会使其展开，悬停引用可预览其来源。",
+    "props": {
+      "sources": "搜索结果，每项包含一个 id、标题和 url，以及可选的摘要和 favicon。没有 favicon 时，用一个彩色字母代替。",
+      "status": "searching 状态下标签会闪烁微光，并为仍在加载的结果保留空位。",
+      "query": "搜索时显示在标签中。",
+      "label": "替换标签文字。默认显示 \"Searching the web\"，之后显示 \"Searched 6 sites\"。",
+      "progress": "搜索进度，0 到 1，以地球图标周围的圆环表示。省略时，每出现一个来源圆环就前进一格。",
+      "linked": "卡片和引用是否在新标签页中打开来源。关闭可让访客留在当前页面；预览仍然可用。",
+      "open": "传入它可控制卡片是否显示。与 onOpenChange 配合使用。",
+      "defaultOpen": "首次渲染时卡片是否显示。",
+      "onOpenChange": "每次卡片显示或隐藏时调用。",
+      "play": "仅用于 WebSearchAnswer。开始逐字打出回答。段落、列表和粗体文字会逐字打出；引用则整体出现。之后新增的子内容会在到达时继续打出。",
+      "speed": "仅用于 WebSearchAnswer。平均每秒字符数。积压较多时会打得更快，因此实时流永远不会落后。",
+      "onComplete": "仅用于 WebSearchAnswer。最后一个字符打出后调用。",
+      "source": "仅用于 WebSearchCitation。行内标签所链接并预览的来源。",
+      "index": "仅用于 WebSearchCitation。显示在站点名称后的数字，用于编号引用。",
+      "className": "合并到根元素（data-slot=\"web-search\"，带有 data-status）上的额外 class。宽度默认为 560px。",
+      "labels": "覆盖内置文案：searching、searchingQuery(query)、searched(count)、showLess、showMore(count) 和 moreSources(count)。"
+    }
+  },
+  "aistatus": {
+    "name": "行内 AI 状态",
+    "description": "一个行内状态组件，展示 AI 正在做什么，从思考、调研到撰写和完成。",
+    "interaction": "按 Replay 观看一条回复从思考到完成的过程。每种状态都有自己的动画图标和微光标签，完成后答案随即出现。",
+    "props": {
+      "state": "内置状态或 states 中的任意键。",
+      "states": "添加自定义状态或覆盖内置状态，每个包含 label、icon 和 active 标记。",
+      "label": "替换当前状态的文字。",
+      "icon": "替换当前状态的图标。",
+      "detail": "标签后的弱化文字，例如 \"12 sources\"。",
+      "favicon": "detail 前的小 logo，可以是图片 url 或元素。",
+      "timer": "显示本次运行已用的秒数。",
+      "elapsed": "要显示的秒数，代替内置计时。",
+      "shimmer": "强制开启或关闭标签的微光效果。",
+      "className": "合并到根元素（data-slot=\"ai-status\"）上的额外 class。"
+    }
+  },
+  "promptbox": {
+    "name": "AI 输入框",
+    "description": "一个聊天输入框，按住发送键的时长决定 AI 思考的深度。",
+    "interaction": "输入提示词，点按发送或按 Enter 发送。改为按住其中任意一个即可蓄力：按钮逐渐填充颜色，指示条随之点亮，从 Quick 逐级升到 Think 再到 Think deeply。松开即按当前级别发送。按 Escape 或将指针拖离按钮可取消蓄力。发送时，文字会从输入框中升起。",
+    "props": {
+      "onSubmit": "发送时调用，参数为去除首尾空白后的提示词和蓄力达到的 effort 级别。点按会以第一个 effort 级别发送。",
+      "efforts": "按住时依次升级的级别，每个包含 id、label 和可选的 hex 颜色。每个级别耗时 650ms；只传一个级别即可关闭蓄力。",
+      "status": "streaming 状态下发送按钮会变为停止按钮，外圈为发送时所用 effort 级别的颜色。你仍可输入，但需等到 idle 状态才能发送。",
+      "onStop": "流式输出期间按下停止按钮时调用。",
+      "placeholder": "传入数组时，在输入框为空期间每 3.2 秒轮换一次。",
+      "hint": "有文字后显示在发送按钮旁。传入 null 可隐藏。",
+      "actions": "底部一行左侧的按钮，例如附件或网页搜索。",
+      "value": "传入它可控制文本。与 onValueChange 配合使用。",
+      "defaultValue": "首次渲染时的文本。",
+      "onValueChange": "每次编辑时以新文本调用，发送后以空字符串调用。",
+      "disabled": "调暗输入框并禁止输入和发送。",
+      "inputRef": "指向 textarea 的 ref，用于在发送后或页面加载时聚焦。",
+      "inputProps": "textarea 的额外属性，例如 name、id、autoFocus 或 maxLength。它的键盘和失焦处理函数会先于输入框自身的处理函数运行；在 onKeyDown 中调用 preventDefault 可阻止 Enter 发送。",
+      "className": "合并到根元素（data-slot=\"prompt-box\"，带有 data-status）上的额外 class。宽度默认为 560px，文字区域增高到 192px 后开始滚动。",
+      "labels": "覆盖发送按钮在空闲和生成中两种状态下的无障碍名称。"
+    }
+  },
+  "streamingresponse": {
+    "name": "流式回复",
+    "description": "一条逐词清晰浮现的 AI 回复，支持 markdown，带有低调的光标和回复操作栏。",
+    "interaction": "按 Replay 观看回答到达的过程。文字像真实模型一样以小段不均匀的节奏到达，在逗号和句号处短暂停顿，每段都从柔和的模糊中变清晰，前方有一个沿行滑动的小圆点。粗体、代码、列表和链接在出现的瞬间就已格式化，从不显示原始符号。按 Stop 可中断。完成后，可以复制、重试或评价。",
+    "props": {
+      "text": "目前已收到的全部内容。在流式传输过程中传入不断增长的字符串；支持 markdown。",
+      "status": "streaming 会在文字到达时逐步显示。done 会显示完剩余内容。stopped 会定格在已显示的内容上。",
+      "speed": "追上进度后的平均每秒词数。落后时会加速，因此各段不会堆积。",
+      "ink": "可选颜色，新出现的词先以该颜色显示，再过渡为文字颜色，也用于小圆点。未设置时一切保持单色。",
+      "actions": "回复完成后显示复制和评价按钮。",
+      "onRetry": "添加一个会调用此函数的重试按钮。",
+      "onFeedback": "按下点赞或点踩时调用；再次按下以清除时，参数为 null。",
+      "defaultFeedback": "首次渲染时显示的评价，例如之前保存的评价。",
+      "onCopy": "以复制的文本调用。停止后，只复制已显示的部分。",
+      "className": "合并到根元素（data-slot=\"streaming-response\"，带有 data-status）上的额外 class。字体和颜色继承自父元素。",
+      "labels": "覆盖操作按钮和代码块按钮的文案：copy、copied、copyCode、retry、goodResponse 和 badResponse。"
+    }
+  },
+  "modelpicker": {
+    "name": "模型选择器",
+    "description": "一个用于 AI 聊天输入框的模型切换器，会从自身的胶囊中展开为可搜索的列表。",
+    "interaction": "点击胶囊，列表会围绕它展开，当前模型精确停留在胶囊原来的位置。悬停或使用方向键时，柔和的高亮会随之滑动，底部显示该模型擅长什么。输入即可筛选。选中一个后，列表会围绕它收起，并把该行带入胶囊。按 Escape 或点击外部，列表会收回到当前模型。",
+    "props": {
+      "models": "要列出的模型，按顺序排列。每个包含 id 和 name，以及可选的用于分组的 provider、icon、description，还有 1 到 5 的 speed 和 intelligence。",
+      "value": "受控用法下选中的模型 id。",
+      "defaultValue": "首次渲染时选中的模型。默认为第一个模型。",
+      "onChange": "选中不同模型时调用，参数为新的 id。",
+      "searchable": "在列表顶部显示搜索框。",
+      "className": "合并到根元素（data-slot=\"model-picker\"）上的额外 class。",
+      "labels": "覆盖触发按钮标签、搜索占位符、列表标签、空状态和指标文本，用于本地化。"
+    }
+  }
+}

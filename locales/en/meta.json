@@ -1,0 +1,28 @@
+{
+  "tagline": "One UI — Rare Animated React Components",
+  "description": "One UI (oneui) is a free, open-source registry of rare animated React components. Built with Tailwind CSS, Motion and the shadcn CLI — copy, paste, and own the code.",
+  "ogAlt": "One UI — rare animated React components",
+  "componentTitle": "{name} — Animated React Component",
+  "componentsTitle": "Components",
+  "componentsDescription": "Browse every One UI (oneui) component in action — rare animated React components built with Tailwind CSS and Motion. Install any of them with the shadcn CLI.",
+  "collectionName": "{site} Components",
+  "breadcrumbHome": "Home",
+  "breadcrumbComponents": "Components",
+  "keywords": [
+    "oneui",
+    "One UI",
+    "One UI components",
+    "react components",
+    "next.js components",
+    "shadcn registry",
+    "shadcn components",
+    "animated ui components",
+    "framer motion components",
+    "motion react",
+    "tailwind css components",
+    "free ui components",
+    "copy paste components",
+    "ui component library",
+    "microinteractions"
+  ]
+}

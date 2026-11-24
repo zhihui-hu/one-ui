@@ -1,0 +1,211 @@
+"use client";
+
+import { Fragment, useId, useState } from "react";
+import type {
+  ComponentProps,
+  CSSProperties,
+  KeyboardEvent,
+  ReactNode,
+} from "react";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Transition,
+} from "motion/react";
+import { cn } from "@/lib/utils";
+
+const SEND: Transition = { type: "spring", visualDuration: 0.42, bounce: 0.28 };
+const SHIFT: Transition = { type: "spring", visualDuration: 0.4, bounce: 0.1 };
+const LEAVE: Transition = { duration: 0.16, ease: [0.4, 0, 1, 1] };
+const INSTANT: Transition = { duration: 0 };
+
+const QUESTION = '[data-slot="faq-question"]';
+const KEY_STEPS: Record<string, (index: number, last: number) => number> = {
+  ArrowDown: (index) => index + 1,
+  ArrowUp: (index) => index - 1,
+  Home: () => 0,
+  End: (_, last) => last,
+};
+
+export type FaqItem = {
+  id: string;
+  question: string;
+  answer: ReactNode;
+};
+
+function OneUIMark() {
+  return (
+    <svg viewBox="180 180 664 664" fill="currentColor" className="size-5">
+      <path d="M768 446L767.9 498L767.8 514.6L767.5 526.7L767.1 536.5L766.5 544.8L765.9 552.2L765.1 558.8L764.2 564.8L763.2 570.3L762.1 575.4L760.8 580.1L759.4 584.5L757.9 588.7L756.3 592.6L754.5 596.2L752.6 599.6L750.5 602.8L748.3 605.9L745.9 608.7L743.4 611.4L740.7 613.9L737.9 616.3L734.8 618.5L731.6 620.6L728.2 622.5L724.6 624.3L720.7 625.9L716.5 627.4L712.1 628.8L707.4 630.1L702.3 631.2L696.8 632.2L690.8 633.1L684.2 633.9L676.8 634.5L668.5 635.1L658.7 635.5L646.6 635.8L630 635.9L578 636L526 635.9L509.4 635.8L497.3 635.5L487.5 635.1L479.2 634.5L471.8 633.9L465.2 633.1L459.2 632.2L453.7 631.2L448.6 630.1L443.9 628.8L439.5 627.4L435.3 625.9L431.4 624.3L427.8 622.5L424.4 620.6L421.2 618.5L418.1 616.3L415.3 613.9L412.6 611.4L410.1 608.7L407.7 605.9L405.5 602.8L403.4 599.6L401.5 596.2L399.7 592.6L398.1 588.7L396.6 584.5L395.2 580.1L393.9 575.4L392.8 570.3L391.8 564.8L390.9 558.8L390.1 552.2L389.5 544.8L388.9 536.5L388.5 526.7L388.2 514.6L388.1 498L388 446L388.1 394L388.2 377.4L388.5 365.3L388.9 355.5L389.5 347.2L390.1 339.8L390.9 333.2L391.8 327.2L392.8 321.7L393.9 316.6L395.2 311.9L396.6 307.5L398.1 303.3L399.7 299.4L401.5 295.8L403.4 292.4L405.5 289.2L407.7 286.1L410.1 283.3L412.6 280.6L415.3 278.1L418.1 275.7L421.2 273.5L424.4 271.4L427.8 269.5L431.4 267.7L435.3 266.1L439.5 264.6L443.9 263.2L448.6 261.9L453.7 260.8L459.2 259.8L465.2 258.9L471.8 258.1L479.2 257.5L487.5 256.9L497.3 256.5L509.4 256.2L526 256.1L578 256L630 256.1L646.6 256.2L658.7 256.5L668.5 256.9L676.8 257.5L684.2 258.1L690.8 258.9L696.8 259.8L702.3 260.8L707.4 261.9L712.1 263.2L716.5 264.6L720.7 266.1L724.6 267.7L728.2 269.5L731.6 271.4L734.8 273.5L737.9 275.7L740.7 278.1L743.4 280.6L745.9 283.3L748.3 286.1L750.5 289.2L752.6 292.4L754.5 295.8L756.3 299.4L757.9 303.3L759.4 307.5L760.8 311.9L762.1 316.6L763.2 321.7L764.2 327.2L765.1 333.2L765.9 339.8L766.5 347.2L767.1 355.5L767.5 365.3L767.8 377.4L767.9 394Z" opacity={0.38} />
+      <path d="M636 578L635.9 630L635.8 646.6L635.5 658.7L635.1 668.5L634.5 676.8L633.9 684.2L633.1 690.8L632.2 696.8L631.2 702.3L630.1 707.4L628.8 712.1L627.4 716.5L625.9 720.7L624.3 724.6L622.5 728.2L620.6 731.6L618.5 734.8L616.3 737.9L613.9 740.7L611.4 743.4L608.7 745.9L605.9 748.3L602.8 750.5L599.6 752.6L596.2 754.5L592.6 756.3L588.7 757.9L584.5 759.4L580.1 760.8L575.4 762.1L570.3 763.2L564.8 764.2L558.8 765.1L552.2 765.9L544.8 766.5L536.5 767.1L526.7 767.5L514.6 767.8L498 767.9L446 768L394 767.9L377.4 767.8L365.3 767.5L355.5 767.1L347.2 766.5L339.8 765.9L333.2 765.1L327.2 764.2L321.7 763.2L316.6 762.1L311.9 760.8L307.5 759.4L303.3 757.9L299.4 756.3L295.8 754.5L292.4 752.6L289.2 750.5L286.1 748.3L283.3 745.9L280.6 743.4L278.1 740.7L275.7 737.9L273.5 734.8L271.4 731.6L269.5 728.2L267.7 724.6L266.1 720.7L264.6 716.5L263.2 712.1L261.9 707.4L260.8 702.3L259.8 696.8L258.9 690.8L258.1 684.2L257.5 676.8L256.9 668.5L256.5 658.7L256.2 646.6L256.1 630L256 578L256.1 526L256.2 509.4L256.5 497.3L256.9 487.5L257.5 479.2L258.1 471.8L258.9 465.2L259.8 459.2L260.8 453.7L261.9 448.6L263.2 443.9L264.6 439.5L266.1 435.3L267.7 431.4L269.5 427.8L271.4 424.4L273.5 421.2L275.7 418.1L278.1 415.3L280.6 412.6L283.3 410.1L286.1 407.7L289.2 405.5L292.4 403.4L295.8 401.5L299.4 399.7L303.3 398.1L307.5 396.6L311.9 395.2L316.6 393.9L321.7 392.8L327.2 391.8L333.2 390.9L339.8 390.1L347.2 389.5L355.5 388.9L365.3 388.5L377.4 388.2L394 388.1L446 388L498 388.1L514.6 388.2L526.7 388.5L536.5 388.9L544.8 389.5L552.2 390.1L558.8 390.9L564.8 391.8L570.3 392.8L575.4 393.9L580.1 395.2L584.5 396.6L588.7 398.1L592.6 399.7L596.2 401.5L599.6 403.4L602.8 405.5L605.9 407.7L608.7 410.1L611.4 412.6L613.9 415.3L616.3 418.1L618.5 421.2L620.6 424.4L622.5 427.8L624.3 431.4L625.9 435.3L627.4 439.5L628.8 443.9L630.1 448.6L631.2 453.7L632.2 459.2L633.1 465.2L633.9 471.8L634.5 479.2L635.1 487.5L635.5 497.3L635.8 509.4L635.9 526Z" />
+    </svg>
+  );
+}
+
+type BubbleProps = {
+  item: FaqItem;
+  ids: { question: string; answer: string };
+  open: boolean;
+  openId: string | null;
+  reduced: boolean;
+};
+
+function Question({
+  item,
+  ids,
+  open,
+  openId,
+  reduced,
+  onToggle,
+}: BubbleProps & { onToggle: () => void }) {
+  return (
+    <motion.button
+      id={ids.question}
+      type="button"
+      data-slot="faq-question"
+      aria-expanded={open}
+      aria-controls={open ? ids.answer : undefined}
+      onClick={onToggle}
+      // every bubble re-measures when any answer opens, so the ones below slide
+      layout="position"
+      layoutDependency={openId}
+      transition={reduced ? INSTANT : SHIFT}
+      whileTap={reduced ? undefined : { scale: 0.97 }}
+      className={cn(
+        "max-w-[85%] cursor-pointer self-start rounded-[18px] rounded-bl-[6px] px-4 py-2.5 text-left text-[15px] leading-[1.4] tracking-[-0.01em] text-black transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#868593]/50 dark:text-white",
+        open
+          ? "bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)] dark:bg-[#333333] dark:shadow-none"
+          : "bg-[#F4F4F9] dark:bg-[#262626]",
+      )}
+    >
+      {item.question}
+    </motion.button>
+  );
+}
+
+function Answer({
+  item,
+  ids,
+  open,
+  openId,
+  reduced,
+  avatar,
+}: BubbleProps & { avatar: ReactNode }) {
+  return (
+    <AnimatePresence mode="popLayout" initial={false}>
+      {open && (
+        <motion.div
+          key="answer"
+          data-slot="faq-answer"
+          layout="position"
+          layoutDependency={openId}
+          initial={{ opacity: 0, scale: 0.6, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{
+            opacity: 0,
+            scale: 0.9,
+            transition: reduced ? INSTANT : LEAVE,
+          }}
+          transition={reduced ? INSTANT : SEND}
+          style={{ originX: 1, originY: 1 }}
+          className="flex items-end justify-end gap-2"
+        >
+          <div
+            id={ids.answer}
+            role="region"
+            aria-labelledby={ids.question}
+            className="max-w-[85%] rounded-[18px] rounded-br-[6px] bg-[var(--faq-accent)] px-4 py-2.5 text-[15px] leading-[1.45] tracking-[-0.01em] text-white"
+          >
+            {item.answer}
+          </div>
+          {avatar != null && (
+            <span
+              aria-hidden
+              className="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/60 text-[var(--faq-accent)] shadow-[0_12px_32px_-12px_rgba(0,0,0,0.15)] backdrop-blur-2xl backdrop-saturate-150 dark:bg-white/[0.07] dark:shadow-[0_12px_32px_-12px_rgba(0,0,0,0.5)] [&>img]:size-full [&>img]:object-cover"
+            >
+              {avatar}
+            </span>
+          )}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export type FaqProps = Omit<ComponentProps<"div">, "defaultValue"> & {
+  items: FaqItem[];
+  value?: string | null;
+  defaultValue?: string | null;
+  onValueChange?: (value: string | null) => void;
+  accent?: string;
+  avatar?: ReactNode;
+};
+
+export function Faq({
+  items,
+  value,
+  defaultValue = null,
+  onValueChange,
+  accent = "#FC4C01",
+  avatar = <OneUIMark />,
+  className,
+  style,
+  ...props
+}: FaqProps) {
+  const reduced = useReducedMotion() ?? false;
+  const uid = useId();
+  const [own, setOwn] = useState(defaultValue);
+  const openId = value === undefined ? own : value;
+
+  const toggle = (id: string) => {
+    const next = openId === id ? null : id;
+    if (value === undefined) setOwn(next);
+    onValueChange?.(next);
+  };
+
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const step = KEY_STEPS[event.key];
+    const target = event.target as HTMLElement;
+    if (!step || !target.matches(QUESTION)) return;
+
+    const questions = [
+      ...event.currentTarget.querySelectorAll<HTMLElement>(QUESTION),
+    ];
+    const next = step(questions.indexOf(target), questions.length - 1);
+    event.preventDefault();
+    questions[(next + questions.length) % questions.length]?.focus();
+  };
+
+  return (
+    <div
+      data-slot="faq"
+      onKeyDown={onKeyDown}
+      style={{ "--faq-accent": accent, ...style } as CSSProperties}
+      className={cn("relative flex w-full max-w-xl flex-col gap-3", className)}
+      {...props}
+    >
+      {items.map((item) => {
+        const bubble = {
+          item,
+          ids: {
+            question: `${uid}-${item.id}-question`,
+            answer: `${uid}-${item.id}-answer`,
+          },
+          open: openId === item.id,
+          openId,
+          reduced,
+        };
+
+        return (
+          <Fragment key={item.id}>
+            <Question {...bubble} onToggle={() => toggle(item.id)} />
+            <Answer {...bubble} avatar={avatar} />
+          </Fragment>
+        );
+      })}
+    </div>
+  );
+}
+
+export default Faq;

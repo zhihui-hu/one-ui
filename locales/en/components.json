@@ -1,0 +1,513 @@
+{
+  "foldercomponent": {
+    "name": "Folder component",
+    "description": "An animated folder whose cards fan out on hover and lift open on click, with a 3D-tilted flap. Supports color and size (sm/md/lg) props.",
+    "interaction": "Hover to fan the cards out, then click to lift the folder open.",
+    "props": {
+      "color": "Color theme of the folder, flap, and cards. Each theme sets matching fills, strokes, and inner shadows.",
+      "size": "Overall scale of the folder. Maps to 0.65× (sm), 1× (md), and 1.35× (lg)."
+    }
+  },
+  "bouncesidebar": {
+    "name": "Bounce sidebar",
+    "description": "A vertical navigation list with a bouncy, spring-animated active indicator.",
+    "interaction": "Click any item to spring the bouncing marker over to it.",
+    "props": {
+      "items": "Rows rendered as the vertical list. A plain string or an object with a label is a nav item, and href turns it into a link. Add heading: true to render a non-selectable group label the marker skips over.",
+      "value": "Active item index for controlled usage. When set, the component won't manage its own state.",
+      "defaultValue": "Initial active index for uncontrolled usage. Ignored when value is provided.",
+      "onChange": "Called with the new index whenever an item is selected.",
+      "dotColor": "Any CSS color for the bouncing active marker (hex, rgb, hsl, var).",
+      "className": "Extra classes merged onto the root <ul> element."
+    }
+  },
+  "hooksidebar": {
+    "name": "Hook Sidebar",
+    "description": "A vertical navigation list with a dashed rail that marks the active item.",
+    "interaction": "Click an item to spring the accent rail down to it. Hovering or tabbing to another row draws a second, dimmer rail that stops where the accent one ends.",
+    "props": {
+      "items": "Rows rendered as the vertical list. A plain string or an object with a label is a nav item, and href turns it into a link.",
+      "label": "Group title shown above the list, outside the rail. Omit it for a bare list. Also names the nav for screen readers.",
+      "value": "Active item index for controlled usage. When set, it wins over both the URL and internal state.",
+      "defaultValue": "Initial active index. Used only when no item has an href and value is not provided.",
+      "onChange": "Called with the new index whenever an item is selected.",
+      "color": "Any CSS color for the active rail (hex, rgb, hsl, var). The hover rail stays neutral.",
+      "dashed": "Draws the rail and its corner as dashes. Set false for a solid line.",
+      "className": "Extra classes merged onto the root <nav> element."
+    }
+  },
+  "proximitysidebar": {
+    "name": "Proximity Sidebar",
+    "description": "An interactive sidebar with proximity hover effects that appears while scrolling and responds to scroll intensity.",
+    "interaction": "Scroll through content to track the current section, then move the pointer near dashes to expand them and click to smooth-scroll to a section.",
+    "props": {
+      "sections": "Ordered section map used for rendering dashes and scroll targeting. Each id must match an element id present in the page.",
+      "side": "Pins the minimap to the chosen side and flips dash transform origin accordingly.",
+      "activeOffset": "Viewport anchor ratio used to detect the active section while scrolling (0 = top, 1 = bottom).",
+      "className": "Additional classes for the outer nav wrapper.",
+      "labels": "Overrides the accessible text for the nav landmark and each dash button."
+    },
+    "credits": ["Inspired by devouringdetails.com"]
+  },
+  "durationpicker": {
+    "name": "Duration Picker",
+    "description": "A gooey, spring-animated picker for entering a duration in hours and minutes.",
+    "interaction": "Click the pen to spring the segments apart and start editing — the hours field is focused for you. Type your values; anything past the ceiling (24 hr / 60 min by default) clamps to the max and shakes so you know it was corrected. Click the tick to confirm and watch the pill merge back into one piece.",
+    "props": {
+      "value": "Controlled value. Pair with onChange and the picker will mirror whatever you pass in. Leave it out to let the component manage its own state.",
+      "defaultValue": "Starting value for uncontrolled usage. Ignored when value is provided.",
+      "onChange": "Fires on every keystroke with the current clamped value — listen here if you want to react while the user types.",
+      "onConfirm": "Fires once with the final value when the tick is clicked. This is usually the one you want for saving.",
+      "onEditingChange": "Notifies you when the picker enters or leaves edit mode — handy for blocking navigation or dimming surrounding UI while open.",
+      "defaultEditing": "Render the picker already open in edit mode.",
+      "maxHours": "Ceiling for the hours field. Typing past it clamps to this value and shakes the input.",
+      "maxMinutes": "Ceiling for the minutes field. Same clamp-and-shake behavior as maxHours.",
+      "hoursLabel": "Text rendered after the hours field — swap it for a translation or a terser 'h'.",
+      "minutesLabel": "Text rendered after the minutes field.",
+      "disabled": "Dims the control and blocks entering edit mode. Standard form-field behavior.",
+      "className": "Extra classes merged onto the root. Every inner part also carries a data-slot attribute (duration-picker, -segment, -input, -toggle) plus data-editing / data-disabled states, so you can restyle from CSS alone.",
+      "labels": "Overrides the accessible label of the edit and save button."
+    }
+  },
+  "fluidorb": {
+    "name": "Fluid Orb",
+    "description": "An animated WebGL orb with drifting fluid shading, inspired by ChatGPT's voice mode.",
+    "interaction": "Ambient — the color patches drift left, right, up, down and diagonally on their own, blending and reforming with no interaction required. Honors prefers-reduced-motion by holding a still frame.",
+    "props": {
+      "color": "Any hex color for the fluid. The middle and bottom bands are derived from it (a pale tint and the full color), while the top stays white. Defaults to the original blue.",
+      "size": "Diameter of the orb in pixels.",
+      "className": "Extra classes merged onto the root element (data-slot=\"fluid-orb\")."
+    },
+    "credits": ["Inspired by chatgpt.com"]
+  },
+  "scrollprogressindicator": {
+    "name": "Scroll Progress",
+    "description": "A scroll progress pill that tracks reading position and expands into a squircle menu of sections you can jump to.",
+    "interaction": "Scroll to fill the ring and watch the active section label crossfade in. Click the pill to morph it into a squircle menu, then tap any section to smooth-scroll there. Click outside or press Escape to close.",
+    "props": {
+      "sections": "Ordered sections shown as the reader moves and listed in the menu. Each id must match an element id present in the scrolled content.",
+      "containerRef": "Scroll container to track and scroll within. Defaults to the window when omitted.",
+      "offset": "Distance in pixels below the scroller's top edge that a section must cross to be marked active.",
+      "className": "Extra classes merged onto the fixed root wrapper — use it to reposition the pill.",
+      "labels": "Overrides the accessible text, here the label of the collapsed pill that opens the section list."
+    }
+  },
+  "railtoc": {
+    "name": "Rail TOC",
+    "description": "A table of contents with a paper plane that flies to the section you're reading.",
+    "interaction": "Scroll the content and the paper plane flies along the rail between headings, turning where the rail bends. Scroll back up and it turns around. The rail behind it is solid and each heading it passes fills in; the rest stays dashed. Click any heading to scroll to it.",
+    "props": {
+      "items": "Headings in document order. Each id must match an element id in the content. Depth sets the indent level and defaults to 0.",
+      "containerRef": "Scroll container to track and scroll within. Defaults to the window when omitted.",
+      "offset": "Distance in pixels below the scroller's top edge where a heading counts as reached. Clicking an item scrolls its heading to this line.",
+      "indent": "Horizontal step in pixels for each depth level.",
+      "title": "Text above the list. It also names the navigation for screen readers.",
+      "className": "Extra classes merged onto the root nav. Inner parts carry data-slot attributes (rail-toc-title, -list, -plane) for styling from CSS."
+    },
+    "credits": ["Inspired by pinterest.com/pin/1118863101209303811"]
+  },
+  "codeblock": {
+    "name": "Code Block",
+    "description": "A clean code block that builds its entire theme from a single accent color. Pass code and a hex, it does the rest.",
+    "interaction": "Pick an accent swatch to re-shade the whole block from that color. Hit the copy button to see it spring into a check.",
+    "props": {
+      "code": "The source code to render.",
+      "language": "Prism language id, e.g. \"tsx\", \"css\", \"json\", \"bash\". Also shown as the tag in the header.",
+      "accent": "Any hex color. The whole theme is shades of it: the darkest shade is the background, tokens are tints of the accent, and the lightest text is always white.",
+      "mode": "Color scheme. Auto follows the page theme (html dark/light class, data-theme, or OS preference). Pass dark or light to pin a palette: dark puts light tints of the accent on a dark surface, light flips the ramp.",
+      "filename": "Filename or path shown on the left of the header. Falls back to the language id when omitted.",
+      "showFrame": "Toggles the outer layout — background, border, rounded corners, and header. Turn off to render nothing but the highlighted code.",
+      "showHeader": "Toggles the header bar. When hidden, the copy button floats over the top-right corner instead. Ignored when showFrame is off.",
+      "showLineNumbers": "Toggles the line-number gutter.",
+      "showCopyButton": "Toggles the copy-to-clipboard button.",
+      "highlightLines": "Optional 1-based line numbers to highlight with a soft accent wash. Off when omitted.",
+      "className": "Extra classes merged onto the root element (data-slot=\"code-block\") — use it for width and max-height.",
+      "labels": "Overrides the copy button labels and the code region label used when there is no filename."
+    }
+  },
+  "gravityletters": {
+    "name": "Gravity Letters",
+    "description": "A playful gravity field where letters, numbers, emoji, or any components you pass fall and pile up like real objects.",
+    "interaction": "Click or tap anywhere to drop a glyph, or press and hold to pour a steady stream. Glyphs tumble as they fall, bounce softly when they land, and pile up into rounded hills. On phones, tilt the device to spill the pile toward the low side. Honors prefers-reduced-motion.",
+    "props": {
+      "type": "Which pool to draw from: letters, digits, or both. Ignored when items is set.",
+      "items": "Your own drop pool: emoji, icons, or any components. Each drop picks a random entry. Overrides type.",
+      "gravity": "Downward acceleration in px/s². Lower is floatier, higher is heavier.",
+      "size": "Base glyph size in pixels. Each drop varies slightly around it.",
+      "color": "Glyph color. Defaults to currentColor so it follows your theme.",
+      "maxGlyphs": "Max glyphs kept in the field; past the cap the oldest fade out. Unlimited by default.",
+      "deviceTilt": "Tilting a phone spills the pile toward the low side. iOS asks for motion permission on the first tap.",
+      "className": "Extra classes for the root element. Use it to size the field."
+    }
+  },
+  "otpinput": {
+    "name": "OTP Input",
+    "description": "A one-time-code input whose characters roll into place behind a caret that slides from slot to slot.",
+    "interaction": "Type to fill each slot and move to the next one. Backspace clears a slot in place, then steps back on the next press. Arrow keys move between slots, and a caret slides along with you. Pasting a code, or letting the phone autofill one from a text message, drops it straight in. Set the status to turn the slots green, or shake them red on a wrong code.",
+    "props": {
+      "length": "How many boxes to render, so a 4 digit code is length={4}. Any count works.",
+      "size": "Overall scale of the boxes. Maps to 40px (sm), 48px (md), and 56px (lg), and carries the text, caret, and gaps with it.",
+      "value": "The current code. Pass it to control the input yourself; leave it out to let the component track its own state.",
+      "defaultValue": "Starting code when the input is uncontrolled.",
+      "onChange": "Fires on every edit with the full code so far.",
+      "onComplete": "Fires once the last slot is filled.",
+      "type": "Which characters a slot accepts. Anything else is ignored, including on paste.",
+      "status": "Drives the feedback state. Success traces a green ring around each box in turn, error rings them red and shakes the row once.",
+      "mask": "Hides the characters, like a password field.",
+      "disabled": "Blocks input and dims every slot.",
+      "autoFocus": "Focuses the first slot on mount.",
+      "className": "Extra classes for the row that wraps the slots.",
+      "slotClassName": "Extra classes for each slot, for sizing and colors.",
+      "labels": "Overrides each slot's accessible label. digit is used for numbers, character for other types."
+    }
+  },
+  "passwordinput": {
+    "name": "Password input",
+    "description": "A password field with an eye toggle to show or hide what you type, and a strength meter that shows the password level as you type.",
+    "interaction": "Click the eye to show your password; click again to hide it. Once you start typing, a strength bar slides in below and fills as the password gets stronger.",
+    "props": {
+      "value": "The current password. Pass it to control the input yourself; leave it out to let the component track its own state.",
+      "defaultValue": "Starting password when the input is uncontrolled.",
+      "onChange": "Fires on every edit with the full password.",
+      "defaultVisible": "Starts with the password shown.",
+      "onVisibleChange": "Fires when the eye shows or hides the password.",
+      "strength": "Shows the four step strength bar under the field once there is something typed, labeled Weak, Fair, Good or Strong.",
+      "placeholder": "Text shown while the field is empty.",
+      "disabled": "Blocks input and dims the whole field.",
+      "className": "Extra classes for the wrapper around the field and the bar.",
+      "inputClassName": "Extra classes for the native input. Any other input prop, like name or autoComplete, goes to it as well.",
+      "labels": "Overrides the visibility toggle label and the strength meter text."
+    }
+  },
+  "themeselector": {
+    "name": "Theme selector",
+    "description": "A row of miniature app previews, one per theme, with a ring that marks the one you pick.",
+    "interaction": "Hover a preview and a faint ring shows around it; click it and a solid ring marks it as selected. Arrow keys move between themes and select as they go; Home and End jump to the first and last.",
+    "props": {
+      "themes": "The themes to show, each with a value, a label and a palette of six colors for its preview. Defaults to dark and light.",
+      "value": "The selected theme. Pass it to control the selector yourself; leave it out to let the component track its own state. Pass null until your theme is known, like during server rendering, so nothing is selected yet.",
+      "defaultValue": "Starting theme when uncontrolled. Falls back to the first theme.",
+      "onChange": "Fires with the new value when a different theme is picked.",
+      "labels": "Shows each theme's label under its preview, brightened on the selected one.",
+      "disabled": "Blocks selection and dims every preview.",
+      "className": "Extra classes for the row that wraps the previews.",
+      "itemClassName": "Extra classes for each preview, for sizing. Each one is w-40 at a 4:3 ratio by default, and everything inside scales with it."
+    }
+  },
+  "toast": {
+    "name": "Toast",
+    "description": "A toast notification with animated status icons, built on Sonner.",
+    "interaction": "Toasts stack in a corner and fan out when you hover them. Each status pops in with its own icon, and a promise toast morphs from a spinner into a check or a cross in place. Swipe one away, press its action, or hover it to show the close button. Honors prefers-reduced-motion.",
+    "props": {
+      "toast(title, options)": "Shows a plain toast and returns its id. toast.success, toast.error, toast.warning, toast.info and toast.loading take the same arguments and add a status icon.",
+      "toast.promise": "Shows messages.loading until the task settles, then swaps to messages.success or messages.error in the same toast. Either can be a function of the result.",
+      "description": "Muted second line under the title.",
+      "action": "A pill button on the right. Clicking it runs onClick and closes the toast.",
+      "duration": "Milliseconds before the toast closes. Loading toasts stay until updated or dismissed.",
+      "id": "Reuse an id to update a toast that is already showing instead of adding a new one.",
+      "dismissible": "Shows the close button and allows swiping it away.",
+      "position": "On Toaster, where the stack sits. Toaster takes the rest of Sonner's Toaster props too, like expand, visibleToasts, offset, duration and hotkey. Dark mode follows your .dark class.",
+      "gap": "On Toaster, the space in pixels between expanded toasts.",
+      "labels": "Set on Toaster. Overrides the accessible label of every toast's close button."
+    },
+    "credits": ["Built on Sonner by Emil Kowalski"]
+  },
+  "githubactivity": {
+    "name": "GitHub activity",
+    "description": "A contribution heatmap with a footer panel that expands over the grid to rank your top repositories.",
+    "interaction": "Click the chevron to expand the top repositories over the grid, and again to collapse them back into the stack. Hover any cell for its count and date.",
+    "props": {
+      "username": "The GitHub username you want the data for.",
+      "contributions": "Your own contribution data, instead of a username.",
+      "repos": "The repositories listed in the footer, highest first.",
+      "year": "Year shown in the heading. Defaults to the year of the last contribution.",
+      "accent": "The color of the contribution squares.",
+      "cellSize": "Size of each day square in pixels.",
+      "months": "How many months of history to show.",
+      "showMonths": "Adds a row of month names above the grid.",
+      "label": "Text shown in the footer next to the avatars.",
+      "defaultOpen": "Starts with the repository panel open. Ignored when open is set.",
+      "open": "Panel state for controlled usage. When set, the component stops managing its own state.",
+      "onOpenChange": "Called with the next state when the chevron is clicked.",
+      "className": "Extra classes for the card that wraps the grid.",
+      "labels": "Overrides the heading(total, year), the day tooltip day(count, date), the twelve month names, and the showRepos and hideRepos button labels."
+    }
+  },
+  "emojireaction": {
+    "name": "Emoji reaction",
+    "description": "A tapback-style reaction button that opens a bar of Apple emoji and sends copies of your pick floating up out of it.",
+    "interaction": "Click the button to pop the emoji bar open, or press and drag straight onto an emoji to pick it in one gesture. Hover an emoji to lift it. Pick one and 5 copies stream up off it, drifting apart, shrinking, and blurring out of focus as they climb. Hold the emoji down to keep them coming. The bar flips below the button when there's no room above, and arrow keys move along it. While it's open the button turns into a cross; click that, click outside, or press Escape to close. The button then shows your last pick.",
+    "props": {
+      "emojis": "Apple emoji names shown in the bar, hyphenated as on Emojipedia. Anything beyond the five defaults needs emojiData too.",
+      "emojiData": "Emoji name to image map passed to EmojiProvider. Defaults to the five bundled faces; pass react-apple-emojis/src/data.json for the full set.",
+      "onReact": "Called with the emoji name every time one is picked, including each repeat while it's held down.",
+      "size": "Scale of the button, the bar, and the emoji that fly up.",
+      "align": "Which edge of the bar lines up with the trigger. It still shifts inward when it would run off screen.",
+      "asChild": "Uses your own child as the trigger instead of the built-in button, so the bar can hang off a message, card, or image.",
+      "className": "Extra classes merged onto the root element.",
+      "labels": "Overrides the accessible text for the trigger, the picker, and each emoji."
+    }
+  },
+  "notificationbell": {
+    "name": "Notification bell",
+    "description": "An iOS-style notification bell with an unread count badge.",
+    "interaction": "Press plus to add a notification, minus to clear one. The bell swings when one lands and the count rolls to the new number. Add a few fast and it swings harder. The badge shrinks away at zero.",
+    "props": {
+      "count": "Unread total on the badge. The badge is hidden at 0, and fractional or negative values are floored to it.",
+      "max": "Highest number shown. Anything above it displays as the max followed by a plus.",
+      "variant": "Whether the badge shows the number or a plain dot. The dot appears and leaves on the same counts.",
+      "size": "Diameter of the button in pixels. The bell, badge, and digits are all fractions of it.",
+      "color": "Badge color, from the Apple system palette. Each one swaps to its dark mode variant with the theme.",
+      "asChild": "Uses your own child as the trigger instead of the built-in button, so the badge can sit on an avatar or a nav item. Your element should be round for the badge to line up, and the bell swing only runs on the built-in button.",
+      "className": "Extra classes merged onto the root element. Sizing is set inline from the size prop, so a width or height class here will not take effect.",
+      "labels": "Overrides the announced label, with or without an unread count."
+    }
+  },
+  "stepplayer": {
+    "name": "Step player",
+    "description": "An iOS-style stepped progress track with a play, pause and replay control. The active step stretches into a bar that fills as it plays.",
+    "interaction": "Press play to start the sequence. The current step stretches into a bar and fills as it runs, then shrinks to a filled dot when it hands off to the next one. Press again to pause mid-fill; the play icon splits into the pause bars as it goes. At the end it fades into a replay arrow. Steps can be clicked to jump.",
+    "props": {
+      "steps": "How many steps to show. Pass an array to give each one its own duration or label.",
+      "value": "Active step index, for controlled use. Leave it out and the component tracks its own index.",
+      "defaultValue": "Step to start on when uncontrolled. Clamped to the last step.",
+      "onValueChange": "Fires when the step advances, wraps, or is clicked. Also fires on replay.",
+      "playing": "Play state, for controlled use. Leave it out to let the button drive it.",
+      "defaultPlaying": "Whether the sequence starts running on mount when uncontrolled.",
+      "onPlayingChange": "Fires when the button is pressed, and when the last step ends without loop.",
+      "duration": "Milliseconds each step runs for. A per-step duration overrides it; 0 stops the timer so you can drive the index yourself.",
+      "loop": "Wraps back to the first step instead of stopping. The replay button never appears when this is on.",
+      "onComplete": "Fires when the last step finishes, on every pass when looping.",
+      "size": "Height of the track and button in pixels. Every other dimension is a fixed ratio of it, so the dots, bar, gaps, padding, icon, and tap targets all scale from this one number.",
+      "showControl": "Shows the round play button. Turn it off for a track on its own and drive it with the playing prop.",
+      "controlPosition": "Which side of the track the button sits on.",
+      "speeds": "Speeds the time label cycles through when pressed. Pass a single speed to pin it and turn the label back into plain text.",
+      "onSpeedChange": "Called with the new speed each time the label is pressed.",
+      "seekable": "Lets a step be clicked to jump to it. The dots keep a finger-sized tap target at every size.",
+      "className": "Extra classes merged onto the root element. It sizes itself from the size prop, so give it a width only if you want the track wider than its content.",
+      "labels": "Overrides the control, track, and step button labels. A step's own label still wins."
+    }
+  },
+  "gridreveal": {
+    "name": "Grid Reveal",
+    "description": "A loading state for AI images that turns into the real picture when it arrives.",
+    "interaction": "Press Generate and the frame opens as four cells, then keeps splitting the biggest one in two until it becomes the picture. Busy parts of the image sharpen first, and a status pill sits in the bottom left until it lands. Honors prefers-reduced-motion by holding a still frame.",
+    "props": {
+      "src": "Image to reveal. Keep it null while the image is generating, since the grid only runs while this is empty and a src that is already loaded makes the whole run flash by.",
+      "alt": "Describes the finished image for screen readers. The frame is hidden from assistive tech when omitted.",
+      "progress": "Position of the wait from 0 to 1, driving how far the grid has split. It holds at 0.72 until the image decodes, and the image landing is what finishes the reveal.",
+      "aspect": "Width divided by height of the frame. The frame fills its parent's width, so constrain the parent to size it.",
+      "caption": "Optional status text, shown as a frosted pill in the bottom left of the frame and lit by a slow shimmer. Change it mid-run and the lines crossfade while the pill resizes to suit.",
+      "estimatedDuration": "Roughly how long the work takes, used to pace the grid when no progress is passed. Overrunning it is fine, the grid keeps creeping instead of stopping.",
+      "onRevealComplete": "Fires once the image has fully resolved.",
+      "onError": "Fires when the image fails to load. Without it a broken src leaves the grid waiting, so use it to show your own fallback.",
+      "className": "Extra classes merged onto the root element (data-slot=\"grid-reveal\")."
+    }
+  },
+  "gooeynav": {
+    "name": "Gooey nav",
+    "description": "A gooey navigation bar that separates the selected item from the group.",
+    "interaction": "Click an item to lift it out of the bar; the rest close back into one piece behind it.",
+    "props": {
+      "items": "Nav entries. A string is a button, an object with href is a link, and icon renders before the label.",
+      "value": "Index of the selected item. Pass it to control the nav yourself; leave it out and the nav follows the url when the items have hrefs, and its own state otherwise.",
+      "defaultValue": "Index the nav starts on when it is uncontrolled. Ignored once value is passed, and ignored when an item href matches the current url.",
+      "onChange": "Fires with the index of the item that was clicked.",
+      "size": "Scale of the bar. Sets the label padding, text size and icon size, and picks the matching separation and radius so the shape stays in proportion. Use xs on phones, where it fits a 360px screen.",
+      "activeColor": "Fill of the selected tile. The unselected bar follows the theme instead, light grey on light and near black on dark.",
+      "activeLabelColor": "Label color of the selected item. Set it when a light activeColor leaves white text unreadable.",
+      "separation": "Gap in pixels that opens on each side of the selected item, which is what pushes the rest of the bar aside. Defaults to the size: 14 (xs), 16 (sm), 20 (md), 24 (lg).",
+      "radius": "Corner radius of the tiles in pixels. Only the outer corners of the bar and the corners along an open gap use it; a closed seam sits at 0 so the tiles read as one shape. Defaults to the size: 8 (xs), 10 (sm), 12 (md), 14 (lg).",
+      "className": "Extra classes merged onto the root element (data-slot=\"gooey-nav\"). The bar sizes to its content and never wraps, so add an overflow container here if it can outgrow its parent."
+    }
+  },
+  "deletebutton": {
+    "name": "Delete button",
+    "description": "A delete button that asks for confirmation in place, no dialog needed.",
+    "interaction": "Click the bin to lift its lid open. A panel slides out with a check to confirm and a cross to back out. Escape backs out too. Confirming draws a check where the bin was, backing out settles the bin in place.",
+    "props": {
+      "onConfirm": "Called when the check is pressed.",
+      "onCancel": "Called when the panel closes without deleting, from the cross, the bin, or Escape.",
+      "className": "Extra classes merged onto the root element.",
+      "labels": "Overrides the button labels and the status announced after a choice."
+    }
+  },
+  "animatedcounter": {
+    "name": "Animated counter",
+    "description": "A number that counts to its new value on a wheel of digits, like an odometer.",
+    "interaction": "Digits roll up as the number grows and back down as it shrinks, fading in and out at the top and bottom of each window rather than being cut off. A number that keeps changing spins instead of stuttering. The width always matches the number: a place that is gained slides in, one that is lost fades out while the rest close up, and the separators glide along with them.",
+    "props": {
+      "value": "The number to show. Each change animates from whatever is on screen, so it can be updated as often as you like.",
+      "decimals": "How many decimal places to keep, up to 15. The value is rounded to that precision, so the wheels always land on a whole digit.",
+      "duration": "Roughly how many seconds a digit takes to settle on its new face. Lower it when the value updates continuously, so the wheels stay close to the number.",
+      "padStart": "Fewest whole digits to show, up to 24, padded with leading zeros. Use it to hold the width steady when the number crosses a power of ten.",
+      "separator": "Character placed every three whole digits. Pass an empty string to group nothing.",
+      "decimalSeparator": "Character between the whole and decimal digits.",
+      "grouping": "Where the separators land. Western groups every three digits, 1,234,567. Indian groups the last three then pairs, 12,34,567.",
+      "prefix": "Rendered before the number, for a currency mark or an icon. It sits outside the wheels and never animates.",
+      "suffix": "Rendered after the number, for a unit or a percent sign.",
+      "className": "Extra classes merged onto the root element (data-slot=\"animated-counter\"). Size, color, font and weight are all inherited, so style it like text. The digit columns carry data-slot=\"animated-counter-digit\" and the separators data-slot=\"animated-counter-mark\", for reaching either from the root."
+    }
+  },
+  "matrixorb": {
+    "name": "Matrix orb",
+    "description": "A dot-matrix orb that animates through idle, listening and thinking states.",
+    "interaction": "Use the controls to switch the orb between its idle, listening and thinking states.",
+    "props": {
+      "state": "Which animation the orb plays.",
+      "level": "How far the orb blooms, 0 to 1. Falls back to a built-in envelope.",
+      "size": "Diameter of the orb in pixels.",
+      "color": "Any CSS color for the dots.",
+      "dots": "How many dots across the grid.",
+      "labels": "Caption under the orb, per state.",
+      "className": "Extra classes merged onto the root element (data-slot=\"matrix-orb\")."
+    }
+  },
+  "tasklist": {
+    "name": "Task list",
+    "description": "A checklist that strikes out completed tasks and moves them to the bottom of the list.",
+    "interaction": "Click a row to toggle it.",
+    "props": {
+      "tasks": "The rows to show, each one an id, a label, and an optional done flag. Pass this to drive the list yourself.",
+      "defaultTasks": "The rows to start with when you are not driving the list. The list tracks which ones are done on its own.",
+      "onTasksChange": "Called with the full list every time a row is ticked or unticked.",
+      "size": "Row size. Text, circle, padding and radius all scale together, and the circle always matches one line of the label.",
+      "accent": "Any CSS color for the filled circle and the focus ring. The strike and the faded text stay grey.",
+      "onSettled": "On TaskItem only. Fires once a row has finished ticking, which is how TaskList knows when to move it down.",
+      "className": "Extra classes merged onto the root element (data-slot=\"task-list\").",
+      "labels": "Overrides what screen readers announce when a task is completed or reopened."
+    }
+  },
+  "voicenote": {
+    "name": "Voice note",
+    "description": "A voice message bar with a scrubbable waveform and a play control.",
+    "interaction": "Press play to start. The play triangle splits into the pause bars, the waveform fills from the left, and soft lights circle the inside edge of the bar. Pause and they wind down to a stop. Drag across the waveform to scrub, or focus it and use the arrow keys. Press the time to change playback speed.",
+    "props": {
+      "src": "URL of the audio file to play. Without it the bar runs on a timer, which is what the demo above does.",
+      "duration": "Length of the clip in seconds. Ignored once a real file reports its own duration.",
+      "waveform": "Bar heights from 0 to 1. Leave it out and the bars are generated from the seed.",
+      "bars": "How many bars to generate. They share the width evenly, so more bars means thinner bars.",
+      "seed": "Picks which generated waveform you get. The same seed always draws the same bars.",
+      "playing": "Drives playback yourself. Leave it out and the bar tracks its own state.",
+      "defaultPlaying": "Whether the bar starts playing when you are not driving it.",
+      "onPlayingChange": "Called whenever playback starts or stops.",
+      "onEnded": "Called when the clip reaches the end, just after the bar rewinds to the start.",
+      "accent": "Any hex color for the light behind the bar. The waveform itself stays neutral.",
+      "size": "Bar size. Height, control, bar width and text all scale together.",
+      "speeds": "Speeds the time label cycles through when pressed. Pass a single speed to pin it and turn the label back into plain text.",
+      "onSpeedChange": "Called with the new speed each time the label is pressed.",
+      "seekable": "Whether the waveform can be scrubbed. The arrow keys move 5 seconds at a time, Home and End jump to the ends. Off removes both the pointer and the keyboard seeking.",
+      "className": "Extra classes merged onto the root element (data-slot=\"voice-note\"). Set the width here.",
+      "children": "On VoiceNoteGroup only. Wrap several bars in it and starting one stops the rest, the way a chat thread behaves.",
+      "labels": "Overrides the accessible text for the play control, seek slider, position readout, and speed button."
+    }
+  },
+  "faq": {
+    "name": "FAQ",
+    "description": "An FAQ styled as a message thread, with each answer sent as a reply bubble.",
+    "interaction": "Click a question to open its answer, and click it again to close it. Arrow keys move between questions.",
+    "props": {
+      "items": "The questions, each one an id, a question, and an answer.",
+      "value": "Id of the open question. Pass this to control which one is open.",
+      "defaultValue": "Id of the question open on first render.",
+      "onValueChange": "Called with the open id, or null, every time a question opens or closes.",
+      "accent": "Any CSS color for the answer bubbles.",
+      "avatar": "Your logo or image, shown in a circle beside each answer. Pass null to hide it.",
+      "className": "Extra classes merged onto the root element (data-slot=\"faq\")."
+    }
+  },
+  "websearch": {
+    "name": "Web Search",
+    "description": "The sources behind an AI answer, shown as a search pill, source cards, a streaming answer, and inline citations.",
+    "interaction": "Press Replay to watch a search run and the answer type itself out. Hover the favicons to fan them out, and hover a citation to preview its source.",
+    "props": {
+      "sources": "The results, each an id, a title, and a url, plus an optional snippet and favicon. Without a favicon, a colored letter stands in.",
+      "status": "Searching shimmers the label and holds empty slots for results still on the way.",
+      "query": "Shown in the label while searching.",
+      "label": "Replaces the label. By default it reads \"Searching the web\", then \"Searched 6 sites\".",
+      "progress": "How far the search is, 0 to 1, drawn as the ring around the globe. Leave it out and the ring fills a step with each source.",
+      "linked": "Whether cards and citations open their source in a new tab. Turn it off to keep visitors on the page; the previews still work.",
+      "open": "Pass this to control whether the cards show. Pair it with onOpenChange.",
+      "defaultOpen": "Whether the cards show on first render.",
+      "onOpenChange": "Called each time the cards show or hide.",
+      "play": "On WebSearchAnswer only. Starts typing the answer. Paragraphs, lists, and bold text are typed into; citations land whole. Children that grow later are typed in as they arrive.",
+      "speed": "On WebSearchAnswer only. Average characters per second. A long backlog types faster so a live stream never falls behind.",
+      "onComplete": "On WebSearchAnswer only. Called once the last character is typed.",
+      "source": "On WebSearchCitation only. The source the inline chip links to and previews.",
+      "index": "On WebSearchCitation only. A number shown after the site name, for numbered references.",
+      "className": "Extra classes merged onto the root element (data-slot=\"web-search\", with data-status). The width defaults to 560px.",
+      "labels": "Overrides the built-in text: searching, searchingQuery(query), searched(count), showLess, showMore(count) and moreSources(count)."
+    }
+  },
+  "aistatus": {
+    "name": "Inline AI Status",
+    "description": "An inline status that shows what an AI is doing, from thinking and researching to writing and done.",
+    "interaction": "Press Replay to watch a reply go from thinking to done. Each state brings its own animated icon and a shimmering label, and the answer appears once it finishes.",
+    "props": {
+      "state": "A built-in state or any key from states.",
+      "states": "Adds custom states or overrides built-in ones, each with a label, icon, and active flag.",
+      "label": "Replaces the text for the current state.",
+      "icon": "Replaces the icon for the current state.",
+      "detail": "Muted text after the label, like \"12 sources\".",
+      "favicon": "A small logo before the detail, as an image url or element.",
+      "timer": "Shows how many seconds the run has taken.",
+      "elapsed": "Seconds to show instead of the built-in count.",
+      "shimmer": "Forces the label shimmer on or off.",
+      "className": "Extra classes merged onto the root element (data-slot=\"ai-status\")."
+    }
+  },
+  "promptbox": {
+    "name": "AI Prompt Box",
+    "description": "A chat input where how long you hold send sets how hard the AI thinks.",
+    "interaction": "Type a prompt and tap send or press Enter to send it. Hold either one instead to charge it: the button fills with color and the bars light up as it climbs from Quick to Think to Think deeply. Letting go sends at that level. Press Escape or drag off the button to cancel a charge. When you send, the words rise out of the box.",
+    "props": {
+      "onSubmit": "Called on send with the trimmed prompt and the effort it was charged to. A tap sends at the first effort.",
+      "efforts": "The levels a hold climbs through, each an id, a label, and an optional hex color. Each level takes 650ms; pass one level to turn charging off.",
+      "status": "Streaming turns the send button into a stop button, ringed in the color of the effort it was sent at. You can still type, but sending waits until it is idle.",
+      "onStop": "Called when the stop button is pressed while streaming.",
+      "placeholder": "Pass an array to rotate through them every 3.2 seconds while the box is empty.",
+      "hint": "Shown next to the send button once there is text. Pass null to hide it.",
+      "actions": "Buttons for the left side of the bottom row, like attach or web search.",
+      "value": "Pass this to control the text. Pair it with onValueChange.",
+      "defaultValue": "The text on first render.",
+      "onValueChange": "Called with the new text on every edit, and with an empty string after a send.",
+      "disabled": "Dims the box and blocks typing and sending.",
+      "inputRef": "A ref to the textarea, for focusing it after a send or on page load.",
+      "inputProps": "Extra props for the textarea, like name, id, autoFocus, or maxLength. Its key and blur handlers run before the box's own; call preventDefault in onKeyDown to stop Enter from sending.",
+      "className": "Extra classes merged onto the root element (data-slot=\"prompt-box\", with data-status). The width defaults to 560px, and the text grows to 192px before it scrolls.",
+      "labels": "Overrides the accessible names of the send button while idle and while streaming."
+    }
+  },
+  "streamingresponse": {
+    "name": "Streaming Response",
+    "description": "An AI reply that develops into focus word by word, with markdown, a quiet caret, and a reply bar.",
+    "interaction": "Press Replay to watch the answer arrive. Words arrive in small uneven bursts like a real model, pausing briefly at commas and full stops, and each burst sharpens out of a soft blur behind a small dot that glides along the line. Bold, code, lists, and links are formatted the moment they appear, never as raw symbols. Press Stop to cut it off. Once it finishes, copy it, retry it, or rate it.",
+    "props": {
+      "text": "Everything received so far. Pass the growing string as it streams; markdown is supported.",
+      "status": "Streaming reveals text as it arrives. Done finishes revealing what is left. Stopped freezes on what was shown.",
+      "speed": "Average words per second once caught up. It speeds up while behind, so bursts never pile up.",
+      "ink": "An optional color new words land in before they settle to the text color, also used for the dot. Unset, everything stays monochrome.",
+      "actions": "Shows copy and rating buttons once the reply settles.",
+      "onRetry": "Adds a retry button that calls this.",
+      "onFeedback": "Called when a thumb is pressed, with null when it is pressed again to clear it.",
+      "defaultFeedback": "The rating to show on first render, like one saved earlier.",
+      "onCopy": "Called with the copied text. After a stop, only the part that was shown is copied.",
+      "className": "Extra classes merged onto the root element (data-slot=\"streaming-response\", with data-status). Font and color come from the parent.",
+      "labels": "Overrides the action and code block button labels: copy, copied, copyCode, retry, goodResponse and badResponse."
+    }
+  },
+  "modelpicker": {
+    "name": "Model Picker",
+    "description": "A model switcher for AI chat inputs that unfolds out of its own pill into a searchable list.",
+    "interaction": "Click the pill and the list unfolds around it, with the current model staying exactly where the pill was. Hover or use the arrow keys and a soft highlight slides along, while the footer shows what that model is good at. Type to filter. Pick one and the list folds away around it, carrying that row down into the pill. Escape or a click outside folds it back onto the current model.",
+    "props": {
+      "models": "The models to list, in order. Each has an id and name, plus an optional provider to group by, icon, description, and speed and intelligence from 1 to 5.",
+      "value": "The selected model id, for controlled use.",
+      "defaultValue": "The model selected on first render. Defaults to the first model.",
+      "onChange": "Called with the new id when a different model is picked.",
+      "searchable": "Shows a search field at the top of the list.",
+      "className": "Extra classes merged onto the root element (data-slot=\"model-picker\").",
+      "labels": "Overrides the trigger label, search placeholder, list label, empty state, and meter text for localization."
+    }
+  }
+}

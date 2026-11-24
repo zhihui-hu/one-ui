@@ -1,0 +1,13 @@
+{
+  "title": "On this page",
+  "items": {
+    "installation": "Installation",
+    "prerequisites": "Prerequisites",
+    "installation-steps": "Installation Steps",
+    "configuration": "Configuration",
+    "usage": "Usage",
+    "customizing-content": "Customizing Content",
+    "submenu-content": "Submenu Content",
+    "features": "Features"
+  }
+}

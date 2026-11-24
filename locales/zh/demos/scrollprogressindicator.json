@@ -1,0 +1,109 @@
+{
+  "labels": { "showSections": "显示章节" },
+  "groups": [
+    {
+      "id": "overview",
+      "eyebrow": "简介",
+      "title": "滚动进度",
+      "description": "一条细细的指示条，显示读者在页面或滚动容器中读到了哪里。它安静地贴在视口边缘，随内容推进逐渐填满。",
+      "items": [
+        {
+          "id": "overview-purpose",
+          "eyebrow": "为什么需要它",
+          "title": "在长页面里知道自己的位置",
+          "description": "长文章看不出自己有多长。进度条持续提示还剩多少内容，又不会在布局里多塞一块界面元素。"
+        },
+        {
+          "id": "overview-signal",
+          "eyebrow": "信号",
+          "title": "一个数值，映射为宽度",
+          "description": "组件只追踪一个 0 到 1 之间的数值，并把它映射到填充上。其余的一切（颜色、粗细、位置）都只是叠加在这个数值上的呈现。"
+        },
+        {
+          "id": "overview-placement",
+          "eyebrow": "位置",
+          "title": "默认固定在顶部",
+          "description": "指示条固定在顶部边缘，内容在下方滚动时它始终可见。也可以放在底部，或绑定到某个容器。"
+        }
+      ]
+    },
+    {
+      "id": "behavior",
+      "eyebrow": "交互",
+      "title": "行为",
+      "description": "进度条直接跟随滚动位置。它应该像页面的实时读数，而不是一段自己播放的动画。",
+      "items": [
+        {
+          "id": "behavior-track",
+          "eyebrow": "追踪",
+          "title": "进度是推导出来的，不是存储的",
+          "description": "滚动偏移除以可滚动总距离，就是进度值。因为每一帧都重新计算，窗口缩放或内容变化后它依然准确。"
+        },
+        {
+          "id": "behavior-smoothing",
+          "eyebrow": "平滑",
+          "title": "用弹簧避免填充卡顿",
+          "description": "原始滚动值可能跳跃式到达。让数值经过一个弹簧，填充就会平滑滑向目标，而不是在帧之间跳动。"
+        },
+        {
+          "id": "behavior-transform",
+          "eyebrow": "性能",
+          "title": "动画用 transform，不碰布局",
+          "description": "填充由 scaleX 驱动，变换原点在左侧。缩放不会在每次滚动时触发布局计算，长文档里也能保持流畅。"
+        }
+      ]
+    },
+    {
+      "id": "styling",
+      "eyebrow": "视觉系统",
+      "title": "样式",
+      "description": "默认外观刻意保持极简：几像素高、铺满宽度，并使用前景色，在两种主题下都清晰可读。",
+      "items": [
+        {
+          "id": "styling-height",
+          "eyebrow": "粗细",
+          "title": "保持纤细",
+          "description": "2 到 4 像素就足以被余光察觉。更粗的进度条会和内容抢注意力，看起来更像加载状态，而不是位置提示。"
+        },
+        {
+          "id": "styling-color",
+          "eyebrow": "对比度",
+          "title": "依赖前景色 token",
+          "description": "使用前景色让进度条无需硬编码颜色也清晰可读，在浅色和深色主题切换时也能正确反转。"
+        },
+        {
+          "id": "styling-origin",
+          "eyebrow": "方向",
+          "title": "从起始边填充",
+          "description": "左侧变换原点让进度条沿阅读方向增长。在从右到左的布局中，原点会翻转，动效依然符合文字的走向。"
+        }
+      ]
+    },
+    {
+      "id": "usage",
+      "eyebrow": "实现",
+      "title": "用法",
+      "description": "把组件放在可滚动布局的顶部附近，无需任何配置即可工作。之后的一切都是可选的细化。",
+      "items": [
+        {
+          "id": "usage-mount",
+          "eyebrow": "挂载",
+          "title": "每个滚动区域一个实例",
+          "description": "整个页面只渲染一个指示条。如果有独立的内部滚动区域，就给它单独一个指向该容器的实例。"
+        },
+        {
+          "id": "usage-classname",
+          "eyebrow": "布局",
+          "title": "用 className 控制位置和颜色",
+          "description": "组件负责追踪逻辑；外层页面通过 className 决定进度条的位置和主题样式。"
+        },
+        {
+          "id": "usage-reduced-motion",
+          "eyebrow": "无障碍",
+          "title": "尊重减少动效设置",
+          "description": "进度条只是装饰，不应该是唯一的位置提示。用户要求减少动效时，去掉弹簧，直接跟随滚动。"
+        }
+      ]
+    }
+  ]
+}

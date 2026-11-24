@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "ship": "向 registry 发布一个新组件",
+    "preview": "为组件库录制一段预览",
+    "star": "给 One UI 点个 Star"
+  },
+  "completed": "已完成：{label}",
+  "reopened": "已重新打开：{label}"
+}

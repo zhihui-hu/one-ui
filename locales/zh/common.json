@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "首页",
+    "components": "组件",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
+  "sidebar": {
+    "open": "打开侧边栏",
+    "close": "关闭侧边栏",
+    "breadcrumb": "面包屑导航"
+  },
+  "categories": {
+    "new": "最新发布",
+    "display": "展示",
+    "ai": "AI 套件",
+    "navigation": "导航",
+    "inputs": "输入",
+    "feedback": "反馈"
+  },
+  "language": {
+    "label": "语言"
+  },
+  "copy": "复制",
+  "copied": "已复制",
+  "copyCommand": "复制命令",
+  "close": "关闭",
+  "toggleTheme": "切换主题",
+  "new": "新",
+  "viewAll": "查看全部",
+  "componentsTotal": "{count} 个组件",
+  "componentsCount": "{count}+ 个稀有而独特的组件",
+  "recordingSoon": "录制中",
+  "search": {
+    "label": "搜索组件",
+    "emptyTitle": "没有找到这么稀有的",
+    "emptyBody": "没有匹配“{query}”的组件",
+    "navigate": "选择",
+    "open": "打开",
+    "count": "{shown} / {total}"
+  },
+  "footer": {
+    "headline": "有品位的组件",
+    "sitemap": "站点地图"
+  },
+  "notFound": {
+    "title": "页面不存在",
+    "headline": "这个页面走丢了。",
+    "body": "链接已失效或页面已移动。所有组件都还在原处。",
+    "browse": "浏览组件",
+    "home": "返回首页",
+    "description": "这个页面不存在。去看看组件吧。"
+  },
+  "unavailable": {
+    "title": "你所在的地区暂不可用",
+    "description": "One UI 在你所在的地区暂不可用。",
+    "headline": "One UI 在你所在的地区暂不可用。",
+    "body": "非常抱歉，One UI 目前在你所在的地区受到访问限制。如果你认为这是误判，请告诉我们。",
+    "contact": "联系我们"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "labels": {
+    "trigger": "试一试",
+    "options": "选项",
+    "viewPrivateKey": "查看私钥",
+    "viewRecoveryPhrase": "查看助记词",
+    "removeWallet": "移除钱包",
+    "cancel": "取消",
+    "reveal": "显示",
+    "continue": "继续",
+    "noShare": "不要分享给任何人",
+    "noRecover": "一旦丢失，我们无法帮你找回",
+    "phraseTitle": "助记词",
+    "phraseDescription": "助记词是备份钱包所用的密钥，请始终妥善保密。",
+    "phraseSafe": "妥善保管你的助记词",
+    "keyTitle": "私钥",
+    "keyDescription": "私钥是备份钱包所用的密钥，请始终保密并妥善保管。",
+    "keySafe": "妥善保管你的私钥",
+    "removeTitle": "确定要移除吗？",
+    "removeDescription": "你还没有备份这个钱包。移除后，你可能永久失去访问权限。建议先用有效的恢复方式备份钱包。"
+  }
+}

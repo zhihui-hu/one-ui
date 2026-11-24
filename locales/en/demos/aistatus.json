@@ -1,0 +1,16 @@
+{
+  "question": "How do I add a One UI component to my project?",
+  "detail": "Reading the registry",
+  "answerBefore": "Run the shadcn CLI with the component's name, like",
+  "period": ".",
+  "answerAfter": " The source lands in your components folder, so it's yours to tweak.",
+  "replay": "Replay",
+  "states": {
+    "thinking": "Thinking",
+    "researching": "Researching",
+    "analyzing": "Analyzing",
+    "writing": "Writing",
+    "done": "Done",
+    "workedFor": "Worked for {time}"
+  }
+}

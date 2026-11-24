@@ -1,0 +1,24 @@
+{
+  "items": {
+    "what-is-one-ui": {
+      "question": "What is One UI?",
+      "answer": "A collection of animated React components built with Tailwind CSS and Motion. You copy the source into your project and own it from there."
+    },
+    "is-it-free": {
+      "question": "Is it free?",
+      "answer": "Yes. Every component is free to use in personal and commercial projects."
+    },
+    "install": {
+      "question": "How do I install a component?",
+      "answer": "Add it with the shadcn CLI. The source lands in your components/ui folder, ready to edit."
+    },
+    "commercial-use": {
+      "question": "Can I use it in commercial projects?",
+      "answer": "Yes, closed source included, as long as you credit One UI with a visible link to ui.huzhihui.com."
+    },
+    "resell": {
+      "question": "Can I resell the components?",
+      "answer": "No. You can't sell, sublicense, or redistribute them on their own, or bundled into a template, kit, theme, or course."
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "prompt": "随便问点什么",
+  "attach": "添加附件",
+  "send": "发送",
+  "labels": {
+    "trigger": "模型：{name}",
+    "search": "搜索模型",
+    "list": "模型",
+    "empty": "没有匹配的模型",
+    "speed": "速度",
+    "intelligence": "智能",
+    "meter": "{value} / {max}"
+  },
+  "descriptions": {
+    "claude-opus-5-5": "能力最强，适合难题",
+    "claude-sonnet-5-5": "聪明又快，适合日常工作",
+    "claude-haiku-5-5": "速度最快，适合快速问答",
+    "gpt-5": "旗舰推理模型",
+    "gpt-5-mini": "更轻量，更便宜",
+    "grok-4": "擅长实时热点话题",
+    "gemini-pro": "超长上下文，适合长文档",
+    "gemini-flash": "快速多模态模型"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "title": "本页内容",
+  "items": {
+    "installation": "安装",
+    "prerequisites": "前置条件",
+    "installation-steps": "安装步骤",
+    "configuration": "配置",
+    "usage": "用法",
+    "customizing-content": "自定义内容",
+    "submenu-content": "子菜单内容",
+    "features": "特性"
+  }
+}

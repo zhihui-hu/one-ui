@@ -1,0 +1,22 @@
+{
+  "labels": {
+    "trigger": "Try it out",
+    "options": "Options",
+    "viewPrivateKey": "View Private Key",
+    "viewRecoveryPhrase": "View Recovery Phase",
+    "removeWallet": "Remove Wallet",
+    "cancel": "Cancel",
+    "reveal": "Reveal",
+    "continue": "Continue",
+    "noShare": "Don’t share it with anyone else",
+    "noRecover": "If you lose it, we can’t recover it",
+    "phraseTitle": "Secret Recovery Phrase",
+    "phraseDescription": "Your Secret Recovery Phrase is the key used to back up your wallet. Keep it secret at all times.",
+    "phraseSafe": "Keep your Secret Phrase safe",
+    "keyTitle": "Private Key",
+    "keyDescription": "Your Private Key is the key used to back up your wallet. Keep it secret and secure at all times.",
+    "keySafe": "Keep your private key safe",
+    "removeTitle": "Are you sure?",
+    "removeDescription": "You haven’t backed up your wallet yet. If you remove it, you could lose access forever. We suggest tapping and backing up your wallet first with a valid recovery method."
+  }
+}

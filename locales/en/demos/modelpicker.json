@@ -1,0 +1,24 @@
+{
+  "prompt": "Ask anything",
+  "attach": "Attach",
+  "send": "Send",
+  "labels": {
+    "trigger": "Model: {name}",
+    "search": "Search models",
+    "list": "Models",
+    "empty": "No models match",
+    "speed": "Speed",
+    "intelligence": "Intelligence",
+    "meter": "{value} of {max}"
+  },
+  "descriptions": {
+    "claude-opus-5-5": "Most capable, for hard problems",
+    "claude-sonnet-5-5": "Smart and quick, for everyday work",
+    "claude-haiku-5-5": "Fastest, for quick answers",
+    "gpt-5": "Flagship reasoning model",
+    "gpt-5-mini": "Lighter and cheaper",
+    "grok-4": "Strong at live, current topics",
+    "gemini-pro": "Huge context for long documents",
+    "gemini-flash": "Fast multimodal model"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "labels": {
+    "play": "Play voice message",
+    "pause": "Pause voice message",
+    "seek": "Seek",
+    "position": "{elapsed} of {total}",
+    "speed": "Playback speed, {speed} times. Press to change"
+  }
+}

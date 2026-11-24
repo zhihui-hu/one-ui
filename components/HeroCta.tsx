@@ -1,0 +1,108 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { Squircle } from "@squircle-js/react";
+import { motion, useReducedMotion } from "motion/react";
+import useMeasure from "react-use-measure";
+import CopyButton from "@/components/CopyButton";
+import { REGISTRY_URL, registryItemUrl } from "@/lib/site";
+import { cn } from "@/lib/utils";
+import { useI18n } from "@/components/i18n/I18nProvider";
+
+const INSTALL_COMMAND = `npx shadcn@latest add ${registryItemUrl("fluid-orb")}`;
+const REGISTRY_BASE = REGISTRY_URL.replace("{name}.json", "");
+
+const spring = { type: "spring", stiffness: 300, damping: 22 } as const;
+
+const GROW_PX = 18;
+const SIDE_SHIFT = GROW_PX / 2;
+
+function StretchSquircleBg({
+  hovered,
+  className,
+  bgClassName,
+}: {
+  hovered: boolean;
+  className?: string;
+  bgClassName: string;
+}) {
+  const reduceMotion = useReducedMotion();
+  const [ref, bounds] = useMeasure();
+  const scaleX =
+    hovered && !reduceMotion && bounds.width > 0
+      ? (bounds.width + GROW_PX) / bounds.width
+      : 1;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={false}
+      animate={{ scaleX }}
+      transition={spring}
+      className={cn("absolute inset-0", className)}
+    >
+      <Squircle asChild cornerRadius={16} cornerSmoothing={1}>
+        <div className={cn("size-full", bgClassName)} />
+      </Squircle>
+    </motion.div>
+  );
+}
+
+export default function HeroCta() {
+  const reduceMotion = useReducedMotion();
+  const [hovered, setHovered] = useState<"pill" | "cta" | null>(null);
+  const shift = (px: number) => (reduceMotion ? 0 : px);
+  const { m, href } = useI18n();
+
+  return (
+    <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+      <motion.div
+        initial={false}
+        animate={{ x: hovered === "cta" ? shift(-SIDE_SHIFT) : 0 }}
+        transition={spring}
+        onHoverStart={() => setHovered("pill")}
+        onHoverEnd={() => setHovered((h) => (h === "pill" ? null : h))}
+        className="relative min-w-0 max-w-[75vw] sm:max-w-full"
+      >
+        <StretchSquircleBg
+          hovered={hovered === "pill"}
+          className="drop-shadow-sm dark:drop-shadow-none"
+          bgClassName="bg-white dark:bg-neutral-900"
+        />
+        <CopyButton
+          value={INSTALL_COMMAND}
+          label={m.common.copyCommand}
+          className="relative h-12 w-full max-w-full flex-row-reverse gap-2 px-4 text-neutral-400 hover:text-neutral-900 sm:w-auto sm:pl-5 dark:text-white/50 dark:hover:text-white"
+        >
+          <code className="min-w-0 flex-1 truncate font-mono text-xs font-semibold text-neutral-900 sm:flex-none sm:text-sm dark:text-white">
+            npx shadcn@latest add {REGISTRY_BASE}
+            <span className="font-normal text-neutral-400 dark:text-white/50">
+              fluid-orb.json
+            </span>
+          </code>
+        </CopyButton>
+      </motion.div>
+
+      <motion.div
+        initial={false}
+        animate={{ x: hovered === "pill" ? shift(SIDE_SHIFT) : 0 }}
+        transition={spring}
+        onHoverStart={() => setHovered("cta")}
+        onHoverEnd={() => setHovered((h) => (h === "cta" ? null : h))}
+        className="group relative shrink-0"
+      >
+        <StretchSquircleBg
+          hovered={hovered === "cta"}
+          bgClassName="bg-[#FC4C01] transition-colors duration-150 ease-out group-hover:bg-[#e64500]"
+        />
+        <Link
+          href={href("/components")}
+          className="relative flex h-12 items-center px-6 text-sm font-semibold font-rund text-white"
+        >
+          {m.home.quickStart}
+        </Link>
+      </motion.div>
+    </div>
+  );
+}

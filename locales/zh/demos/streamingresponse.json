@@ -1,0 +1,21 @@
+{
+  "question": "为什么弹簧动画比缓动曲线感觉更好？",
+  "answer": "弹簧动画感觉自然，是因为它们会**保留速度**。在半途打断，它会从当前状态接着走。\n\n1. 菜单这类精确的界面用 `bounce: 0`。\n2. *俏皮*的时刻加一点回弹。\n\n[AI Prompt Box]({href}) 的发送按钮就用了这个。",
+  "stop": "停止",
+  "replay": "重播",
+  "status": {
+    "thinking": "思考中",
+    "writing": "写作中",
+    "done": "完成",
+    "workedFor": "用时 {elapsed}",
+    "stopped": "已停止"
+  },
+  "labels": {
+    "copy": "复制",
+    "copied": "已复制",
+    "copyCode": "复制代码",
+    "retry": "重试",
+    "goodResponse": "回答不错",
+    "badResponse": "回答不好"
+  }
+}

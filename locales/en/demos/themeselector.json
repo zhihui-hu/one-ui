@@ -1,0 +1,8 @@
+{
+  "title": "Theme",
+  "description": "Pick how the interface looks.",
+  "themes": {
+    "dark": "Dark",
+    "light": "Light"
+  }
+}

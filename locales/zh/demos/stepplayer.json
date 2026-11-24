@@ -1,0 +1,10 @@
+{
+  "status": "第 {step} 步，共 {count} 步",
+  "labels": {
+    "play": "播放",
+    "pause": "暂停",
+    "replay": "重播",
+    "progress": "第 {step} 步，共 {count} 步",
+    "step": "第 {step} 步"
+  }
+}

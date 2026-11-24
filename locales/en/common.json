@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Home",
+    "components": "Components",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "sidebar": {
+    "open": "Open sidebar",
+    "close": "Close sidebar",
+    "breadcrumb": "Breadcrumb"
+  },
+  "categories": {
+    "new": "New releases",
+    "display": "Display",
+    "ai": "AI kit",
+    "navigation": "Navigation",
+    "inputs": "Inputs",
+    "feedback": "Feedback"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "copy": "Copy",
+  "copied": "Copied",
+  "copyCommand": "Copy command",
+  "close": "Close",
+  "toggleTheme": "Toggle theme",
+  "new": "New",
+  "viewAll": "View all",
+  "componentsTotal": "{count} components",
+  "componentsCount": "{count}+ rare and unique components",
+  "recordingSoon": "Recording soon",
+  "search": {
+    "label": "Search components",
+    "emptyTitle": "Nothing rare enough",
+    "emptyBody": "No components match “{query}”",
+    "navigate": "navigate",
+    "open": "open",
+    "count": "{shown} of {total}"
+  },
+  "footer": {
+    "headline": "Tasteful Components",
+    "sitemap": "Sitemap"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "headline": "This page went missing.",
+    "body": "The link is broken or the page moved. Every component is still right where you left it.",
+    "browse": "Browse components",
+    "home": "Back home",
+    "description": "This page does not exist. Browse the components instead."
+  },
+  "unavailable": {
+    "title": "Not available in your country",
+    "description": "One UI is not available in your country.",
+    "headline": "One UI isn't available in your country.",
+    "body": "We're sorry. Access to One UI is restricted in your region for now. If you think this is a mistake, let us know.",
+    "contact": "Contact us"
+  }
+}

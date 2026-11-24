@@ -1,0 +1,45 @@
+{
+  "query": "spring animations react",
+  "replay": "Replay",
+  "sources": {
+    "motion": {
+      "title": "Spring animations: physics based motion for React",
+      "snippet": "Springs simulate real physics, so motion keeps its velocity when it is interrupted and settles naturally."
+    },
+    "mdn": {
+      "title": "prefers-reduced-motion - CSS media feature",
+      "snippet": "Detects if a user has enabled a setting on their device to minimize the amount of non-essential motion."
+    },
+    "react": {
+      "title": "useEffect: synchronizing with external systems",
+      "snippet": "useEffect is a React Hook that lets you synchronize a component with an external system."
+    },
+    "webdev": {
+      "title": "Animations and performance on the web",
+      "snippet": "Animating transform and opacity keeps work on the compositor, so frames stay smooth."
+    },
+    "github": {
+      "title": "one-ui: animated React components"
+    },
+    "vercel": {
+      "title": "Building interfaces that feel fast"
+    }
+  },
+  "answer": [
+    "Use a spring for anything the user can interrupt, since it keeps its velocity instead of restarting",
+    ". Stick to transform and opacity so the work stays on the compositor",
+    ", and turn the motion off when the user asks for less",
+    ". Start the animation from an effect, not during render",
+    "."
+  ],
+  "labels": {
+    "searching": "Searching the web",
+    "searchingQuery": "Searching “{query}”",
+    "searchedOne": "Searched {count} site",
+    "searchedOther": "Searched {count} sites",
+    "showLess": "Show less",
+    "showMore": "Show {count} more sources",
+    "moreSourcesOne": "more source",
+    "moreSourcesOther": "more sources"
+  }
+}

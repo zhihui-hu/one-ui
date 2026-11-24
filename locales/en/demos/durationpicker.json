@@ -1,0 +1,8 @@
+{
+  "hours": "Hr.",
+  "minutes": "Min.",
+  "labels": {
+    "edit": "Edit duration",
+    "save": "Save duration"
+  }
+}

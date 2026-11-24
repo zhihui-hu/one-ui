@@ -1,0 +1,3 @@
+{
+  "states": { "idle": "空闲", "listening": "聆听中", "thinking": "思考中" }
+}

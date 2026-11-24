@@ -1,0 +1,38 @@
+{
+  "labels": { "dismiss": "关闭" },
+  "containerAriaLabel": "通知",
+  "success": {
+    "button": "成功",
+    "title": "更改已保存",
+    "description": "你的个人资料已是最新。"
+  },
+  "error": {
+    "button": "错误",
+    "title": "上传失败",
+    "description": "文件超过 10 MB。",
+    "action": "重试",
+    "done": "已上传"
+  },
+  "warning": {
+    "button": "警告",
+    "title": "存储空间即将用完",
+    "description": "5 GB 空间已用 92%。"
+  },
+  "info": {
+    "button": "信息",
+    "title": "更新已就绪",
+    "description": "版本 2.4 将在重启后安装。"
+  },
+  "promise": {
+    "button": "Promise",
+    "loading": "正在发布帖子",
+    "success": "帖子已发布",
+    "error": "发布失败"
+  },
+  "undo": {
+    "button": "撤销",
+    "title": "消息已归档",
+    "action": "撤销",
+    "done": "消息已恢复"
+  }
+}

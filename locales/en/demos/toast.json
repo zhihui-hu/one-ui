@@ -1,0 +1,38 @@
+{
+  "labels": { "dismiss": "Dismiss" },
+  "containerAriaLabel": "Notifications",
+  "success": {
+    "button": "Success",
+    "title": "Changes saved",
+    "description": "Your profile is up to date."
+  },
+  "error": {
+    "button": "Error",
+    "title": "Upload failed",
+    "description": "The file is over 10 MB.",
+    "action": "Retry",
+    "done": "Uploaded"
+  },
+  "warning": {
+    "button": "Warning",
+    "title": "Storage almost full",
+    "description": "You have used 92% of your 5 GB."
+  },
+  "info": {
+    "button": "Info",
+    "title": "Update ready",
+    "description": "Version 2.4 installs on restart."
+  },
+  "promise": {
+    "button": "Promise",
+    "loading": "Publishing your post",
+    "success": "Post published",
+    "error": "Couldn't publish"
+  },
+  "undo": {
+    "button": "Undo",
+    "title": "Message archived",
+    "action": "Undo",
+    "done": "Message restored"
+  }
+}
