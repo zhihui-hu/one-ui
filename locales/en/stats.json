@@ -1,0 +1,48 @@
+{
+  "title": "Traffic",
+  "description": "One UI's real traffic from Cloudflare, Google Analytics, Google Search Console and Bing. Public and refreshed every 5 minutes.",
+  "ranges": {
+    "24h": "Last 24 hours",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "3d": "Last 3 days",
+    "30d": "Last 30 days"
+  },
+  "updated": "Updated {time}",
+  "peak": "Peak {value}",
+  "loading": "Loading",
+  "notConfigured": "Not connected yet.",
+  "unavailable": "Temporarily unavailable. Try again in a few minutes.",
+  "beijingTime": "Beijing time (UTC+8)",
+  "cloudflare": {
+    "dailyNote": "UTC dates (Cloudflare limits hourly data to 3 days)",
+    "pageViews": "Page views",
+    "requests": "Requests",
+    "cacheRate": "Cache rate",
+    "bytes": "Bandwidth",
+    "cachedBytes": "Cached bandwidth",
+    "countries": "Top regions by requests",
+    "unknownRegion": "Unknown"
+  },
+  "ga": {
+    "users": "Visitors",
+    "newUsers": "New visitors",
+    "sessions": "Sessions",
+    "pageViews": "Page views",
+    "avgSession": "Avg. session",
+    "sources": "Top sources by sessions",
+    "pages": "Top pages by views",
+    "direct": "Direct",
+    "empty": "No data in this range yet."
+  },
+  "search": {
+    "window": "Last {days} days",
+    "clicks": "Search clicks",
+    "impressions": "Impressions",
+    "ctr": "Click-through rate",
+    "position": "Avg. position",
+    "dailyClicks": "Daily clicks, last 7 days",
+    "chart": "Daily clicks · peak {value}",
+    "lag": "Search data lags 2 to 3 days."
+  }
+}

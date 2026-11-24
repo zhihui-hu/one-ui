@@ -1,0 +1,48 @@
+{
+  "title": "网站流量统计",
+  "description": "One UI 来自 Cloudflare、Google Analytics、Google Search Console 与 Bing 的真实访问数据，公开透明，每 5 分钟更新。",
+  "ranges": {
+    "24h": "近 24 小时",
+    "today": "今天",
+    "yesterday": "昨天",
+    "3d": "近 3 天",
+    "30d": "近 30 天"
+  },
+  "updated": "最后更新 {time}",
+  "peak": "最高 {value}",
+  "loading": "加载中",
+  "notConfigured": "尚未接入。",
+  "unavailable": "暂时不可用，请几分钟后再试。",
+  "beijingTime": "北京时间（UTC+8）",
+  "cloudflare": {
+    "dailyNote": "按 UTC 日期统计（Cloudflare 按小时最多查询 3 天）",
+    "pageViews": "页面浏览量",
+    "requests": "请求数",
+    "cacheRate": "缓存率",
+    "bytes": "总流量",
+    "cachedBytes": "已缓存流量",
+    "countries": "主要来源地区（按请求数）",
+    "unknownRegion": "未知地区"
+  },
+  "ga": {
+    "users": "访客数",
+    "newUsers": "新访客",
+    "sessions": "会话数",
+    "pageViews": "页面浏览量",
+    "avgSession": "平均会话时长",
+    "sources": "访问来源（按会话数）",
+    "pages": "热门页面（按浏览量）",
+    "direct": "直接访问",
+    "empty": "这个时间段还没有数据。"
+  },
+  "search": {
+    "window": "近 {days} 天",
+    "clicks": "搜索点击",
+    "impressions": "搜索展示",
+    "ctr": "点击率",
+    "position": "平均排名",
+    "dailyClicks": "近 7 天日均点击",
+    "chart": "每日点击 · 最高 {value}",
+    "lag": "搜索数据通常滞后 2 到 3 天。"
+  }
+}

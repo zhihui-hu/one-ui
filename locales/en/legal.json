@@ -1,0 +1,169 @@
+{
+  "updatedLabel": "Last updated {date}",
+  "updated": "2026-11-24",
+  "contactHeading": "Contact",
+  "contactBody": "Questions about this page go to <email>{email}</email>.",
+  "privacy": {
+    "title": "Privacy Policy",
+    "description": "What One UI collects when you browse the site or install a component, and what it does not.",
+    "sections": [
+      {
+        "heading": "The short version",
+        "body": [
+          "One UI is a documentation site and a component registry. There are no accounts, no sign-up and no ads. We use Google Analytics to count visits in aggregate. We do not sell or share personal data."
+        ]
+      },
+      {
+        "heading": "What your browser stores",
+        "body": [
+          "If you pick a language, a session cookie named NEXT_LOCALE remembers it until you close the browser.",
+          "Your theme choice (light or dark) is saved in your browser's local storage. It never leaves your device.",
+          "Neither is used to identify or track you."
+        ]
+      },
+      {
+        "heading": "Analytics",
+        "body": [
+          "We use Google Analytics 4 to see which pages are visited and how people find the site. It records pages viewed, referrer, device and browser type, and approximate location. IP addresses are not stored.",
+          "Google Analytics sets first-party cookies (_ga and _ga_*) to tell visits apart. In the EEA, UK and Switzerland these cookies are off by default and only cookieless, aggregated signals are sent.",
+          "Ads features, remarketing and data sharing for advertising are turned off. You can block Google Analytics with any content blocker or Google's opt-out browser add-on.",
+          "The aggregated numbers (visits, top pages, top sources, regions) are published on our public traffic page. No individual visitor appears there."
+        ]
+      },
+      {
+        "heading": "Server logs",
+        "body": [
+          "The site runs on Cloudflare. Like any web host, Cloudflare processes request data such as IP address, user agent, requested URL and approximate country, to deliver pages, block abuse and keep the service secure. We use this only in aggregate and do not combine it with other data. See Cloudflare's privacy policy for how they handle it."
+        ]
+      },
+      {
+        "heading": "Registry and MCP",
+        "body": [
+          "When you install a component with the shadcn CLI or an MCP client, your tool fetches JSON files from /r/. Those requests are handled like any other page request. We do not receive your project code or prompts."
+        ]
+      },
+      {
+        "heading": "Email",
+        "body": [
+          "If you write to us, we use your email address and message only to reply. We delete it when it is no longer needed."
+        ]
+      },
+      {
+        "heading": "Your rights",
+        "body": [
+          "You can ask what data we hold about you, or ask us to delete it, at any time by email. Depending on where you live (for example the EU, UK or California), you may have additional rights under local law."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "body": [
+          "If this policy changes, we update this page and the date at the top."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "description": "The rules for using the One UI site, its component code and its registry.",
+    "sections": [
+      {
+        "heading": "Agreement",
+        "body": [
+          "By using ui.huzhihui.com, its registry or its MCP server, you agree to these terms. If you do not agree, do not use the site."
+        ]
+      },
+      {
+        "heading": "Using the components",
+        "body": [
+          "Component source code published on this site is free to copy, modify and use in personal and commercial projects. Once a component is in your codebase, it is your code to maintain.",
+          "You may not resell or redistribute the components as a standalone component library, template pack or registry that competes with One UI."
+        ]
+      },
+      {
+        "heading": "Site content",
+        "body": [
+          "The One UI name, logo, site design, demos, written documentation and images remain ours. Do not copy them or use them in a way that suggests we endorse your product.",
+          "Some components credit other authors or libraries. Their own licenses still apply to the parts they wrote."
+        ]
+      },
+      {
+        "heading": "Acceptable use",
+        "body": [
+          "Do not scrape the site or the registry at a rate that degrades it for others, try to break or bypass its security, or use it for anything unlawful."
+        ]
+      },
+      {
+        "heading": "No warranty",
+        "body": [
+          "Everything is provided \"as is\", without warranty of any kind. Test components before shipping them. We are not liable for any damages arising from using the site or the code, to the extent the law allows."
+        ]
+      },
+      {
+        "heading": "Availability",
+        "body": [
+          "We may change, pause or remove the site, components or registry at any time, and may restrict access in some regions."
+        ]
+      },
+      {
+        "heading": "Copyright complaints",
+        "body": [
+          "If you believe something here infringes your copyright, follow our <dmca>DMCA policy</dmca>."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "body": [
+          "We may update these terms. Continuing to use the site after a change means you accept the new terms."
+        ]
+      }
+    ]
+  },
+  "dmca": {
+    "title": "DMCA Policy",
+    "description": "How to report content on One UI that infringes your copyright, and how to respond to a report.",
+    "sections": [
+      {
+        "heading": "Overview",
+        "body": [
+          "We respect intellectual property and respond to clear notices of copyright infringement under the Digital Millennium Copyright Act (17 U.S.C. § 512). When a notice is valid, we remove or disable the material and, where possible, tell the person who published it."
+        ]
+      },
+      {
+        "heading": "Filing a notice",
+        "body": [
+          "Send your notice to <email>{email}</email> with the subject \"DMCA Notice\". It must include:",
+          "1. Your physical or electronic signature.",
+          "2. The copyrighted work you believe is infringed.",
+          "3. The exact URL on One UI where the material appears.",
+          "4. Your name, postal address, phone number and email address.",
+          "5. A statement that you believe in good faith the use is not authorized by the owner, its agent or the law.",
+          "6. A statement, under penalty of perjury, that the information is accurate and that you are the owner or authorized to act for the owner.",
+          "Incomplete notices may not be acted on. Knowingly false claims can make you liable for damages under § 512(f)."
+        ]
+      },
+      {
+        "heading": "Counter-notice",
+        "body": [
+          "If your material was removed and you believe that was a mistake or misidentification, send a counter-notice to the same address with:",
+          "1. Your physical or electronic signature.",
+          "2. The removed material and the URL where it appeared.",
+          "3. A statement, under penalty of perjury, that you believe in good faith it was removed by mistake or misidentification.",
+          "4. Your name, address and phone number, and consent to the jurisdiction of the federal court for your district (or any district where we may be found, if you are outside the US), and that you will accept service from the person who filed the notice.",
+          "Unless the complainant tells us within 10 to 14 business days that they have filed a court action, we may restore the material."
+        ]
+      },
+      {
+        "heading": "Repeat infringers",
+        "body": [
+          "We remove contributions from anyone who repeatedly infringes others' copyright."
+        ]
+      },
+      {
+        "heading": "Code on GitHub",
+        "body": [
+          "The source repository is hosted on GitHub. For material in the repository itself, you can also use GitHub's own DMCA process."
+        ]
+      }
+    ]
+  }
+}

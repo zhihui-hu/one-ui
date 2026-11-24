@@ -18,3 +18,8 @@ export const LAUNCH_DATE = "2026-06-10";
 
 export const HALLOWEEN_WEBS_ENABLED = true;
 export const DIWALI_LIGHTS_ENABLED = true;
+
+// public ids, leave empty to switch each one off
+export const GA_MEASUREMENT_ID = "G-MBX28WR3LD";
+export const GOOGLE_SITE_VERIFICATION = "";
+export const BING_SITE_VERIFICATION = "";

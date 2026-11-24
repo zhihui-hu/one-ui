@@ -23,6 +23,18 @@ const ENTRIES: Entry[] = [
     changeFrequency: "monthly",
     priority: 0.6,
   },
+  {
+    path: "/stats",
+    lastModified: new Date("2026-11-24"),
+    changeFrequency: "daily",
+    priority: 0.4,
+  },
+  ...(["/privacy", "/terms", "/dmca"] as const).map((path) => ({
+    path,
+    lastModified: new Date("2026-11-24"),
+    changeFrequency: "yearly" as const,
+    priority: 0.3,
+  })),
   ...components.map((component) => ({
     path: component.href,
     lastModified,

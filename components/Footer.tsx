@@ -58,6 +58,10 @@ export default function Footer() {
     { label: "GitHub", href: GITHUB_URL, external: true, icon: GithubLogo },
   ];
   const UTILITY_LINKS = [
+    { label: m.common.footer.traffic, href: href("/stats"), page: true },
+    { label: m.common.footer.privacy, href: href("/privacy"), page: true },
+    { label: m.common.footer.terms, href: href("/terms"), page: true },
+    { label: m.common.footer.dmca, href: href("/dmca"), page: true },
     { label: m.common.footer.sitemap, href: "/sitemap.xml" },
     { label: "robots.txt", href: "/robots.txt" },
   ];
@@ -121,9 +125,15 @@ export default function Footer() {
                     &middot;
                   </span>
                 )}
-                <a href={link.href} className={HOVER}>
-                  {link.label}
-                </a>
+                {link.page ? (
+                  <Link href={link.href} className={HOVER}>
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a href={link.href} className={HOVER}>
+                    {link.label}
+                  </a>
+                )}
               </Fragment>
             ))}
           </span>

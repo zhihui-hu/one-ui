@@ -14,7 +14,13 @@ import {
 import { getMessages } from "@/lib/i18n/messages";
 import { localeAlternates } from "@/lib/i18n/metadata";
 import { notFound } from "next/navigation";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import Analytics from "@/components/Analytics";
+import {
+  BING_SITE_VERIFICATION,
+  GOOGLE_SITE_VERIFICATION,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/site";
 import { siteJsonLd } from "@/lib/seo";
 import "../globals.css";
 
@@ -97,6 +103,12 @@ export async function generateMetadata({
         "max-video-preview": -1,
       },
     },
+    verification: {
+      google: GOOGLE_SITE_VERIFICATION || undefined,
+      other: BING_SITE_VERIFICATION
+        ? { "msvalidate.01": BING_SITE_VERIFICATION }
+        : undefined,
+    },
     icons: {
       icon: [{ url: "/logos/oneui-stack-favicon.svg", type: "image/svg+xml" }],
     },
@@ -161,6 +173,7 @@ export default async function RootLayout({
             <CommandMenuLoader />
           </I18nProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

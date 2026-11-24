@@ -41,6 +41,10 @@
   },
   "footer": {
     "headline": "Tasteful Components",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "dmca": "DMCA",
+    "traffic": "Traffic",
     "sitemap": "Sitemap"
   },
   "notFound": {

@@ -41,6 +41,10 @@
   },
   "footer": {
     "headline": "有品位的组件",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "dmca": "DMCA",
+    "traffic": "流量统计",
     "sitemap": "站点地图"
   },
   "notFound": {
