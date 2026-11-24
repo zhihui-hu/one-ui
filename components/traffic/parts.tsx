@@ -62,7 +62,25 @@ export function PanelState<T>({
       </Message>
     );
   }
-  if (load.state === "ready") return <>{children(load.data as T)}</>;
+  if (load.state === "ready") {
+    const { stale, staleReason } = load.data as {
+      stale?: boolean;
+      staleReason?: string;
+    };
+    return (
+      <>
+        {stale ? (
+          <p
+            className="-mt-1 rounded-xl bg-[#FF9F0A]/10 px-3 py-2 text-xs text-[#B25000] dark:text-[#FFB340]"
+            title={staleReason}
+          >
+            {m.stats.stale}
+          </p>
+        ) : null}
+        {children(load.data as T)}
+      </>
+    );
+  }
   if (load.state === "error") {
     return <Message detail={load.reason}>{m.stats.unavailable}</Message>;
   }

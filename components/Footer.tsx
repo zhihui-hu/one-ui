@@ -7,6 +7,8 @@ import { GithubLogo, type LogoProps } from "./logos";
 import { useI18n } from "@/components/i18n/I18nProvider";
 
 const GITHUB_URL = "https://github.com/zhihui-hu/one-ui";
+const DMCA_STATUS_URL =
+  "https://www.dmca.com/Protection/Status.aspx?ID=7ce9d68a-4aef-4050-8f88-df33bdeac077&refurl=https://ui.huzhihui.com";
 
 type FooterLink = {
   label: string;
@@ -136,6 +138,26 @@ export default function Footer() {
                 )}
               </Fragment>
             ))}
+            <span
+              aria-hidden="true"
+              className="text-black/25 dark:text-white/25"
+            >
+              &middot;
+            </span>
+            <a
+              href={DMCA_STATUS_URL}
+              target="_blank"
+              rel="noreferrer"
+              title="DMCA.com Protection Status"
+              className="flex h-4.25 w-fit overflow-hidden rounded-[3px] font-runde text-[9px] font-bold uppercase leading-none tracking-[0.06em] shadow-[0_0_3px_rgba(0,0,0,0.16)] dark:shadow-[0_0_3px_rgba(0,0,0,0.55)]"
+            >
+              <span className="flex items-center bg-[#ff3300] px-1.5 text-[#282828]">
+                DMCA
+              </span>
+              <span className="flex items-center bg-[#282828] px-1.5 text-[#ff3300]">
+                Protected
+              </span>
+            </a>
           </span>
         </div>
       </div>

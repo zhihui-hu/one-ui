@@ -14,6 +14,8 @@ export const dynamic = "force-dynamic";
 
 const FIVE_MINUTES = 300;
 const ONE_HOUR = 3600;
+// bing only updates daily and throttles shared cloudflare ips, so ask it rarely
+const SIX_HOURS = 6 * ONE_HOUR;
 
 const json = (body: unknown, status = 200, maxAge = 0) =>
   Response.json(body, {
@@ -49,15 +51,17 @@ export async function GET(
       case "cloudflare": {
         const settings = config.cloudflare;
         if (!settings) return notConfigured(source);
-        const body = await cached(`cloudflare:${range}`, FIVE_MINUTES, () =>
-          cloudflareStats(settings, range),
+        const body = await cached(
+          `cloudflare:${range}`,
+          { ttl: FIVE_MINUTES },
+          () => cloudflareStats(settings, range),
         );
         return json(body, 200, 60);
       }
       case "ga": {
         const settings = config.ga;
         if (!settings) return notConfigured(source);
-        const body = await cached(`ga:${range}`, FIVE_MINUTES, () =>
+        const body = await cached(`ga:${range}`, { ttl: FIVE_MINUTES }, () =>
           gaStats(settings, range),
         );
         return json(body, 200, 60);
@@ -65,13 +69,19 @@ export async function GET(
       case "gsc": {
         const settings = config.gsc;
         if (!settings) return notConfigured(source);
-        const body = await cached("gsc", ONE_HOUR, () => gscStats(settings));
+        const body = await cached("gsc", { ttl: ONE_HOUR }, () =>
+          gscStats(settings),
+        );
         return json(body, 200, 300);
       }
       case "bing": {
         const settings = config.bing;
         if (!settings) return notConfigured(source);
-        const body = await cached("bing", ONE_HOUR, () => bingStats(settings));
+        const body = await cached(
+          "bing",
+          { ttl: SIX_HOURS, backoff: ONE_HOUR },
+          () => bingStats(settings),
+        );
         return json(body, 200, 300);
       }
     }

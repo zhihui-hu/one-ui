@@ -24,7 +24,13 @@ export function isTrafficSource(value: unknown): value is TrafficSource {
 
 export type NotConfigured = { configured: false; missing?: string[] };
 
-type Window = {
+type Freshness = {
+  // the upstream failed; this is the last good result
+  stale?: boolean;
+  staleReason?: string;
+};
+
+type Window = Freshness & {
   configured: true;
   // hourly buckets are utc instants, daily ones are yyyy-mm-dd dates
   granularity: "hour" | "day";
@@ -68,7 +74,7 @@ export type GaStats = Window & {
   pages: { path: string; pageViews: number }[];
 };
 
-export type SearchStats = {
+export type SearchStats = Freshness & {
   configured: true;
   days: number;
   start: string;

@@ -1,6 +1,6 @@
 {
   "headline": "有品位的组件，生来出众。",
-  "sub": "One UI 是一套免费开源的稀有动画 React 组件集合。在下方查看它们的实际效果，并通过 shadcn CLI 或 <mcp>MCP</mcp> 安装任意组件。",
+  "sub": "One UI 是一套免费开源的动画 React 组件集合。在下方查看它们的实际效果，并通过 shadcn CLI 或 <mcp>MCP</mcp> 安装任意组件。",
   "quickStart": "快速开始",
   "showcaseSub": "每个组件只有一个文件。用 shadcn CLI 添加，包管理器随你选。",
   "componentsSub": "每个组件都是一个归你所有的文件，而不是需要安装的依赖。可通过 shadcn CLI 或 <mcp>MCP</mcp> 添加任意组件。",

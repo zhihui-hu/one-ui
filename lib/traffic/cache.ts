@@ -40,12 +40,21 @@ async function writeEdge(key: string, value: unknown, ttl: number) {
   } catch {}
 }
 
+type Options = {
+  ttl: number;
+  // after a failure, no upstream call for this long; protects rate-limited apis like bing
+  backoff?: number;
+};
+
+// last good result, served with `stale: true` while the upstream keeps failing
+const LAST_GOOD_TTL = 7 * 86_400;
+
 // concurrent misses share one upstream call, so page views never spend api quota
-export async function cached<T>(
+export async function cached<T extends object>(
   key: string,
-  ttlSeconds: number,
+  { ttl, backoff = 600 }: Options,
   load: () => Promise<T>,
-): Promise<T> {
+): Promise<T & { stale?: boolean }> {
   const hit = memory.get(key);
   if (hit && hit.expires > Date.now()) return hit.value as T;
 
@@ -58,10 +67,25 @@ export async function cached<T>(
       memory.set(key, { value: edge, expires: Date.now() + 30_000 });
       return edge;
     }
-    const value = await load();
-    memory.set(key, { value, expires: Date.now() + ttlSeconds * 1000 });
-    await writeEdge(key, value, ttlSeconds);
-    return value;
+    try {
+      const failed = await readEdge<{ message: string }>(`${key}:failed`);
+      if (failed) throw new Error(failed.message);
+      const value = await load();
+      memory.set(key, { value, expires: Date.now() + ttl * 1000 });
+      await Promise.all([
+        writeEdge(key, value, ttl),
+        writeEdge(`${key}:last`, value, LAST_GOOD_TTL),
+      ]);
+      return value;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      await writeEdge(`${key}:failed`, { message }, backoff);
+      const last = await readEdge<T>(`${key}:last`);
+      if (last === undefined) throw error;
+      const stale = { ...last, stale: true, staleReason: message };
+      memory.set(key, { value: stale, expires: Date.now() + 60_000 });
+      return stale;
+    }
   })();
 
   inflight.set(key, task);

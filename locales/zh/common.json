@@ -29,11 +29,11 @@
   "new": "新",
   "viewAll": "查看全部",
   "componentsTotal": "{count} 个组件",
-  "componentsCount": "{count}+ 个稀有而独特的组件",
+  "componentsCount": "{count}+ 个动画组件",
   "recordingSoon": "录制中",
   "search": {
     "label": "搜索组件",
-    "emptyTitle": "没有找到这么稀有的",
+    "emptyTitle": "没有找到匹配的组件",
     "emptyBody": "没有匹配“{query}”的组件",
     "navigate": "选择",
     "open": "打开",

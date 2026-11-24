@@ -11,13 +11,13 @@ const WEIGHTS = [400, 700];
 const CARDS = {
   en: {
     title: "One UI",
-    tagline: "Rare animated React components",
-    body: "Free and open source. Built with Tailwind CSS and Motion, installed with the shadcn CLI.",
+    tagline: "Animated React components for shadcn",
+    body: "Free and open source. Built with Tailwind CSS and Motion; you own the code.",
   },
   zh: {
     title: "One UI",
-    tagline: "稀有动画 React 组件",
-    body: "免费开源。基于 Tailwind CSS 和 Motion 构建，通过 shadcn CLI 安装。",
+    tagline: "shadcn 动画 React 组件",
+    body: "免费开源。基于 Tailwind CSS 和 Motion 构建，代码归你所有。",
   },
 };
 

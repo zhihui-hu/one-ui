@@ -44,5 +44,6 @@
     "chart": "Daily clicks · peak {value}",
     "lag": "Search data lags 2 to 3 days."
   },
-  "missing": "Missing:"
+  "missing": "Missing:",
+  "stale": "The source is not responding right now; showing the last saved numbers."
 }

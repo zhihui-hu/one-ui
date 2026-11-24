@@ -29,11 +29,11 @@
   "new": "New",
   "viewAll": "View all",
   "componentsTotal": "{count} components",
-  "componentsCount": "{count}+ rare and unique components",
+  "componentsCount": "{count}+ animated components",
   "recordingSoon": "Recording soon",
   "search": {
     "label": "Search components",
-    "emptyTitle": "Nothing rare enough",
+    "emptyTitle": "No matching components",
     "emptyBody": "No components match “{query}”",
     "navigate": "navigate",
     "open": "open",
