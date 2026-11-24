@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { bindFullscreenQuad, createProgram, hexToRgb } from "@/lib/webgl";
 
 // rendered below native resolution, then upscaled by css, which softens the flame and cuts the pixel cost
@@ -75,90 +75,132 @@ void main() {
 }
 `;
 
+type Teardown = () => void;
+
+// draws until the returned teardown runs; null when webgl or the shader is unavailable
+function start(canvas: HTMLCanvasElement, color: string): Teardown | null {
+  const gl = canvas.getContext("webgl", { antialias: false, alpha: true });
+  if (!gl || gl.isContextLost()) return null;
+
+  const compiled = createProgram(gl, VERT, FRAG);
+  if (!compiled) return null;
+
+  gl.useProgram(compiled.program);
+  const quad = bindFullscreenQuad(gl, compiled.program, "a_pos");
+
+  const uResolution = gl.getUniformLocation(compiled.program, "u_resolution");
+  const uTime = gl.getUniformLocation(compiled.program, "u_time");
+  gl.uniform3f(
+    gl.getUniformLocation(compiled.program, "u_color"),
+    ...hexToRgb(color),
+  );
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const startedAt = performance.now();
+  const elapsed = () => (performance.now() - startedAt) / 1000;
+
+  let frame = 0;
+
+  const draw = () => {
+    gl.uniform1f(uTime, TIME_OFFSET + (reduceMotion ? 0 : elapsed()));
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  };
+
+  const loop = () => {
+    draw();
+    frame = requestAnimationFrame(loop);
+  };
+
+  const play = () => {
+    if (frame || reduceMotion) return;
+    frame = requestAnimationFrame(loop);
+  };
+
+  const pause = () => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+  };
+
+  const resize = (force = false) => {
+    const w = Math.max(1, Math.round(canvas.clientWidth * RESOLUTION_SCALE));
+    const h = Math.max(1, Math.round(canvas.clientHeight * RESOLUTION_SCALE));
+    if (!force && canvas.width === w && canvas.height === h) return;
+    canvas.width = w;
+    canvas.height = h;
+    gl.viewport(0, 0, w, h);
+    gl.uniform2f(uResolution, w, h);
+    // redraw at once so a resize never exposes a blank or stretched frame
+    draw();
+  };
+
+  // a restored context starts with default uniforms, so set them even when the size is unchanged
+  resize(true);
+
+  const resizeObserver = new ResizeObserver(() => resize());
+  resizeObserver.observe(canvas);
+
+  // no reason to burn frames while the footer is off screen
+  const visibilityObserver = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) play();
+    else pause();
+  });
+  visibilityObserver.observe(canvas);
+
+  return () => {
+    pause();
+    resizeObserver.disconnect();
+    visibilityObserver.disconnect();
+    if (!gl.isContextLost()) {
+      gl.deleteBuffer(quad);
+      compiled.dispose();
+    }
+  };
+}
+
 export default function FluidWave({ color = "#FC4C01" }: { color?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext("webgl", { antialias: false, alpha: true });
-    if (!gl) return;
+    let teardown = start(canvas, color);
+    const unavailable = teardown === null;
 
-    const compiled = createProgram(gl, VERT, FRAG);
-    if (!compiled) return;
-
-    gl.useProgram(compiled.program);
-    const quad = bindFullscreenQuad(gl, compiled.program, "a_pos");
-
-    const uResolution = gl.getUniformLocation(compiled.program, "u_resolution");
-    const uTime = gl.getUniformLocation(compiled.program, "u_time");
-    gl.uniform3f(
-      gl.getUniformLocation(compiled.program, "u_color"),
-      ...hexToRgb(color),
-    );
-
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const startedAt = performance.now();
-    const elapsed = () => (performance.now() - startedAt) / 1000;
-
-    let frame = 0;
-
-    const draw = () => {
-      gl.uniform1f(uTime, TIME_OFFSET + (reduceMotion ? 0 : elapsed()));
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    // the browser drops webgl contexts after sleep, a gpu reset or too many live contexts; without this the flame vanishes for good
+    const onLost = (event: Event) => {
+      event.preventDefault();
+      teardown?.();
+      teardown = null;
     };
-
-    const loop = () => {
-      draw();
-      frame = requestAnimationFrame(loop);
+    const onRestored = () => {
+      teardown = start(canvas, color);
     };
-
-    const play = () => {
-      if (frame || reduceMotion) return;
-      frame = requestAnimationFrame(loop);
-    };
-
-    const pause = () => {
-      cancelAnimationFrame(frame);
-      frame = 0;
-    };
-
-    const resize = () => {
-      const w = Math.max(1, Math.round(canvas.clientWidth * RESOLUTION_SCALE));
-      const h = Math.max(1, Math.round(canvas.clientHeight * RESOLUTION_SCALE));
-      if (canvas.width === w && canvas.height === h) return;
-      canvas.width = w;
-      canvas.height = h;
-      gl.viewport(0, 0, w, h);
-      gl.uniform2f(uResolution, w, h);
-      // redraw at once so a resize never exposes a blank or stretched frame
-      draw();
-    };
-
-    resize();
-    draw();
-
-    const resizeObserver = new ResizeObserver(resize);
-    resizeObserver.observe(canvas);
-
-    // no reason to burn frames while the footer is off screen
-    const visibilityObserver = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) play();
-      else pause();
-    });
-    visibilityObserver.observe(canvas);
+    canvas.addEventListener("webglcontextlost", onLost);
+    canvas.addEventListener("webglcontextrestored", onRestored);
+    if (unavailable) queueMicrotask(() => setFailed(true));
 
     return () => {
-      pause();
-      resizeObserver.disconnect();
-      visibilityObserver.disconnect();
-      gl.deleteBuffer(quad);
-      compiled.dispose();
+      canvas.removeEventListener("webglcontextlost", onLost);
+      canvas.removeEventListener("webglcontextrestored", onRestored);
+      teardown?.();
     };
   }, [color]);
+
+  if (failed) {
+    return (
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 blur-3xl"
+        style={{
+          background: `radial-gradient(120% 100% at 50% 100%, ${color} 35%, transparent 75%)`,
+        }}
+      />
+    );
+  }
 
   return (
     <canvas

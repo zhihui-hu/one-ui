@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+// one value per build, compiled into the bundle and served as app-version.json; next dev evaluates this file more than once, so keep the first
+process.env.NEXT_PUBLIC_BUILD_TIME ??= new Date().toISOString();
+
 const PUBLIC_CACHE = [
   {
     key: "Cache-Control",
@@ -30,6 +33,11 @@ const nextConfig: NextConfig = {
       { source: "/componentdemos/:path*", headers: IMMUTABLE_CACHE },
       { source: "/og/:path*", headers: PUBLIC_CACHE },
       { source: "/r/:path*", headers: REGISTRY_CACHE },
+      // polled by the update checker, so a stale copy would hide new deploys
+      {
+        source: "/app-version.json",
+        headers: [{ key: "Cache-Control", value: "no-store" }],
+      },
     ];
   },
 };

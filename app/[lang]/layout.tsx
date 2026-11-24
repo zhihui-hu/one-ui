@@ -15,6 +15,8 @@ import { getMessages } from "@/lib/i18n/messages";
 import { localeAlternates } from "@/lib/i18n/metadata";
 import { notFound } from "next/navigation";
 import Analytics from "@/components/Analytics";
+import BuildInfo from "@/components/BuildInfo";
+import UpdateNotice from "@/components/UpdateNotice";
 import {
   BING_SITE_VERIFICATION,
   GOOGLE_SITE_VERIFICATION,
@@ -171,9 +173,11 @@ export default async function RootLayout({
           <I18nProvider lang={locale} messages={messages}>
             <div className="flex flex-1 flex-col">{children}</div>
             <CommandMenuLoader />
+            <UpdateNotice />
           </I18nProvider>
         </ThemeProvider>
         <Analytics />
+        <BuildInfo />
       </body>
     </html>
   );

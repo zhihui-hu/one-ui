@@ -61,5 +61,12 @@
     "headline": "One UI isn't available in your country.",
     "body": "We're sorry. Access to One UI is restricted in your region for now. If you think this is a mistake, let us know.",
     "contact": "Contact us"
+  },
+  "update": {
+    "title": "A new version is out",
+    "description": "Reload the page to get the latest One UI.",
+    "action": "Update now",
+    "updating": "Updating…",
+    "later": "Remind me later"
   }
 }
