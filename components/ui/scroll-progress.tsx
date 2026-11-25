@@ -88,13 +88,6 @@ const ScrollProgress = ({
 
   const label = sections.find((s) => s.id === activeId)?.label;
 
-  const labelVersion = React.useRef(0);
-  const prevLabel = React.useRef(label);
-  if (label !== prevLabel.current) {
-    prevLabel.current = label;
-    labelVersion.current += 1;
-  }
-
   const collapsedRef = React.useRef<HTMLDivElement>(null);
   const openRef = React.useRef<HTMLDivElement>(null);
   const labelRef = React.useRef<HTMLSpanElement>(null);
@@ -185,19 +178,22 @@ const ScrollProgress = ({
           <span className="h-5 w-5" />
           <span
             ref={labelRef}
-            className="whitespace-nowrap text-sm font-medium leading-none"
+            className="max-w-[min(62vw,20rem)] truncate text-sm font-medium leading-5"
           >
             {label}
           </span>
         </div>
-        <div ref={openRef} className="w-max p-1.5">
+        <div
+          ref={openRef}
+          className="max-h-[60vh] w-max max-w-[calc(100vw-2rem)] overflow-hidden p-1.5"
+        >
           {sections.map((s) => (
             <div
               key={s.id}
               className="flex items-center gap-3 px-3 py-2 text-sm font-medium leading-none"
             >
-              <span className="h-1.5 w-1.5" />
-              <span className="whitespace-nowrap">{s.label}</span>
+              <span className="h-1.5 w-1.5 shrink-0" />
+              <span className="min-w-0 truncate leading-5">{s.label}</span>
             </div>
           ))}
         </div>
@@ -222,7 +218,7 @@ const ScrollProgress = ({
             {open ? (
               <motion.ul
                 key="list"
-                className="absolute inset-0 flex flex-col p-1.5"
+                className="absolute inset-0 flex flex-col overflow-y-auto overscroll-contain p-1.5"
                 initial={{
                   opacity: 0,
                   filter: reduceMotion ? undefined : "blur(4px)",
@@ -279,7 +275,7 @@ const ScrollProgress = ({
                           }}
                         />
                         <motion.span
-                          className="relative whitespace-nowrap"
+                          className="relative min-w-0 truncate leading-5"
                           initial={
                             reduceMotion
                               ? undefined
@@ -351,9 +347,9 @@ const ScrollProgress = ({
                   <AnimatePresence initial={false}>
                     {label && (
                       <motion.span
-                        key={labelVersion.current}
+                        key={activeId}
                         data-slot="scroll-progress-label"
-                        className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap text-sm font-medium leading-none text-foreground"
+                        className="absolute inset-y-0 left-0 right-0 truncate text-sm font-medium leading-5 text-foreground"
                         initial={
                           reduceMotion
                             ? { opacity: 0 }

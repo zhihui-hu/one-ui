@@ -108,7 +108,7 @@ function compile(gl: WebGLRenderingContext, type: number, src: string) {
   return shader
 }
 
-const FluidOrb = ({
+export const FluidOrb = ({
   size = 240,
   color = '#1A73F2',
   className,

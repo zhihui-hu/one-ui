@@ -44,3 +44,15 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           NEXT_TELEMETRY_DISABLED: 1
+
+      # lets the blog pull the new components right away instead of waiting for its daily cron.
+      # needs a fine-grained PAT with Contents: write on zhihui-hu/zhihui-hu; skipped when unset.
+      - name: Notify blog to sync One UI
+        env:
+          GH_TOKEN: ${{ secrets.BLOG_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "BLOG_DISPATCH_TOKEN is not set, the blog will pick this up on its daily sync."
+            exit 0
+          fi
+          gh api repos/zhihui-hu/zhihui-hu/dispatches -f event_type=one-ui-updated
