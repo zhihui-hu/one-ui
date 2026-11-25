@@ -1,19 +1,15 @@
-import { env as buildEnv } from "@/lib/env";
-
-// Next.js port of the one-template copy: build values come from `@/lib/env`
-// instead of `import.meta.env`, and there is no Vite preload-error hook.
-//
-// The build serves app-version.json (src/app/app-version.json/route.ts) with the
-// same BUILD_TIME that is compiled into the bundle. A worker polls that manifest,
-// so detection does not depend on HTTP validators such as ETag, which
-// Cloudflare strips from HTML.
+// the build serves /app-version.json with the same build id that is compiled into the bundle; a worker polls it, so detection does not depend on etag, which some cdns strip from html
+const buildEnv: BuildEnv = {
+  PROD: process.env.NODE_ENV === "production",
+  BASE_URL: "/",
+  BUILD_TIME: process.env.NEXT_PUBLIC_BUILD_TIME,
+};
 
 const CHECK_INTERVAL_MS = 60_000;
 
-/** Fired when a call into the server failed in a way a newer deployment explains. */
-export const CHECK_NOW_EVENT = "one-ui:check-update";
+export const CHECK_NOW_EVENT = "app-update:check";
 
-/** Asks the running checker to compare builds now instead of at the next tick. */
+// call after a request fails in a way a newer deployment explains
 export function requestUpdateCheck() {
   if (typeof window !== "undefined")
     window.dispatchEvent(new Event(CHECK_NOW_EVENT));
@@ -30,11 +26,7 @@ type WorkerMessage = {
   message?: string;
 };
 
-/**
- * Starts update detection and calls `onUpdate` when a newer build is deployed.
- * Returns the cleanup function; it is a no-op outside production browsers.
- * `env` exists for tests; callers rely on the default.
- */
+// returns the cleanup function; a no-op outside production browsers. `env` exists for tests
 export function startAppUpdateCheck(
   onUpdate: () => void,
   env: BuildEnv = buildEnv,
@@ -100,16 +92,14 @@ export function startAppUpdateCheck(
 
 const SNOOZE_KEY = "app-update:snoozed-on";
 
-/** "稍后提醒": hides the update prompt until the local date changes. */
 export function snoozeUpdateForToday() {
   try {
     localStorage.setItem(SNOOZE_KEY, new Date().toDateString());
   } catch {
-    // Storage may be unavailable (private mode); the prompt just returns sooner.
+    // storage may be unavailable (private mode); the prompt just returns sooner
   }
 }
 
-/** True while a "稍后提醒" from earlier today is in effect. */
 export function isUpdateSnoozed() {
   try {
     return localStorage.getItem(SNOOZE_KEY) === new Date().toDateString();
@@ -118,7 +108,7 @@ export function isUpdateSnoozed() {
   }
 }
 
-/** Reloads the current page past any cached HTML. */
+// the query param gets past any cached html
 export function reloadForUpdate() {
   const url = new URL(window.location.href);
   url.searchParams.set("t", Date.now().toString());

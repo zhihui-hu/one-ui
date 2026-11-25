@@ -25,7 +25,8 @@ export type ComponentCategory =
   | "navigation"
   | "inputs"
   | "feedback"
-  | "display";
+  | "display"
+  | "project";
 
 export const CATEGORY_ORDER: ComponentCategory[] = [
   "display",
@@ -33,6 +34,7 @@ export const CATEGORY_ORDER: ComponentCategory[] = [
   "navigation",
   "inputs",
   "feedback",
+  "project",
 ];
 
 export type ComponentItem = {
@@ -2503,6 +2505,117 @@ export function Toolbar() {
   const [model, setModel] = useState("opus")
   return <ModelPicker models={models} value={model} onChange={setModel} />
 }`,
+  },
+  {
+    href: "/components/updatenotice",
+    category: "project",
+    isNew: true,
+    registry: "update-notice",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/update-notice.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    props: [
+      {
+        name: "open",
+        type: "boolean",
+      },
+      {
+        name: "onUpdate",
+        type: "() => void",
+      },
+      {
+        name: "onLater",
+        type: "() => void",
+      },
+      {
+        name: "labels",
+        type: "Partial<UpdateNoticeLabels>",
+      },
+      {
+        name: "className",
+        type: "string",
+      },
+    ],
+    usage: `// next.config.ts: one build id per build, compiled into the bundle and served at /app-version.json
+process.env.NEXT_PUBLIC_BUILD_TIME ??= new Date().toISOString()
+
+// app/layout.tsx: mount it once
+import { UpdateNotice } from "@/components/ui/update-notice"
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <UpdateNotice />
+      </body>
+    </html>
+  )
+}
+
+// anywhere: a request failed in a way a new deploy explains, so check now
+import { requestUpdateCheck } from "@/lib/app-update"
+
+requestUpdateCheck()`,
+  },
+  {
+    href: "/components/appinfo",
+    category: "project",
+    isNew: true,
+    registry: "app-info",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/app-info.tsx`,
+    props: [
+      {
+        name: "info",
+        type: "Record<string, unknown>",
+        required: true,
+      },
+      {
+        name: "enabled",
+        type: "boolean",
+        default: "true",
+      },
+      {
+        name: "color",
+        type: "string",
+        default: '"#61dafb"',
+      },
+    ],
+    usage: `// app/layout.tsx: mount it once
+import { AppInfo, buildVersion, formatBuildTime } from "@/components/ui/app-info"
+
+// next.config.ts sets it once per build:
+// process.env.NEXT_PUBLIC_BUILD_TIME ??= new Date().toISOString()
+const BUILD_TIME = process.env.NEXT_PUBLIC_BUILD_TIME
+const TIME_ZONE = "Asia/Shanghai"
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <AppInfo
+          info={{
+            // 2026.11.25.1627: the version is the build date, nothing to bump by hand
+            "my-app": buildVersion(BUILD_TIME, TIME_ZONE),
+            // 2026-11-25 16:27:02 +08:00
+            "build time": formatBuildTime(BUILD_TIME, TIME_ZONE),
+            api: process.env.NEXT_PUBLIC_API_URL,
+          }}
+        />
+      </body>
+    </html>
+  )
+}
+
+// anywhere: print one variable while debugging
+import { printInfo } from "@/components/ui/app-info"
+
+printInfo("user", user)`,
   },
 ];
 

@@ -1,0 +1,11 @@
+{
+  "show": "Simulate a new release",
+  "hint": "In your app it appears on its own after a deploy.",
+  "labels": {
+    "title": "New version available",
+    "description": "Update to reload the page on the latest version.",
+    "action": "Update now",
+    "updating": "Updating…",
+    "later": "Later"
+  }
+}

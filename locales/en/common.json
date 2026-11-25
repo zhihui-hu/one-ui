@@ -16,7 +16,8 @@
     "ai": "AI kit",
     "navigation": "Navigation",
     "inputs": "Inputs",
-    "feedback": "Feedback"
+    "feedback": "Feedback",
+    "project": "Project"
   },
   "language": {
     "label": "Language"

@@ -1,5 +1,6 @@
 import aistatus from "./aistatus.json";
 import animatedcounter from "./animatedcounter.json";
+import appinfo from "./appinfo.json";
 import bouncesidebar from "./bouncesidebar.json";
 import codeblock from "./codeblock.json";
 import deletebutton from "./deletebutton.json";
@@ -28,12 +29,14 @@ import streamingresponse from "./streamingresponse.json";
 import tasklist from "./tasklist.json";
 import themeselector from "./themeselector.json";
 import toast from "./toast.json";
+import updatenotice from "./updatenotice.json";
 import voicenote from "./voicenote.json";
 import websearch from "./websearch.json";
 
 const demos = {
   aistatus,
   animatedcounter,
+  appinfo,
   bouncesidebar,
   codeblock,
   deletebutton,
@@ -62,6 +65,7 @@ const demos = {
   tasklist,
   themeselector,
   toast,
+  updatenotice,
   voicenote,
   websearch,
 };

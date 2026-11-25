@@ -509,5 +509,27 @@
       "className": "Extra classes merged onto the root element (data-slot=\"model-picker\").",
       "labels": "Overrides the trigger label, search placeholder, list label, empty state, and meter text for localization."
     }
+  },
+  "updatenotice": {
+    "name": "Update notice",
+    "description": "A prompt that tells people a new version of your app is deployed and reloads them onto it.",
+    "interaction": "The notice slides in at the bottom right once a newer build is live. Update reloads the page on the new version. Later hides it until tomorrow.",
+    "props": {
+      "open": "Shows or hides the notice yourself and turns off the built-in checker. Leave unset to let it appear when a new build is deployed.",
+      "onUpdate": "Called when update is pressed, instead of the default page reload.",
+      "onLater": "Called when later is pressed. Without open, the notice also stays hidden for the rest of the day.",
+      "labels": "Overrides the title, description, and button text.",
+      "className": "Extra classes merged onto the root element (data-slot=\"update-notice\"). It is fixed to the bottom right by default."
+    }
+  },
+  "appinfo": {
+    "name": "App info",
+    "description": "A debug helper that prints your app's build info and variables to the browser console as labeled badges.",
+    "interaction": "Open the browser console to see one badge per entry: the name on the left, the value on the right. Objects stay expandable.",
+    "props": {
+      "info": "The entries to print, as name and value pairs. Each name prints once per page load.",
+      "enabled": "Set to false to print nothing, for example outside development.",
+      "color": "Background color of the value badge."
+    }
   }
 }

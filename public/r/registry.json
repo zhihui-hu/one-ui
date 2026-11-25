@@ -599,6 +599,51 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "update-notice",
+      "type": "registry:block",
+      "title": "Update Notice",
+      "description": "A prompt that tells people a new version of your app is deployed and reloads them onto it.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/update-notice.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "lib/app-update.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/app-version.json/route.ts",
+          "type": "registry:page",
+          "target": "app/app-version.json/route.ts"
+        },
+        {
+          "path": "public/app-update-checker.worker.js",
+          "type": "registry:file",
+          "target": "public/app-update-checker.worker.js"
+        }
+      ],
+      "docs": "Add `process.env.NEXT_PUBLIC_BUILD_TIME ??= new Date().toISOString()` to the top of next.config.ts, then mount <UpdateNotice /> once in your root layout. Serve /app-version.json with Cache-Control: no-store."
+    },
+    {
+      "name": "app-info",
+      "type": "registry:ui",
+      "title": "App Info",
+      "description": "A debug helper that prints your app's build info and variables to the browser console as labeled badges.",
+      "files": [
+        {
+          "path": "components/ui/app-info.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
