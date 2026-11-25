@@ -46,7 +46,9 @@
     "terms": "服务条款",
     "dmca": "DMCA",
     "traffic": "流量统计",
-    "sitemap": "站点地图"
+    "sitemap": "站点地图",
+    "more": "作者的其他项目",
+    "blog": "博客"
   },
   "notFound": {
     "title": "页面不存在",

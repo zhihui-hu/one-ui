@@ -7,6 +7,8 @@ import { GithubLogo, type LogoProps } from "./logos";
 import { useI18n } from "@/components/i18n/I18nProvider";
 
 const GITHUB_URL = "https://github.com/zhihui-hu/one-ui";
+const ONE_IP_URL = "https://ip.huzhihui.com";
+const BLOG_URL = "https://huzhihui.com";
 const DMCA_STATUS_URL =
   "https://www.dmca.com/Protection/Status.aspx?ID=7ce9d68a-4aef-4050-8f88-df33bdeac077&refurl=https://ui.huzhihui.com";
 
@@ -58,6 +60,10 @@ export default function Footer() {
     { label: m.common.nav.components, href: href("/components") },
     { label: "MCP", href: href("/mcp") },
     { label: "GitHub", href: GITHUB_URL, external: true, icon: GithubLogo },
+  ];
+  const AUTHOR_LINKS = [
+    { label: "One IP", href: ONE_IP_URL },
+    { label: m.common.footer.blog, href: BLOG_URL },
   ];
   const UTILITY_LINKS = [
     { label: m.common.footer.traffic, href: href("/stats"), page: true },
@@ -115,6 +121,25 @@ export default function Footer() {
         >
           <span className="flex flex-wrap items-center gap-2.5">
             <span>One UI &copy; {new Date().getFullYear()}</span>
+            <span
+              aria-hidden="true"
+              className="text-black/25 dark:text-white/25"
+            >
+              &middot;
+            </span>
+            <span>{m.common.footer.more}</span>
+            {AUTHOR_LINKS.map((link) => (
+              // noopener without noreferrer, so the author's own sites see where the visit came from
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener"
+                className={`font-medium text-black/70 dark:text-white/70 ${HOVER}`}
+              >
+                {link.label}
+              </a>
+            ))}
           </span>
           <span className="flex flex-wrap items-center gap-2.5">
             {UTILITY_LINKS.map((link, index) => (

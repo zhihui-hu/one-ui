@@ -46,7 +46,9 @@
     "terms": "Terms of Service",
     "dmca": "DMCA",
     "traffic": "Traffic",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "more": "More from the author",
+    "blog": "Blog"
   },
   "notFound": {
     "title": "Page not found",
